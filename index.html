@@ -652,9 +652,12 @@ section {
 
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
   margin-top: 3.5rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .team-card {
@@ -735,8 +738,11 @@ section {
 
 .advisors-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .advisor-card {
@@ -975,7 +981,6 @@ section {
     grid-template-columns: repeat(3, 1fr);
   }
   .pipeline-step:nth-child(3) .pipeline-connector { display: none; }
-  .team-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
