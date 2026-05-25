@@ -16,7 +16,7 @@
       function injectMobileCSS() {
         if (!document.querySelector('.muller-host')) { setTimeout(injectMobileCSS, 50); return; }
         var s = document.createElement('style');
-        s.textContent = '@media (max-width: 768px) { .muller-host, .muller-fade { display: none !important; } }';
+        s.textContent = '@media (max-width: 820px) { .muller-host, .muller-fade { display: none !important; } }';
         (document.head || document.documentElement).appendChild(s);
       }
       setTimeout(injectMobileCSS, 50);
