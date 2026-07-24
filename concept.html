@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Concept — Living Model — Big Picture Bio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0A; --ink:#F2EFEA; --ink-2:#E0DCD2; --muted:#B0ACA4; --accent:#F08AB8;
+    --serif:"Source Serif 4",Georgia,serif; --sans:"Geist",-apple-system,sans-serif; --mono:"Geist Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+
+  .hero{position:relative;height:86vh;min-height:600px;overflow:hidden;background:#120b16;}
+  canvas#muller{position:absolute;inset:0;width:100%;height:100%;display:block;}
+  .glow{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;
+    background:radial-gradient(58% 85% at 86% 8%, rgba(246,201,130,.42), rgba(240,138,184,.14) 42%, transparent 68%);}
+  .scrim{position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(90deg, rgba(10,10,10,.9) 0%, rgba(10,10,10,.5) 34%, rgba(10,10,10,0) 64%),
+               linear-gradient(0deg, rgba(10,10,10,.7) 0%, rgba(10,10,10,0) 40%);}
+  .grain{position:absolute;inset:0;pointer-events:none;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .htext{position:absolute;left:6%;bottom:14%;z-index:4;width:min(680px,60%);}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:14px;}
+  .eyebrow .bar{width:36px;height:1px;background:var(--accent);display:inline-block;}
+  h1{font-family:var(--serif);font-weight:300;font-size:clamp(30px,4.4vw,58px);line-height:1.05;letter-spacing:-.02em;margin:18px 0 0;}
+  h1 .i{font-style:italic;color:var(--accent);}
+  .sub{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(16px,1.5vw,21px);line-height:1.4;color:var(--ink-2);margin:18px 0 0;max-width:46ch;}
+  .caption{position:absolute;right:5%;bottom:7%;z-index:4;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,239,234,.66);}
+  .caption b{color:var(--accent);font-weight:500;}
+
+  .wrap{max-width:1200px;margin:0 0 0 0;padding:clamp(48px,8vh,96px) clamp(24px,7vw,120px);}
+  .note{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+  h2{font-family:var(--serif);font-weight:300;font-size:clamp(22px,2.6vw,34px);line-height:1.12;letter-spacing:-.015em;margin:14px 0 0;max-width:24ch;}
+  h2 .a{font-style:italic;color:var(--accent);}
+  .lead{font-family:var(--serif);font-weight:300;font-size:clamp(16px,1.4vw,20px);line-height:1.5;color:var(--ink-2);margin:16px 0 0;max-width:56ch;}
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:clamp(30px,4vh,48px);}
+  @media(max-width:820px){.tiles{grid-template-columns:1fr;}}
+  .tile{background:#111014;border:1px solid #2A2A30;border-radius:14px;padding:16px;}
+  .tile svg{width:100%;height:150px;display:block;}
+  .tile .tl{font-family:var(--sans);font-size:14px;color:var(--ink);margin-top:12px;font-weight:500;}
+  .tile .td{font-family:var(--sans);font-size:12.5px;line-height:1.45;color:var(--muted);margin-top:4px;}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <canvas id="muller"></canvas>
+  <div class="glow"></div>
+  <div class="scrim"></div>
+  <div class="grain"></div>
+  <div class="htext">
+    <div class="eyebrow"><span class="bar"></span>Concept · the living model</div>
+    <h1>Turning months into <span class="i">decades</span> — made visible.</h1>
+    <p class="sub">The disease's clonal make-up, continuously reshaped by the model. Not a photo — the product itself, alive.</p>
+  </div>
+  <div class="caption">Modelling · <b><span id="state">response underway</span></b></div>
+</section>
+
+<div class="wrap">
+  <div class="note">The rest of the visual language</div>
+  <h2>One system, drawn from what the model <span class="a">actually does</span>.</h2>
+  <p class="lead">Every hero and section break becomes a piece of the real science — living linework instead of stock imagery. Sketches below; each would animate and become a page's signature.</p>
+  <div class="tiles">
+    <div class="tile">
+      <svg viewBox="0 0 300 150" id="tile-constellation" aria-hidden="true"></svg>
+      <div class="tl">Combination constellation</div>
+      <div class="td">The interaction graph — nodes lighting, edges tracing as the model computes. Platform &amp; Competitive heroes.</div>
+    </div>
+    <div class="tile">
+      <svg viewBox="0 0 300 150" id="tile-pareto" aria-hidden="true"></svg>
+      <div class="tl">Pareto landscape</div>
+      <div class="td">Thousands of combinations settling onto the efficiency frontier. Lifecycle hero.</div>
+    </div>
+    <div class="tile">
+      <svg viewBox="0 0 300 150" id="tile-sites" aria-hidden="true"></svg>
+      <div class="tl">Many sites at once</div>
+      <div class="td">A small Muller at each disease site, modelled together. Pipeline hero.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var PAL=['#F6C982','#F19A6C','#EC7EA6','#CE6BA0','#96509A','#52223F'];
+  var AGG=[0.00,0.00,0.02,0.12,0.06,0.80];
+  var RES=[0.10,0.06,0.55,0.08,0.00,0.21];
+  var N=6, SAMP=140;
+  var wf=[];
+  for(var i=0;i<N;i++){ wf.push({f:0.7+Math.random()*1.4, s:0.10+Math.random()*0.22, p:Math.random()*6.28, a:0.22+Math.random()*0.22}); }
+  var parts=[];
+  for(var p=0;p<34;p++){ parts.push({x:Math.random(),y:Math.random(),spd:0.00006+Math.random()*0.00012,r:0.6+Math.random()*1.8,ph:Math.random()*6.28}); }
+
+  var cv=document.getElementById('muller'), ctx=cv.getContext('2d'), dpr=Math.min(window.devicePixelRatio||1,2), W=0,H=0;
+  function resize(){ var r=cv.getBoundingClientRect(); W=r.width; H=r.height; cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
+  window.addEventListener('resize',resize); resize();
+
+  var stateEl=document.getElementById('state');
+  function draw(now){
+    var t=now/1000;
+    var health=0.5+0.42*Math.sin(t*0.11);
+    ctx.clearRect(0,0,W,H);
+    var usable=H*0.86;
+    var tops=[], bots=[];
+    for(i=0;i<N;i++){ tops.push([]); bots.push([]); }
+    for(var k=0;k<=SAMP;k++){
+      var xN=k/SAMP, x=xN*W, sum=0, th=[];
+      for(i=0;i<N;i++){
+        var base=AGG[i]+(RES[i]-AGG[i])*health;
+        var w=wf[i];
+        var v=base*(1+w.a*Math.sin(w.f*xN*6.28 + t*w.s*6.28 + w.p));
+        if(v<0.0006)v=0.0006; th.push(v); sum+=v;
+      }
+      var scale=usable/sum;
+      var wig=Math.sin(x*0.0055+t*0.22)*H*0.045;
+      var y=(H-usable)/2+wig;
+      for(i=0;i<N;i++){ tops[i].push([x,y]); y+=th[i]*scale; bots[i].push([x,y]); }
+    }
+    for(i=0;i<N;i++){
+      var T=tops[i], B=bots[i];
+      ctx.beginPath();
+      ctx.moveTo(T[0][0],T[0][1]);
+      for(k=1;k<T.length;k++) ctx.lineTo(T[k][0],T[k][1]);
+      for(k=B.length-1;k>=0;k--) ctx.lineTo(B[k][0],B[k][1]);
+      ctx.closePath();
+      ctx.fillStyle=PAL[i]; ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(T[0][0],T[0][1]);
+      for(k=1;k<T.length;k++) ctx.lineTo(T[k][0],T[k][1]);
+      ctx.strokeStyle='rgba(255,255,255,0.14)'; ctx.lineWidth=1; ctx.stroke();
+    }
+    for(p=0;p<parts.length;p++){
+      var pt=parts[p]; pt.x+=pt.spd*1000/60; if(pt.x>1.05)pt.x=-0.05;
+      var px=pt.x*W, py=(pt.y*0.7+0.15)*H + Math.sin(px*0.01+t*0.6+pt.ph)*14;
+      var g=ctx.createRadialGradient(px,py,0,px,py,pt.r*7);
+      g.addColorStop(0,'rgba(255,240,214,0.6)'); g.addColorStop(1,'rgba(255,240,214,0)');
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(px,py,pt.r*7,0,6.28); ctx.fill();
+    }
+    var s = health<0.34 ? 'aggressive disease' : (health>0.66 ? 'durable control' : 'response underway');
+    if(stateEl.textContent!==s) stateEl.textContent=s;
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a){ var e=document.createElementNS(NS,t); for(var k in a) e.setAttribute(k,a[k]); return e; }
+
+  var c=document.getElementById('tile-constellation');
+  var cx=150,cy=72,R=58,names=12;
+  for(i=0;i<names;i++){ var ang=i/names*6.28-1.57; var nx=cx+Math.cos(ang)*R, ny=cy+Math.sin(ang)*R;
+    c.appendChild(el('circle',{cx:nx,cy:ny,r:3,fill:'#4b4360'})); }
+  var edges=[[0,4],[0,6],[0,8],[3,7],[3,9],[6,10]];
+  for(i=0;i<edges.length;i++){ var a1=edges[i][0]/names*6.28-1.57,a2=edges[i][1]/names*6.28-1.57;
+    var l=el('line',{x1:cx+Math.cos(a1)*R,y1:cy+Math.sin(a1)*R,x2:cx+Math.cos(a2)*R,y2:cy+Math.sin(a2)*R,stroke:(i%2?'#7FA0E0':'#F08AB8'),'stroke-width':1.4,opacity:.85}); c.appendChild(l); }
+  c.appendChild(el('circle',{cx:cx+Math.cos(-1.57)*R,cy:cy+Math.sin(-1.57)*R,r:5,fill:'#F08AB8'}));
+
+  var pa=document.getElementById('tile-pareto');
+  for(i=0;i<38;i++){ var rx=18+Math.random()*264, ry=20+Math.random()*110;
+    var hi=ry<70&&Math.random()>0.5; pa.appendChild(el('circle',{cx:rx,cy:ry,r:hi?2.6:2,fill:hi?'#EC7EA6':'#4b4650',opacity:hi?.95:.5})); }
+  var fr=[[20,120],[70,86],[120,64],[175,50],[230,44],[282,42]];
+  var d='M'+fr[0][0]+' '+fr[0][1]; for(i=1;i<fr.length;i++){ var mx=(fr[i-1][0]+fr[i][0])/2; d+=' Q'+mx+' '+fr[i-1][1]+' '+fr[i][0]+' '+fr[i][1]; }
+  pa.appendChild(el('path',{d:d,fill:'none',stroke:'#F08AB8','stroke-width':1.6,'stroke-dasharray':'5 4',opacity:.9}));
+
+  var st=document.getElementById('tile-sites');
+  var sites=[[70,45],[150,95],[220,55]];
+  st.appendChild(el('path',{d:'M70 45 L150 95 L220 55',fill:'none',stroke:'#3a3446','stroke-width':1,'stroke-dasharray':'3 4'}));
+  for(i=0;i<sites.length;i++){ var bx=sites[i][0]-16,by=sites[i][1]-16,seg=[0.5,0.2,0.15,0.15];
+    var yy=by; for(var j=0;j<4;j++){ st.appendChild(el('rect',{x:bx,y:yy,width:32,height:seg[j]*32,rx:1.5,fill:PAL[j+1]})); yy+=seg[j]*32; }
+    st.appendChild(el('circle',{cx:sites[i][0],cy:sites[i][1],r:20,fill:'none',stroke:'#2A2A30','stroke-width':1})); }
+})();
+</script>
+</body>
+</html>
