@@ -131,35 +131,76 @@
 
   function drawResistance(v,t){
     var c=v.ctx,b=region(v);
-    var routes=["FERROPTOSIS","AUTOPHAGY","ANTIGEN LOSS","STROMAL LOCKOUT","DNA REPAIR","DORMANCY"];
-    var tumours=["NSCLC","BRST","HGSOC","MEL","PDAC","CRC","GBM","PCa"];
-    var left=b.x+Math.min(150,b.w*.28),top=b.y+46,right=b.x+b.w-8,bottom=b.y+b.h-28;
-    var cw=(right-left)/tumours.length,rh=(bottom-top)/routes.length;
-    tumours.forEach(function(name,i){ label(c,name,left+(i+.5)*cw,top-14,7,rgba(PAL.ink,.44),"center"); });
-    routes.forEach(function(name,r){
-      label(c,name,left-12,top+(r+.5)*rh+3,7,rgba(r===0?PAL.orange:PAL.ink,r===0?.85:.48),"right");
-      for(var col=0;col<tumours.length;col++){
-        var score=hash((r+2)*73+(col+5)*41);
-        if(r===0)score=.62+.36*hash(col*23+4);
-        if(r===3&&(col===4||col===6))score=.93;
-        if(r===5&&(col===0||col===7))score=.86;
-        var x=left+col*cw+2,y=top+r*rh+2;
-        roundRect(c,x,y,cw-4,rh-4,6);
-        c.fillStyle=rgba(score>.78?PAL.orange:score>.52?PAL.rose:PAL.plum,.12+score*.5);c.fill();
-        if(score>.72){
-          c.beginPath();c.arc(x+cw-13,y+10,2,0,Math.PI*2);
-          c.fillStyle=score>.88?PAL.amber:PAL.blue;c.fill();
-        }
-      }
+    var routes=["FERROPTOSIS ARMOUR","CYTOPROTECTIVE AUTOPHAGY","ANTIGEN LOSS","STROMAL LOCKOUT","DNA REPAIR","DORMANCY / RESEEDING"];
+    var colors=[PAL.orange,PAL.amber,PAL.pink,PAL.rose,PAL.purple,PAL.blue];
+    var top=b.y+44,bottom=b.y+b.h-34,usable=bottom-top;
+    var origin=b.x+16,split=b.x+b.w*.31,right=b.x+b.w-12;
+    var sourceY=[];
+    var bandH=usable/routes.length;
+
+    glow(c,split,b.y+b.h*.5,b.w*.28,PAL.plum,.16);
+
+    routes.forEach(function(name,i){
+      var y=top+(i+.5)*bandH;
+      sourceY.push(y);
+      c.beginPath();
+      c.moveTo(origin,y-bandH*.38);
+      c.bezierCurveTo(origin+(split-origin)*.38,y-bandH*.42,split-(split-origin)*.24,y-bandH*.19,split,y-4);
+      c.lineTo(split,y+4);
+      c.bezierCurveTo(split-(split-origin)*.24,y+bandH*.19,origin+(split-origin)*.38,y+bandH*.42,origin,y+bandH*.38);
+      c.closePath();
+      var g=c.createLinearGradient(origin,0,split,0);
+      g.addColorStop(0,rgba(colors[i],.28));
+      g.addColorStop(1,rgba(colors[i],.82));
+      c.fillStyle=g;c.fill();
+      c.strokeStyle=rgba(colors[i],.45);c.lineWidth=.7;c.stroke();
     });
-    var sweep=(t*.00006)%1,sx=lerp(left,right,sweep);
-    var scan=c.createLinearGradient(sx-44,0,sx+44,0);
-    scan.addColorStop(0,rgba(PAL.blue,0));scan.addColorStop(.5,rgba(PAL.blue,.14));scan.addColorStop(1,rgba(PAL.blue,0));
-    c.fillStyle=scan;c.fillRect(sx-44,top,88,bottom-top);
-    line(c,sx,top,sx,bottom,rgba(PAL.blue,.48),1);
-    label(c,"● OBSERVED",left,bottom+20,7,rgba(PAL.amber,.76));
-    label(c,"○ GENERATED",left+92,bottom+20,7,rgba(PAL.blue,.76));
-    label(c,"RECURRENT ROUTES",right,bottom+20,7,rgba(PAL.ink,.42),"right");
+
+    var sweep=(t*.000055)%1;
+    var sweepX=lerp(split,right,sweep);
+    for(var n=0;n<72;n++){
+      var band=n%routes.length;
+      var sy=sourceY[band]+(hash(n*17)-.5)*bandH*.55;
+      var ex=split+(right-split)*(.5+hash(n*7)*.5);
+      var ey=top+10+hash(n*11+3)*(usable-20);
+      var active=Math.abs(ex-sweepX)<38;
+      c.beginPath();c.moveTo(split,sy);
+      c.bezierCurveTo(
+        split+(right-split)*(.18),sy+(hash(n*13)-.5)*bandH*1.3,
+        split+(right-split)*(.46),ey+(hash(n*19)-.5)*bandH*1.8,
+        ex,ey
+      );
+      c.strokeStyle=rgba(colors[band],active?.72:.15);
+      c.lineWidth=active?1.1:.65;c.stroke();
+      c.fillStyle=rgba(colors[band],active?.95:.5);
+      c.beginPath();c.arc(ex,ey,active?2.1:1.1,0,Math.PI*2);c.fill();
+    }
+
+    var selected=2;
+    var selectedY=top+usable*.34;
+    c.beginPath();c.moveTo(split,sourceY[selected]);
+    c.bezierCurveTo(split+(right-split)*.2,sourceY[selected]-bandH*.8,right-(right-split)*.3,selectedY+bandH*.75,right,selectedY);
+    c.strokeStyle=rgba(PAL.pink,.96);c.lineWidth=2;c.stroke();
+    c.strokeStyle=rgba(PAL.pink,.9);c.lineWidth=1.2;
+    c.beginPath();c.arc(right,selectedY,8+Math.sin(t*.004)*2,0,Math.PI*2);c.stroke();
+    c.fillStyle=PAL.pink;c.beginPath();c.arc(right,selectedY,2.8,0,Math.PI*2);c.fill();
+
+    var scan=c.createLinearGradient(sweepX-42,0,sweepX+42,0);
+    scan.addColorStop(0,rgba(PAL.blue,0));scan.addColorStop(.5,rgba(PAL.blue,.11));scan.addColorStop(1,rgba(PAL.blue,0));
+    c.fillStyle=scan;c.fillRect(sweepX-42,top,84,usable);
+    line(c,sweepX,top,sweepX,bottom,rgba(PAL.blue,.34),.8);
+
+    if(b.w>430){
+      routes.forEach(function(name,i){
+        label(c,name,origin,sourceY[i]+3,6.6,rgba(PAL.ink,.68),"left",i===selected?"600":"500");
+      });
+      label(c,"OBSERVED CELL STATES",origin,bottom+20,7,rgba(PAL.amber,.7));
+      label(c,"GENERATED EVOLUTIONARY ROUTES",right,bottom+20,7,rgba(PAL.blue,.72),"right");
+      label(c,"ANTIGEN-LOSS ROUTE",right-12,selectedY-12,7.2,rgba(PAL.pink,.92),"right","600");
+    }else{
+      label(c,"CELL STATES",origin,bottom+20,7,rgba(PAL.amber,.7));
+      label(c,"EVOLUTIONARY ROUTES",right,bottom+20,7,rgba(PAL.blue,.72),"right");
+    }
   }
 
   function drawAntigen(v,t){
