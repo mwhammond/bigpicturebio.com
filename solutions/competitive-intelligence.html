@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 </head>
-<body>
+<body class="inner-page" data-bio-art="resistance-map">
 <div id="site-nav"></div>
 
 <header class="hero">
@@ -64,12 +64,12 @@
       </div>
       <div class="col-exhibit reveal">
         <div class="panel">
-          <div class="panel-head"><span class="panel-title">Standard-of-care trajectory</span><span class="panel-tag">Illustrative</span></div>
-          <div data-chart="landscape"></div>
+          <div class="panel-head"><span class="panel-title">Global resistance atlas</span><span class="panel-tag">Model view</span></div>
+          <div class="bio-instrument" data-bio-art="resistance-map"></div>
           <div class="panel-legend">
-            <span><i style="border-color:#8A7FA8"></i>Incumbent SoC</span>
-            <span><i style="border-color:#F19A6C"></i>Competitor combination</span>
-            <span><i style="border-color:#F08AB8"></i>Your asset</span>
+            <span style="color:#F6C982"><i></i>Observed route</span>
+            <span style="color:#83B9FF"><i></i>Generated route</span>
+            <span style="color:#EC7EA6"><i></i>Recurrent across tumours</span>
           </div>
         </div>
       </div>
@@ -120,5 +120,6 @@
 <div id="site-contact"></div>
 <div id="site-footer"></div>
 <script src="/assets/site.js"></script>
+<script src="/assets/inner-visuals.js"></script>
 </body>
 </html>
