@@ -29,12 +29,11 @@
   var SCENES=[
     ["00 — RESPONSE","—","0","Living response"],
     ["01 — OBSERVE","—","0","Baseline mapped"],
-    ["02 — RESISTANCE MAP","—","—","Resistance atlas"],
-    ["03 — GENERATE","—","29,870","Search active"],
-    ["04 — OPTIMISE","08,412","29,870","Pareto selected"],
-    ["05 — SEQUENCE","08,412","31,206","Schedule optimised"],
-    ["06 — STRESS-TEST","08,412","34,119","Risk closed"],
-    ["07 — PREDICT","08,412","34,119","Durable control"]
+    ["02 — GENERATE","—","29,870","Search active"],
+    ["03 — OPTIMISE","08,412","29,870","Pareto selected"],
+    ["04 — SEQUENCE","08,412","31,206","Schedule optimised"],
+    ["05 — STRESS-TEST","08,412","34,119","Risk closed"],
+    ["06 — PREDICT","08,412","34,119","Durable control"]
   ];
 
   var W=0,H=0,DPR=1;
@@ -201,62 +200,6 @@
         text(d[0],b.x+b.w-16,y-5,8,"rgba(242,239,234,.76)","right","500");
       });
     }
-    ctx.restore();
-  }
-
-  function drawResistanceMap(alpha,now){
-    var b=box();
-    frame(b,"GLOBAL RESISTANCE ATLAS / OBSERVED + GENERATED",alpha);
-    ctx.save();
-    ctx.globalAlpha=alpha;
-    var routes=["FERROPTOSIS ARMOUR","CYTOPROTECTIVE AUTOPHAGY","ANTIGEN LOSS","STROMAL EXCLUSION","DNA REPAIR","DORMANCY / RESEEDING"];
-    var tumours=["NSCLC","BREAST","HGSOC","MEL","PDAC","CRC","GBM","PCa"];
-    var left=b.x+Math.min(154,b.w*.29);
-    var top=b.y+62;
-    var right=b.x+b.w-20;
-    var bottom=b.y+b.h-42;
-    var cw=(right-left)/tumours.length;
-    var rh=(bottom-top)/routes.length;
-    var sweep=(now*.000055)%1;
-
-    tumours.forEach(function(name,i){
-      var x=left+(i+.5)*cw;
-      text(name,x,top-14,7,"rgba(242,239,234,.46)","center","500");
-    });
-    routes.forEach(function(name,r){
-      var y=top+(r+.5)*rh;
-      text(name,left-12,y+3,7.2,r===0?rgba("#F19A6C",.9):"rgba(242,239,234,.55)","right","500");
-      for(var c=0;c<tumours.length;c++){
-        var score=hash((r+1)*97+(c+1)*43);
-        if(r===0) score=.56+.42*hash(c*19+4);
-        if(r===3 && (c===4||c===6)) score=.91;
-        if(r===5 && (c===0||c===7)) score=.84;
-        var x=left+c*cw+2;
-        var yy=top+r*rh+2;
-        roundedRect(x,yy,cw-4,rh-4,Math.min(8,rh*.18));
-        var color=score>.78?"#F19A6C":score>.54?"#C37B69":"#59424F";
-        ctx.fillStyle=rgba(color,.14+score*.58);
-        ctx.fill();
-        if(score>.72){
-          ctx.fillStyle=score>.86?"#F6C982":"#EC7EA6";
-          ctx.beginPath();
-          ctx.arc(x+cw-12,yy+10,2.1,0,Math.PI*2);
-          ctx.fill();
-        }
-      }
-    });
-
-    var sx=lerp(left,right,sweep);
-    var scan=ctx.createLinearGradient(sx-44,0,sx+44,0);
-    scan.addColorStop(0,"rgba(131,185,255,0)");
-    scan.addColorStop(.5,"rgba(131,185,255,.16)");
-    scan.addColorStop(1,"rgba(131,185,255,0)");
-    ctx.fillStyle=scan;
-    ctx.fillRect(sx-44,top,88,bottom-top);
-    line(sx,top,sx,bottom,"rgba(131,185,255,.45)",1);
-    text("● OBSERVED",left,bottom+22,7.5,rgba("#F6C982",.78));
-    text("○ GENERATED",left+92,bottom+22,7.5,rgba(BLUE,.75));
-    text("GLOBAL ATLAS",right,bottom+22,7.5,"rgba(242,239,234,.52)","right","500");
     ctx.restore();
   }
 
@@ -484,15 +427,14 @@
   }
 
   function drawScene(index,alpha,now){
-    if(alpha<=.001 || index<0 || index>7) return;
+    if(alpha<=.001 || index<0 || index>6) return;
     if(index===0) drawMuller(alpha,now,.82,true);
     if(index===1) drawMuller(alpha,now,.28,true);
-    if(index===2) drawResistanceMap(alpha,now);
-    if(index===3) drawSearch(alpha,now);
-    if(index===4) drawPareto(alpha,now);
-    if(index===5) drawSequence(alpha,now);
-    if(index===6) drawRisk(alpha,now);
-    if(index===7) drawSurvival(alpha,now);
+    if(index===2) drawSearch(alpha,now);
+    if(index===3) drawPareto(alpha,now);
+    if(index===4) drawSequence(alpha,now);
+    if(index===5) drawRisk(alpha,now);
+    if(index===6) drawSurvival(alpha,now);
   }
 
   function updateStory(){
@@ -525,7 +467,7 @@
     var mix=smooth(renderedScene-base);
     var drawTime=reduced?0:now;
     drawScene(base,1-mix,drawTime);
-    drawScene(Math.min(base+1,7),mix,drawTime);
+    drawScene(Math.min(base+1,6),mix,drawTime);
 
     lastTime=now;
     if(!reduced && visible) raf=requestAnimationFrame(render);
