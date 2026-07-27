@@ -607,6 +607,7 @@ p.body{ font-family:var(--sans); font-size:clamp(15px,1.1vw,17px); line-height:1
   color:rgba(242,239,234,.5);
   font-size:8px;
   letter-spacing:.1em;
+  transition:opacity .22s ease, visibility .22s ease;
 }
 .model-key span{ display:inline-flex; align-items:center; gap:6px; }
 .model-key i{

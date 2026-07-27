@@ -91,7 +91,7 @@
         '<div class="footer-inner">'+
           '<div>'+
             '<div class="fm">Big Picture <em>Bio</em></div>'+
-            '<p class="ftag">The world model for combination therapy — predicting the synergistic interactions that decide modern therapies.</p>'+
+            '<p class="ftag">Mechanistic prediction for novel synergistic combinations beyond the reach of conventional machine learning.</p>'+
           '</div>'+
           '<div class="fcol"><h4>Solutions</h4>'+solLinks+'</div>'+
           '<div class="fcol">'+

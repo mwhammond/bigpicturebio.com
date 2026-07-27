@@ -17,6 +17,7 @@
   var candidateEl=document.getElementById("model-candidate");
   var testedEl=document.getElementById("model-tested");
   var stateEl=document.getElementById("model-state");
+  var modelKey=document.getElementById("model-key");
   var reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var PAL=["#F6C982","#F19A6C","#EC7EA6","#CE6BA0","#96509A","#52223F"];
@@ -27,13 +28,13 @@
   var BG="#08090c";
 
   var SCENES=[
-    ["00 — RESPONSE","—","0","Living response"],
-    ["01 — OBSERVE","—","0","Baseline mapped"],
-    ["02 — GENERATE","—","29,870","Search active"],
-    ["03 — OPTIMISE","08,412","29,870","Pareto selected"],
-    ["04 — SEQUENCE","08,412","31,206","Schedule optimised"],
-    ["05 — STRESS-TEST","08,412","34,119","Risk closed"],
-    ["06 — PREDICT","08,412","34,119","Durable control"]
+    ["00 — STANDARD OF CARE","—","0","Standard of care"],
+    ["01 — THEORETICAL POTENTIAL","—","0","Theoretical potential"],
+    ["02 — GENERATE","—","12,308","Search active"],
+    ["03 — OPTIMISE","08,412","12,308","Pareto selected"],
+    ["04 — SEQUENCE","08,412","12,308","Schedule optimised"],
+    ["05 — STRESS-TEST","08,412","12,308","Risk closed"],
+    ["06 — PREDICT","08,412","12,308","Durable control"]
   ];
 
   var W=0,H=0,DPR=1;
@@ -116,70 +117,92 @@
     ctx.restore();
   }
 
-  function mullerFractions(t,response){
-    var cancer=lerp(.64,.10,response*smooth(clamp((t-.04)/.88,0,1)));
-    var resistant=.08*Math.exp(-Math.pow((t-.34)*4.7,2))*(1-response*.72);
-    var stroma=lerp(.22,.52,response*smooth(clamp((t-.16)/.76,0,1)));
-    var immune=Math.max(.08,1-cancer-resistant-stroma);
-    var total=cancer+resistant+stroma+immune;
-    return [
-      immune*.56/total,
-      immune*.44/total,
-      stroma*.62/total,
-      stroma*.38/total,
-      resistant/total,
-      cancer/total
-    ];
+  function mullerFractions(t,mode){
+    var response=typeof mode==="number" ? clamp(mode,0,1) : mode==="potential" ? 1 : 0;
+
+    var contraction=smooth(clamp(t/.34,0,1));
+    var relapse=smooth(clamp((t-.42)/.58,0,1));
+    var socSensitive=lerp(lerp(.58,.12,contraction),.08,relapse);
+    var socResistant=lerp(lerp(.04,.07,contraction),.52,relapse);
+    var socStroma=lerp(lerp(.23,.36,contraction),.23,relapse);
+    var socImmune=Math.max(.03,1-socSensitive-socResistant-socStroma);
+
+    var elimination=smooth(clamp((t-.02)/.86,0,1));
+    var potentialSensitive=lerp(.58,.012,elimination);
+    var transientResistance=.05*Math.exp(-Math.pow((t-.30)*6.2,2));
+    var potentialResistant=(.04+transientResistance)*(1-.92*elimination);
+    var potentialStroma=lerp(.23,.44,elimination);
+    var potentialImmune=Math.max(.03,1-potentialSensitive-potentialResistant-potentialStroma);
+
+    var soc=[socImmune,socStroma,socResistant,socSensitive];
+    var potential=[potentialImmune,potentialStroma,potentialResistant,potentialSensitive];
+    var mixed=soc.map(function(value,i){ return lerp(value,potential[i],response); });
+    var total=mixed.reduce(function(sum,value){ return sum+value; },0);
+    return mixed.map(function(value){ return value/total; });
   }
 
-  function drawMuller(alpha,now,response,annotate){
+  function drawMuller(alpha,now,mode,annotate){
     var b=box();
-    frame(b,"POPULATION DYNAMICS / 0–36 MONTHS",alpha);
+    var potential=mode==="potential" || typeof mode==="number" && mode>.5;
+    frame(b,"PDAC POPULATION DYNAMICS / "+(potential?"THEORETICAL POTENTIAL":"STANDARD OF CARE")+" / 0–36 MONTHS",alpha);
     ctx.save();
-    ctx.globalAlpha=alpha;
     roundedRect(b.x+1,b.y+34,b.w-2,b.h-35,0);
     ctx.clip();
 
     var top=b.y+42;
     var usable=b.h-75;
     var samples=86;
+    var colors=[PAL[0],PAL[2],PAL[4],PAL[5]];
     var boundaries=[];
     var i,k;
-    for(i=0;i<7;i++) boundaries.push([]);
+    for(i=0;i<5;i++) boundaries.push([]);
 
     for(k=0;k<=samples;k++){
       var t=k/samples;
-      var f=mullerFractions(t,response);
+      var f=mullerFractions(t,mode);
       var x=b.x+t*b.w;
       var drift=Math.sin(t*7.2+now*.00018)*usable*.015;
       var y=top+drift;
       boundaries[0].push([x,y]);
-      for(i=0;i<6;i++){
+      for(i=0;i<4;i++){
         y+=f[i]*usable;
         boundaries[i+1].push([x,y]);
       }
     }
 
-    for(i=0;i<6;i++){
-      ctx.beginPath();
-      ctx.moveTo(boundaries[i][0][0],boundaries[i][0][1]);
-      for(k=1;k<=samples;k++) ctx.lineTo(boundaries[i][k][0],boundaries[i][k][1]);
-      for(k=samples;k>=0;k--) ctx.lineTo(boundaries[i+1][k][0],boundaries[i+1][k][1]);
-      ctx.closePath();
-      var grad=ctx.createLinearGradient(b.x,0,b.x+b.w,0);
-      grad.addColorStop(0,rgba(PAL[i],.78));
-      grad.addColorStop(.55,PAL[i]);
-      grad.addColorStop(1,rgba(PAL[i],.9));
-      ctx.fillStyle=grad;
-      ctx.fill();
-      ctx.strokeStyle="rgba(255,255,255,.11)";
-      ctx.lineWidth=.8;
-      ctx.stroke();
+    function paintBands(strength){
+      ctx.save();
+      ctx.globalAlpha=alpha*strength;
+      for(i=0;i<4;i++){
+        ctx.beginPath();
+        ctx.moveTo(boundaries[i][0][0],boundaries[i][0][1]);
+        for(k=1;k<=samples;k++) ctx.lineTo(boundaries[i][k][0],boundaries[i][k][1]);
+        for(k=samples;k>=0;k--) ctx.lineTo(boundaries[i+1][k][0],boundaries[i+1][k][1]);
+        ctx.closePath();
+        var grad=ctx.createLinearGradient(b.x,0,b.x+b.w,0);
+        grad.addColorStop(0,rgba(colors[i],.80));
+        grad.addColorStop(.55,colors[i]);
+        grad.addColorStop(1,rgba(colors[i],.92));
+        ctx.fillStyle=grad;
+        ctx.fill();
+        ctx.strokeStyle="rgba(255,255,255,.13)";
+        ctx.lineWidth=1;
+        ctx.stroke();
+      }
+      ctx.restore();
     }
 
-    var play=(now*.000038)%1;
+    var play=reduced ? .999 : (now*.000038)%1;
     var px=b.x+play*b.w;
-    line(px,b.y+36,px,b.y+b.h,"rgba(255,255,255,.6)",1);
+    paintBands(.12);
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(b.x,b.y+34,Math.max(0,px-b.x),b.h-34);
+    ctx.clip();
+    paintBands(1);
+    ctx.restore();
+
+    line(px,b.y+36,px,b.y+b.h,"rgba(255,255,255,.72)",1.2);
     ctx.fillStyle=INK;
     ctx.beginPath();
     ctx.arc(px,b.y+36,2.4,0,Math.PI*2);
@@ -187,18 +210,22 @@
     text(Math.round(play*36)+" MO",px+7,b.y+51,8,"rgba(242,239,234,.72)");
 
     if(annotate && W>760){
-      var labels=[
-        ["CD8+ EFFECTOR",PAL[0],.09],
-        ["NORMALISED STROMA",PAL[2],.39],
-        ["REACTIVE CAF",PAL[3],.64],
-        ["RESISTANT CLONE",PAL[4],.77],
-        ["CANCER / RESIDUAL",PAL[5],.88]
-      ];
-      labels.forEach(function(d){
-        var y=b.y+43+d[2]*usable;
-        line(b.x+b.w-88,y,b.x+b.w-12,y,rgba(d[1],.75),1);
-        text(d[0],b.x+b.w-16,y-5,8,"rgba(242,239,234,.76)","right","500");
+      var end=mullerFractions(.98,mode);
+      var cumulative=0;
+      var labels=["IMMUNE CONTROL","STROMA","RESISTANT CLONE","SENSITIVE CANCER"];
+      end.forEach(function(fraction,index){
+        var y=top+(cumulative+fraction*.5)*usable;
+        if(!potential || index<2){
+          line(b.x+b.w-104,y,b.x+b.w-12,y,rgba(colors[index],.78),1);
+          text(labels[index],b.x+b.w-16,y-5,8,"rgba(242,239,234,.80)","right","500");
+        }
+        cumulative+=fraction;
       });
+      if(potential){
+        var cancerTotal=Math.round((end[2]+end[3])*100);
+        line(b.x+b.w-118,b.y+b.h-24,b.x+b.w-12,b.y+b.h-24,rgba(PAL[4],.80),1);
+        text("TOTAL CANCER <"+Math.max(3,cancerTotal)+"%",b.x+b.w-16,b.y+b.h-30,8,"rgba(242,239,234,.86)","right","500");
+      }
     }
     ctx.restore();
   }
@@ -215,7 +242,7 @@
 
   function drawSearch(alpha,now){
     var b=box();
-    frame(b,"GENERATIVE SEARCH / 29,870 COMBINATIONS",alpha);
+    frame(b,"GENERATIVE SEARCH / 12,308 COMBINATIONS EXPLORED",alpha);
     ctx.save();
     ctx.globalAlpha=alpha;
     var x0=b.x+35,y0=b.y+48,w=b.w-70,h=b.h-90;
@@ -344,17 +371,18 @@
     ctx.save();
     ctx.globalAlpha=alpha;
     var samples=30,bounds=[],i,k;
-    for(i=0;i<7;i++) bounds.push([]);
+    var colors=[PAL[0],PAL[2],PAL[4],PAL[5]];
+    for(i=0;i<5;i++) bounds.push([]);
     for(k=0;k<=samples;k++){
       var t=k/samples,f=mullerFractions(t,response),y=cy-h/2;
       bounds[0].push([cx-w/2+t*w,y]);
-      for(i=0;i<6;i++){ y+=f[i]*h; bounds[i+1].push([cx-w/2+t*w,y]); }
+      for(i=0;i<4;i++){ y+=f[i]*h; bounds[i+1].push([cx-w/2+t*w,y]); }
     }
-    for(i=0;i<6;i++){
+    for(i=0;i<4;i++){
       ctx.beginPath();ctx.moveTo(bounds[i][0][0],bounds[i][0][1]);
       for(k=1;k<=samples;k++)ctx.lineTo(bounds[i][k][0],bounds[i][k][1]);
       for(k=samples;k>=0;k--)ctx.lineTo(bounds[i+1][k][0],bounds[i+1][k][1]);
-      ctx.closePath();ctx.fillStyle=PAL[i];ctx.fill();
+      ctx.closePath();ctx.fillStyle=colors[i];ctx.fill();
     }
     roundedRect(cx-w/2,cy-h/2,w,h,8);
     ctx.strokeStyle="rgba(255,255,255,.18)";ctx.lineWidth=1;ctx.stroke();
@@ -428,8 +456,8 @@
 
   function drawScene(index,alpha,now){
     if(alpha<=.001 || index<0 || index>6) return;
-    if(index===0) drawMuller(alpha,now,.82,true);
-    if(index===1) drawMuller(alpha,now,.28,true);
+    if(index===0) drawMuller(alpha,now,"soc",true);
+    if(index===1) drawMuller(alpha,now,"potential",true);
     if(index===2) drawSearch(alpha,now);
     if(index===3) drawPareto(alpha,now);
     if(index===4) drawSequence(alpha,now);
@@ -451,6 +479,10 @@
       if(candidateEl) candidateEl.textContent=meta[1];
       if(testedEl) testedEl.textContent=meta[2];
       if(stateEl) stateEl.textContent=meta[3];
+      if(modelKey){
+        modelKey.style.opacity=idx<=1?"1":"0";
+        modelKey.style.visibility=idx<=1?"visible":"hidden";
+      }
     }
   }
 
@@ -458,13 +490,13 @@
     raf=0;
     if(!lastTime) lastTime=now;
     if(reduced) renderedScene=targetScene;
-    else renderedScene=lerp(renderedScene,targetScene,.085);
+    else renderedScene=lerp(renderedScene,targetScene,.16);
     ctx.setTransform(DPR,0,0,DPR,0,0);
     ctx.clearRect(0,0,W,H);
     ctx.fillStyle=BG;ctx.fillRect(0,0,W,H);
 
     var base=Math.floor(renderedScene);
-    var mix=smooth(renderedScene-base);
+    var mix=smooth(clamp(((renderedScene-base)-.44)/.12,0,1));
     var drawTime=reduced?0:now;
     drawScene(base,1-mix,drawTime);
     drawScene(Math.min(base+1,6),mix,drawTime);
