@@ -29,12 +29,9 @@
 
   var SCENES=[
     ["00 — STANDARD OF CARE","—","0","Standard of care"],
-    ["01 — THEORETICAL POTENTIAL","—","0","Theoretical potential"],
-    ["02 — GENERATE","—","12,308","Search active"],
-    ["03 — OPTIMISE","08,412","12,308","Pareto selected"],
-    ["04 — SEQUENCE","08,412","12,308","Schedule optimised"],
-    ["05 — STRESS-TEST","08,412","12,308","Risk closed"],
-    ["06 — PREDICT","08,412","12,308","Durable control"]
+    ["01 — REDESIGN","—","0","Resistance held down"],
+    ["02 — GENERATE & OPTIMISE","08,412","12,308","Pareto selected"],
+    ["03 — PREDICT","08,412","12,308","Durable control"]
   ];
 
   var W=0,H=0,DPR=1;
@@ -84,8 +81,9 @@
     ctx.setLineDash([]);
   }
   function box(){
-    if(W<820) return {x:20,y:94,w:W-40,h:Math.min(H*.48,390)};
-    return {x:Math.max(W*.435,470),y:Math.max(108,H*.14),w:W-Math.max(W*.435,470)-54,h:H-Math.max(108,H*.14)-132};
+    if(W<1024) return {x:20,y:94,w:W-40,h:Math.min(H*.46,380)};
+    var bx=Math.max(W*.5,560);
+    return {x:bx,y:Math.max(108,H*.14),w:W-bx-54,h:H-Math.max(108,H*.14)-132};
   }
   function resize(){
     var r=canvas.getBoundingClientRect();
@@ -144,7 +142,7 @@
   function drawMuller(alpha,now,mode,annotate){
     var b=box();
     var potential=mode==="potential" || typeof mode==="number" && mode>.5;
-    frame(b,"PDAC POPULATION DYNAMICS / "+(potential?"THEORETICAL POTENTIAL":"STANDARD OF CARE")+" / 0–36 MONTHS",alpha);
+    frame(b,"TUMOUR POPULATION DYNAMICS / "+(potential?"WITH REDESIGNED COMBINATION":"STANDARD OF CARE")+" / 0–36 MONTHS",alpha);
     ctx.save();
     roundedRect(b.x+1,b.y+34,b.w-2,b.h-35,0);
     ctx.clip();
@@ -455,14 +453,11 @@
   }
 
   function drawScene(index,alpha,now){
-    if(alpha<=.001 || index<0 || index>6) return;
+    if(alpha<=.001 || index<0 || index>3) return;
     if(index===0) drawMuller(alpha,now,"soc",true);
     if(index===1) drawMuller(alpha,now,"potential",true);
     if(index===2) drawSearch(alpha,now);
-    if(index===3) drawPareto(alpha,now);
-    if(index===4) drawSequence(alpha,now);
-    if(index===5) drawRisk(alpha,now);
-    if(index===6) drawSurvival(alpha,now);
+    if(index===3) drawSurvival(alpha,now);
   }
 
   function updateStory(){
@@ -499,7 +494,7 @@
     var mix=smooth(clamp(((renderedScene-base)-.44)/.12,0,1));
     var drawTime=reduced?0:now;
     drawScene(base,1-mix,drawTime);
-    drawScene(Math.min(base+1,6),mix,drawTime);
+    drawScene(Math.min(base+1,3),mix,drawTime);
 
     lastTime=now;
     if(!reduced && visible) raf=requestAnimationFrame(render);

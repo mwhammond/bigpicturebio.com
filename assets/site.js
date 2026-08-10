@@ -6,6 +6,20 @@
 (function(){
   "use strict";
 
+  /* ---------------- Theme (applied before the body fades in) ------------- */
+  try{
+    var savedTheme = localStorage.getItem("bpb-theme");
+    if(savedTheme === "light" || savedTheme === "dark"){
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    }
+  }catch(e){}
+  function toggleTheme(){
+    var isLight = document.documentElement.getAttribute("data-theme") === "light";
+    var next = isLight ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", next);
+    try{ localStorage.setItem("bpb-theme", next); }catch(e){}
+  }
+
   /* ---------------- Site config (single source of truth) ---------------- */
   var SOLUTIONS = [
     ["/solutions/clinical-development.html",       "Clinical Development",        "Design the trial that reads out"],
@@ -46,12 +60,16 @@
           '<a href="/company.html"'+(isCurrent("/company.html")?' class="current"':'')+'>Company</a>'+
           '<a href="/blog/"'+(path.indexOf("/blog")===0?' class="current"':'')+'>Journal</a>'+
           '<a href="/#contact">Contact</a>'+
+          '<button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light or dark theme" title="Toggle light or dark theme"></button>'+
         '</div>'+
       '</nav>';
 
     var nav = document.getElementById("nav");
     var toggle = nav.querySelector(".nav-toggle");
     toggle.addEventListener("click", function(){ nav.classList.toggle("menu-open"); });
+
+    var themeBtn = document.getElementById("themeToggle");
+    if(themeBtn) themeBtn.addEventListener("click", toggleTheme);
 
     // dropdown (click on desktop, tap on mobile)
     var solItem = document.getElementById("solItem");
