@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why the right combinations are the next breakthrough — Big Picture Bio</title>
+<meta name="description" content="Most diseases of ageing have no single cause, so no single-target drug can reverse them. Why rationally designed drug combinations — checkpoint doublets, TROP2 and topoisomerase-payload ADCs, KRAS backbones — are where the next breakthroughs live, and how Big Picture Bio's world model finds them across billions of options.">
+<link rel="canonical" href="https://bigpicturebio.com/blog/why-the-right-combinations/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="Big Picture Bio">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Big Picture Bio">
+<meta property="og:title" content="Why the right combinations are the next breakthrough in drug design">
+<meta property="og:description" content="Diseases of ageing rarely have a single cause. The next wave of medicines will be rationally designed combinations, and finding them means searching a space far too large to screen.">
+<meta property="og:url" content="https://bigpicturebio.com/blog/why-the-right-combinations/">
+<meta property="og:image" content="https://bigpicturebio.com/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Why the right combinations are the next breakthrough in drug design">
+<meta name="twitter:description" content="Diseases of ageing rarely have a single cause. The next wave of medicines will be rationally designed combinations, and finding them means searching a space far too large to screen.">
+<meta name="twitter:image" content="https://bigpicturebio.com/img/og-image.png">
+
+<link rel="icon" href="/img/favicon-48.png" sizes="48x48">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/blog.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Why the right combinations are the next breakthrough in drug design",
+  "description": "Most diseases of ageing have no single cause, so no single-target drug can reverse them. Why rationally designed drug combinations are where the next breakthroughs live, and how Big Picture Bio's world model finds them.",
+  "image": "https://bigpicturebio.com/img/og-image.png",
+  "author": { "@type": "Organization", "name": "Big Picture Bio", "url": "https://bigpicturebio.com" },
+  "publisher": { "@type": "Organization", "name": "Big Picture Bio", "logo": { "@type": "ImageObject", "url": "https://bigpicturebio.com/img/favicon-192.png" } },
+  "datePublished": "2026-08-11",
+  "dateModified": "2026-08-11",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://bigpicturebio.com/blog/why-the-right-combinations/" },
+  "keywords": "combination therapy, drug combinations, combination therapy design, synergy, oncology, checkpoint inhibitors, antibody-drug conjugates, TROP2 ADC, topoisomerase inhibitor, KRAS combination, LAG-3, AI drug discovery, clinical trial prediction"
+}
+</script>
+</head>
+<body class="inner-page article-page" data-bio-art="combination-space">
+<div id="site-nav"></div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-scrim"></div>
+  <div class="hero-inner">
+    <div class="eyebrow"><span class="bar"></span>Perspective · Combination therapy</div>
+    <h1>Why the right combinations are the <span class="italic">next breakthrough</span></h1>
+    <p class="sub">Diseases of ageing rarely have a single cause. The next generation of medicines will be combinations, and finding them means searching a space far too large to screen your way through.</p>
+    <div class="article-meta">
+      <span>Big Picture Bio</span><span class="sep">/</span>
+      <span>11 August 2026</span><span class="sep">/</span>
+      <span>9 min read</span>
+    </div>
+  </div>
+</header>
+
+<main>
+<article>
+
+  <!-- INTRO -->
+  <section class="block">
+    <div class="wrap">
+      <div class="article-body reveal">
+        <p class="lead-para dropcap">Ask a pharma company what it is looking for and the answer is almost always the same: a novel target, ideally one with single-agent efficacy. That preference has ruled drug discovery since the beginning of rational drug design, and it still shapes how the industry allocates its money today.</p>
+        <p>It is easy to see why. A single target is tractable. One mechanism, one biomarker, one clean causal story to tell a regulator. And every so often it works spectacularly. Imatinib blocks the single BCR-ABL fusion protein that drives chronic myeloid leukaemia, and in the IRIS trial that defined the modern targeted era it produced a complete haematologic response in <strong>95.3%</strong> of patients,<a class="ref" href="#r1">1</a> turning a fatal leukaemia into a condition most people now survive for well over a decade.</p>
+        <p>The question is whether that model still serves us against the disease burden we actually carry now. An ageing population is accumulating conditions that are, almost by definition, not caused by any one thing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: wish list -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <div class="eyebrow"><span class="bar"></span>The premise</div>
+        <h2 class="head">The &ldquo;ideal target&rdquo; is a wish list, <span class="accent">not a biological fact</span>.</h2>
+      </div>
+      <div class="article-body reveal" style="margin-top:22px">
+        <p>The textbook criteria for a good target read like a checklist. It should sit in a pathway causally linked to the disease and to nothing else, ideally with human genetic evidence tying it to the condition. It should be expressed in diseased tissue and nowhere else. It should have a druggable surface, and it should be different enough from its relatives that you can hit it without hitting them. AstraZeneca formalised a version of this as its <strong>5R framework</strong> after auditing its own pipeline (right target, right tissue, right safety, right patient, right commercial potential), and credited disciplined decisions across all five for reversing its clinical success rate.<a class="ref" href="#r2">2</a></p>
+        <p>Biology does not organise itself to make that checklist easy to satisfy. Living systems are built on redundancy, feedback and failsafes, the same properties that make them robust to damage. Engineer a mouse to lack a gene and it often shows no defect at all, because a paralog quietly takes over the job. Delete <em>Rpl22</em> and its paralog <em>Rpl22l1</em> steps in;<a class="ref" href="#r3">3</a> knock out one or even two of the three cyclin D genes and the remaining one covers for them.<a class="ref" href="#r4">4</a> Tumours use the same trick against us: block one signalling route and the cell reroutes through another. There is no strong reason to expect a perfectly isolated, disease-only, non-redundant node to exist for most diseases, because that is not how the system was built.</p>
+        <blockquote class="pull">The nodes that matter most are the ones evolution was most careful to back up.</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: even a clean target -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <div class="eyebrow"><span class="bar"></span>And even if you find one</div>
+        <h2 class="head">A clean target may still not be <span class="accent">enough</span>.</h2>
+      </div>
+      <div class="article-body reveal" style="margin-top:22px">
+        <p>Suppose you find one anyway. Diseases of ageing are rarely the output of a single broken part. Alzheimer&rsquo;s is the clearest case: amyloid plaques, tau tangles, chronic neuroinflammation and vascular dysfunction interact and reinforce one another, and few researchers now believe any one of them fully explains progression.<a class="ref" href="#r5">5</a> That is the backdrop to decades of amyloid-only programmes returning, at best, modest effects; even the anti-amyloid antibodies that finally cleared plaque slow decline by roughly a quarter rather than stopping it.<a class="ref" href="#r6">6</a> The same shape, several interacting pathologies rather than one root cause, shows up across most of the diseases that accumulate with age.</p>
+        <p>So the more honest question may not be &ldquo;where is the next great target?&rdquo; We are largely standing on the shoulders of giants; much of the important target biology in a given disease has arguably already been found. What has not been solved is the expectation that any one of those targets, hit in isolation, should reverse a disease that never had a single cause. The work left to do lies in managing the relationships between the nodes we already have.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Eroom -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <div class="eyebrow"><span class="bar"></span>The cost</div>
+        <h2 class="head">This is part of why drug development keeps getting <span class="accent">more expensive</span>.</h2>
+      </div>
+      <div class="article-body reveal" style="margin-top:22px">
+        <p>The industry has a name for its declining returns on research: Eroom&rsquo;s Law, Moore&rsquo;s Law spelled backwards. The number of new drugs approved per billion inflation-adjusted dollars of R&amp;D has fallen by half roughly every nine years since 1950, even as the underlying science and computing power improved beyond recognition.<a class="ref" href="#r7">7</a> A field that keeps insisting on single, clean, isolated mechanisms, in diseases that do not have them, is a plausible part of that gap between scientific progress and drug-approval productivity.</p>
+      </div>
+      <div class="kpis reveal" style="margin-top:clamp(30px,4vw,48px)">
+        <div class="statline"><span class="n">½</span><span class="l">New drugs per $1B of R&amp;D halve about every 9 years — Eroom&rsquo;s Law, holding since 1950</span></div>
+        <div class="statline"><span class="n">~80&times;</span><span class="l">Fall in R&amp;D efficiency since 1950, inflation-adjusted (Scannell et al.)</span></div>
+        <div class="statline"><span class="n">$2.6<span style="font-size:.5em;font-family:var(--serif);font-style:italic">B</span></span><span class="l">Capitalised cost per new drug, and still climbing (DiMasi, 2016)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: field is moving -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <div class="eyebrow"><span class="bar"></span>The shift</div>
+        <h2 class="head">The field is already moving toward combinations. It just cannot <span class="accent">navigate</span> them yet.</h2>
+      </div>
+      <div class="article-body reveal" style="margin-top:22px">
+        <p>Pharma has not ignored any of this. It is visibly shifting toward dual- and multi-mechanism medicine. Bispecific antibodies went from a niche format to standard equipment, with fourteen approved by the end of 2023, and a first-in-class PD-1&times;VEGF bispecific, ivonescimab, has now beaten single-agent pembrolizumab head to head in lung cancer.<a class="ref" href="#r8">8</a> The older proof points are already approved and have aged well. Combining two checkpoint inhibitors, nivolumab against PD-1 and ipilimumab against CTLA-4, extended median progression-free survival in advanced melanoma from <strong>2.9 months</strong> on ipilimumab alone to <strong>11.5 months</strong> together. Years on, that gap had widened into survival: a median of <strong>72.1 months</strong> on the combination against 19.9 on ipilimumab, with roughly half the combination patients still alive at six and a half years.<a class="ref" href="#r9">9</a> Anti-LAG-3 became the third checkpoint class to reach the clinic in combination, as relatlimab plus nivolumab, the first LAG-3 regimen approved and one that more than doubled progression-free survival over nivolumab alone.<a class="ref" href="#r10">10</a></p>
+        <p>The same logic runs through the parts of oncology moving fastest right now. Antibody-drug conjugates carrying topoisomerase-1 payloads, the TROP2 conjugates datopotamab deruxtecan and sacituzumab govitecan and the HER2 conjugate trastuzumab deruxtecan, are being developed less as solo agents than as backbones. Sacituzumab govitecan with pembrolizumab lifted first-line progression-free survival in triple-negative breast cancer to <strong>11.2 months</strong> against 7.8 for chemotherapy with pembrolizumab; datopotamab deruxtecan is in late-stage trials alongside the EGFR inhibitor osimertinib; trastuzumab deruxtecan is being paired with pertuzumab and with checkpoint blockade.<a class="ref" href="#r11">11</a> KRAS G12C inhibitors needed partners too. Blocking the mutant protein alone triggers a feedback reactivation of EGFR, so sotorasib only worked in colorectal cancer once it was combined with the EGFR antibody panitumumab, roughly tripling progression-free survival over standard care.<a class="ref" href="#r12">12</a> The direction of travel is clear. The hard part is no longer whether to combine, but which combination, in which order, for which patient. Regulators ask a version of the same question: each component of a fixed-dose combination has to earn its place under the contribution-of-components principle, and since 2013 the FDA has kept a narrow codevelopment pathway open for two novel agents that only work together.<a class="ref" href="#r13">13</a></p>
+      </div>
+
+      <!-- EXHIBIT: unlock bars -->
+      <figure class="fig reveal">
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">The unlock · synergy vs single-agent screens</span><span class="panel-tag">Illustrative</span></div>
+          <p class="panel-title-lg">A component with no solo activity can transform a combination</p>
+          <p class="panel-intro">Screen agents one at a time and the most valuable partners look like failures. Synergy lives in the interaction, which is exactly what single-agent testing throws away.</p>
+          <div class="bars" id="unlockBars" aria-hidden="true"></div>
+          <div class="panel-legend">
+            <span style="color:#96509A"><i class="dot"></i><span style="color:var(--muted)">Sensitiser alone</span></span>
+            <span style="color:#CE6BA0"><i class="dot"></i><span style="color:var(--muted)">Active agent alone</span></span>
+            <span style="color:#EC7EA6"><i class="dot"></i><span style="color:var(--muted)">Combination</span></span>
+          </div>
+          <div class="panel-note">Sensitisers, immune primers and resistance-breakers carry weak monotherapy signals, so a pipeline tuned for single-agent efficacy discards them.</div>
+        </div>
+      </figure>
+
+      <!-- EXHIBIT: share gauge + market -->
+      <figure class="fig reveal">
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Market · combinations as the default</span><span class="panel-tag">Sources: The Oncologist 2024 · IQVIA 2025</span></div>
+          <p class="panel-title-lg">Combinations are now roughly one in three new oncology approvals</p>
+          <div style="display:grid;grid-template-columns:minmax(0,220px) 1fr;gap:clamp(20px,3vw,44px);align-items:center;margin-top:18px">
+            <div class="gauge-wrap">
+              <div id="shareGauge"></div>
+              <div class="gauge-cap">of FDA solid-tumour approvals, 2011&ndash;2023, were combination regimens<a class="ref" href="#r15">15</a></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:clamp(20px,2.6vw,30px)">
+              <div class="kpi"><span class="k">$252<span class="accent">B</span></span><span class="d">Global spend on cancer medicines, 2024 — projected to reach $441B by 2029 (IQVIA)<a class="ref" href="#r16">16</a></span></div>
+              <div class="kpi"><span class="k">99&thinsp;/&thinsp;292</span><span class="d">FDA solid-tumour approvals that were combinations, rising in absolute number year on year</span></div>
+            </div>
+          </div>
+          <div class="panel-note">Combination regimens have moved from the exception toward the default across immuno-oncology, targeted therapy and ADC development.</div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- SECTION: brute force -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <div class="eyebrow"><span class="bar"></span>The search problem</div>
+        <h2 class="head">You cannot brute-force your way to the <span class="accent">right combination</span>.</h2>
+      </div>
+      <div class="article-body reveal" style="margin-top:22px">
+        <p>Combinations are harder to navigate than single agents precisely because of the complexity they are meant to address. The search space is enormous: a full pairwise screen of just 100 drugs at 100 doses each is on the order of <strong>50 million experiments</strong>, and every extra drug, or every move to triplets and quadruplets, multiplies that again. Even the best physical screens have a deeper limit. BATCHIE, a Bayesian platform, recovered most of the synergies in a 206-drug panel while running only about 4% of its roughly 1.4 million wells,<a class="ref" href="#r14">14</a> which is a genuine advance and still cells in a dish. A dish cannot see the immune compartment clearing or sparing a clone, the stroma that walls a drug out, how much of a dose actually reaches each metastatic site, or the order and timing in which agents are given. It will not tell you that a combination which clears the primary tumour reseeds from the marrow, or that an oncolytic fails in a liver metastasis because prior chemotherapy remodelled its vasculature. Those are the factors that decide a human outcome, and a physical screen leaves out almost all of them.</p>
+      </div>
+      <div class="scale-run reveal">
+        <div><strong>16B</strong><span>Plausible drug &amp; sequence combinations for one cancer · illustrative</span></div>
+        <i>&rarr;</i>
+        <div><strong>50M</strong><span>Experiments for a 100&times;100 pairwise dose screen</span></div>
+        <i>&rarr;</i>
+        <div><strong>304,205</strong><span>Years to brute-force one cancer at 10 min per prediction</span></div>
+      </div>
+      <div class="article-body reveal" style="margin-top:clamp(28px,4vw,44px)">
+        <p>Add sequence, schedule and patient stratification on top, and the plausible regimens for a single cancer run into the billions. So physical screening was never going to be how we find these answers, and the enthusiasm for fully autonomous closed-loop labs makes us wary rather than hopeful: biology is not cheaply verifiable the way maths or software is, and automating a misleading assay mostly produces wrong answers faster.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: what good looks like (MULLER) -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <div class="eyebrow"><span class="bar"></span>What good looks like</div>
+        <h2 class="head">What a good combination actually does <span class="accent">over time</span>.</h2>
+      </div>
+      <div class="article-body reveal" style="margin-top:22px">
+        <p>The reason combinations matter is easiest to see by watching a tumour and its surroundings evolve. A single agent can shrink a cancer for a while, but it also selects: a resistant subclone that was a rounding error at baseline expands into the space the drug clears, and the disease returns. A well-chosen combination closes those exits, holding the resistant population down while the stroma normalises and the immune compartment does the durable work. Toggle between the two.</p>
+      </div>
+
+      <figure class="fig reveal" id="mullerFig" style="position:relative">
+        <div class="panel">
+          <div class="panel-head">
+            <span class="panel-title">Interactive · tumour evolution over 36 months</span>
+            <div class="toggle" role="group" aria-label="Choose regimen">
+              <button data-mode="mono" aria-pressed="false">Single agent</button>
+              <button data-mode="combo" aria-pressed="true">Rational combination</button>
+            </div>
+          </div>
+          <p class="panel-title-lg">Monotherapy relapse vs a designed combination</p>
+          <p class="panel-intro muller-intro"></p>
+          <div class="muller-chart"></div>
+          <div class="panel-legend muller-legend"></div>
+          <div class="panel-note">Illustrative Muller plot — band thickness is the share of tissue held by each population. Hover a band to name it.</div>
+        </div>
+        <div class="tt"></div>
+        <figcaption><b>Read it left to right.</b> The single-agent course clears sensitive disease early, then a resistant subclone escapes and repopulates. The combination suppresses that escape and lets a normalised stroma and immune response take hold, holding the tumour to a small residual at 36 months.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- SECTION: what the field needs / approach (PARETO) -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <div class="eyebrow"><span class="bar"></span>What the field needs</div>
+        <h2 class="head">A model that can <span class="accent">reason</span> about the biology.</h2>
+      </div>
+      <div class="article-body reveal" style="margin-top:22px">
+        <p>What the field needs is a model that can hold several mechanisms in mind at once and tie them to real human outcomes, so you know, before you go near a clinic, which combination will move the needle for which patient.</p>
+        <p>Most of the industry building trial-prediction models is chasing the newest architecture, foundation models and virtual cells today, classical machine learning a few years ago. Underneath, they all join the dots between past trials. That gives you a good model of how known drugs behave in familiar situations and very little ability to extrapolate to a novel drug, a new target, or a system pushed into a state it has not seen. Clinical data makes this worse: one sample per patient at one moment, a narrow range of drugs, almost no counterfactuals. An off-the-shelf language model can already predict trial outcomes with close to <strong>80% accuracy</strong>. Restrict it to the cases that actually matter, the surprising success, the true synergy, and that accuracy collapses toward zero. Those cases resist interpolation. They need reasoning about the biology.</p>
+        <h3>Reasoning back to the driving node</h3>
+        <p>Over the past year we built agents to unpick the earliest vulnerabilities of Alzheimer&rsquo;s disease with the <a href="https://alleninstitute.org/" target="_blank" rel="noopener">Allen Institute</a>. Working from single-cell omics, they integrated across hundreds of smaller hypotheses, most of them far from the largest changes in the data, and converged on NMDA-receptor-expression-mediated hyperexcitability as a common early vulnerability.<a class="ref" href="#r18">18</a> That subtlety is the whole point. Disease is driven by cell state, by network position and by how the system evolves, so the biggest change in a dataset is usually a downstream consequence, several steps from the lever that actually controls it. To intervene you have to reason back to the driving node. It is the lesson a decade of amyloid antibodies, aimed at a late and highly visible change, keeps teaching the hard way.</p>
+        <h3>A world model, then a fast search over it</h3>
+        <p>So we built the model differently. It plays the disease forward in time, step by step, across each metastatic site and the organs that matter, and across each group of patients in a trial, reasoning by analogy about how every pairwise interaction unfolds and bringing it all back together to ask whether a given trial design would actually hit its endpoint. This works because biology is largely conserved: a cell exposed to a given signal, absent competing factors, tends to respond in a knowable way, and the rules for scaling a dose from a dish to a human, or for why an oncolytic may fail after prior chemotherapy has remodelled the vasculature, can be reasoned about from first principles. It is the same reasoning that produced immunotherapy and the GLP-1 drugs, with some luck along the way; we taught a model to do it deliberately.</p>
+        <p>Prediction alone is not enough. The deep model is slow, about ten minutes a cycle, and there are billions of combinations to consider. So we distilled it into a fast approximation that runs in a fraction of a second and paired that with a genetic optimiser that recombines the building blocks of a regimen, tests them against the fast model, learns, and tries again. Within minutes it returns the optimum combination for a given cancer, with or without stratification, the wider trade-off curve of survival against regimen complexity, and, most usefully, the two or three wet-lab experiments that would most reduce the remaining uncertainty. Those experiments sharpen the model&rsquo;s grasp of this cancer, and of the systems biology underneath it.</p>
+      </div>
+
+      <figure class="fig reveal" id="paretoFig" style="position:relative">
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Interactive · the trade-off curve</span><span class="panel-tag">Illustrative &amp; schematic</span></div>
+          <p class="panel-title-lg">Every regimen is a bet on benefit against complexity</p>
+          <p class="panel-intro">More drugs can buy more benefit, but also more toxicity, cost and failure risk. The useful regimens sit on the efficient frontier; the goal is to design toward the top-left. Hover any point for the regimen.</p>
+          <div class="pareto-chart"></div>
+          <div class="panel-note">Positions convey the qualitative trade-off rather than exact trial values. A model that can price this curve picks the combination worth its complexity and leaves the rest.</div>
+        </div>
+        <div class="tt"></div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- SECTION: early signal + worked example -->
+  <section class="section">
+    <div class="section-bg"></div>
+    <div class="section-inner">
+      <div class="section-head reveal">
+        <div class="eyebrow"><span class="bar"></span>Early signal</div>
+        <h2>We put the reasoning to the test before the read-out.</h2>
+      </div>
+      <div class="row align-top">
+        <div class="col-text reveal">
+          <div class="kpis" style="margin-bottom:26px"><div class="statline"><span class="n">87%</span><span class="l">prospective accuracy on ASCO read-outs, across entirely novel combinations</span></div></div>
+          <div class="article-body">
+            <p>Across recent ASCO read-outs the model has predicted endpoints with <strong>87% prospective accuracy</strong>, including on combinations it had never seen. Ahead of this year&rsquo;s meeting it called the readout of Regeneron&rsquo;s fianlimab, an anti-LAG-3 antibody, before its Phase 3 melanoma trial missed its primary endpoint and took roughly <strong>$8 billion</strong> off the company&rsquo;s value in a single day.<a class="ref" href="#r17">17</a> The reasoning behind that call rests on more than a decade of company-building at Deep Science Ventures, where the great majority of theses translated as planned. We are about to take our first repurposing combination into the lab with a partner we will name shortly, and we are in conversation with several of the largest pharmaceutical companies in the world.</p>
+          </div>
+          <div class="roles" style="margin-top:26px">
+            <span>KRAS backbone design</span>
+            <span>TOPO ADCs in PDAC</span>
+            <span>CD47 rebound in breast</span>
+            <span>post-GLP-1 oncology</span>
+            <span>oral SERD sequencing</span>
+            <span>ivonescimab translation</span>
+          </div>
+          <p class="footnote">A live sample of the questions we are modelling now.</p>
+        </div>
+        <div class="col-exhibit reveal">
+          <div class="report">
+            <div class="report-top"><span>Big Picture Bio · Prospective call</span><span>Excerpt · illustrative</span></div>
+            <h4>Fianlimab (anti-LAG-3) + cemiplimab — 1L metastatic melanoma</h4>
+            <p>LAG-3 contributes little independent exhaustion signal in a PD-1&ndash;naive, checkpoint-responsive setting; against a pembrolizumab comparator the model placed <span class="hl">the added blockade largely on cells already licensed to kill</span>.</p>
+            <p>It therefore predicted <span class="hl">no meaningful separation on progression-free survival</span> versus single-agent PD-1, with the combination&rsquo;s cost falling on toxicity rather than benefit.</p>
+            <div class="callout">Predicted: primary PFS endpoint not met. Reported May 2026 — the trial missed, and the market cut roughly $8B from Regeneron in a day.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA: solutions -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <div class="eyebrow"><span class="bar"></span>Where this goes to work</div>
+        <h2 class="head">Put the model on your <span class="accent">hardest question</span>.</h2>
+        <p class="lead">The same reasoning engine sits underneath every decision our partners bring us, from the trial they are about to commit to, to the asset they are weighing, to the platform they need to point.</p>
+      </div>
+      <div class="solutions-grid reveal" style="margin-top:clamp(28px,4vw,48px)">
+        <a class="sol-card" href="/solutions/clinical-development.html"><span class="k">Clinical Development</span><h3>Design the trial that reads out</h3><p>Predict your endpoint, then design the trial that clears it on fewer patients.</p><span class="go">Explore</span></a>
+        <a class="sol-card" href="/solutions/competitive-intelligence.html"><span class="k">Competitive Intelligence</span><h3>Read the field by its mechanism</h3><p>Know what becomes standard of care, and what a rival&rsquo;s combination does to your franchise.</p><span class="go">Explore</span></a>
+        <a class="sol-card" href="/solutions/investment-partnering-dd.html"><span class="k">Investment &amp; partnering DD</span><h3>A mechanistic verdict on the asset</h3><p>Where it wins, what it needs beside it, and whether it still beats standard of care at launch.</p><span class="go">Explore</span></a>
+        <a class="sol-card" href="/solutions/lifecycle-franchise-strategy.html"><span class="k">Lifecycle &amp; Franchise Strategy</span><h3>Keep your asset the standard</h3><p>The combination, sequence and setting that hold your molecule first-line.</p><span class="go">Explore</span></a>
+        <a class="sol-card" href="/solutions/platform-payload-strategy.html"><span class="k">Platform &amp; Payload Strategy</span><h3>Point your platform at the target</h3><p>The payload, target and indication most likely to win in patients.</p><span class="go">Explore</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERENCES -->
+  <section class="block">
+    <div class="wrap">
+      <div class="refs" id="references">
+        <h2>References</h2>
+        <ol class="reflist">
+          <li id="r1">O&rsquo;Brien SG, et al. Imatinib compared with interferon and low-dose cytarabine for newly diagnosed chronic-phase CML (IRIS). <em>N Engl J Med</em> 2003;348:994&ndash;1004 (complete haematologic response 95.3%). <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa022457" target="_blank" rel="noopener">nejm.org</a>. Ten-year follow-up: Hochhaus A, et al. <em>N Engl J Med</em> 2017;376:917&ndash;927. <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa1609324" target="_blank" rel="noopener">nejm.org</a></li>
+          <li id="r2">Cook D, et al. Lessons learned from the fate of AstraZeneca&rsquo;s drug pipeline: a five-dimensional framework. <em>Nat Rev Drug Discov</em> 2014;13:419&ndash;431. <a href="https://www.nature.com/articles/nrd4309" target="_blank" rel="noopener">nature.com</a></li>
+          <li id="r3">O&rsquo;Leary MN, et al. The ribosomal protein Rpl22 controls ribosome composition by directly repressing expression of its own paralog, Rpl22l1. <em>PLoS Genet</em> 2013;9:e1003708. <a href="https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1003708" target="_blank" rel="noopener">plos.org</a></li>
+          <li id="r4">Kozar K, et al. Mouse development and cell proliferation in the absence of D-cyclins (only the triple knockout is lethal). <em>Cell</em> 2004;118:477&ndash;491. <a href="https://pubmed.ncbi.nlm.nih.gov/15315760/" target="_blank" rel="noopener">pubmed</a></li>
+          <li id="r5">Multiple interacting pathologies in Alzheimer&rsquo;s disease and the rationale for combination therapy (amyloid, tau, neuroinflammation, vascular dysfunction). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12434272/" target="_blank" rel="noopener">ncbi.nlm.nih.gov</a></li>
+          <li id="r6">van Dyck CH, et al. Lecanemab in early Alzheimer&rsquo;s disease (CLARITY-AD); decline slowed by ~27% on CDR-SB. <em>N Engl J Med</em> 2023;388:9&ndash;21. <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2212948" target="_blank" rel="noopener">nejm.org</a></li>
+          <li id="r7">Scannell JW, et al. Diagnosing the decline in pharmaceutical R&amp;D efficiency (Eroom&rsquo;s Law). <em>Nat Rev Drug Discov</em> 2012;11:191&ndash;200. <a href="https://www.nature.com/articles/nrd3681" target="_blank" rel="noopener">nature.com</a></li>
+          <li id="r8">Klein C, et al. The present and future of bispecific antibodies for cancer therapy (14 approved by end-2023). <em>Nat Rev Drug Discov</em> 2024;23:301&ndash;319. <a href="https://www.nature.com/articles/s41573-024-00896-6" target="_blank" rel="noopener">nature.com</a>. Ivonescimab vs pembrolizumab (HARMONi-2): Fang W, et al. <em>Lancet</em> 2024. <a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(24)02722-3/abstract" target="_blank" rel="noopener">thelancet.com</a></li>
+          <li id="r9">Larkin J, et al. Combined nivolumab and ipilimumab or monotherapy in untreated melanoma (CheckMate 067). <em>N Engl J Med</em> 2015;373:23&ndash;34. <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa1504030" target="_blank" rel="noopener">nejm.org</a>. Long-term overall survival (72.1 vs 19.9 months): Wolchok JD, et al. <em>J Clin Oncol</em> 2022;40:127&ndash;137. <a href="https://ascopubs.org/doi/10.1200/JCO.21.02229" target="_blank" rel="noopener">ascopubs.org</a></li>
+          <li id="r10">Tawbi HA, et al. Relatlimab and nivolumab versus nivolumab in untreated melanoma (RELATIVITY-047); PFS 10.1 vs 4.6 months; first LAG-3 combination approved (2022). <em>N Engl J Med</em> 2022;386:24&ndash;34. <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2109970" target="_blank" rel="noopener">nejm.org</a></li>
+          <li id="r11">Antibody-drug conjugate combinations. Sacituzumab govitecan + pembrolizumab in first-line TNBC (ASCENT-04/KEYNOTE-D19), FDA approval. <a href="https://www.fda.gov/drugs/resources-information-approved-drugs/fda-approves-sacituzumab-govitecan-hziy-monotherapy-and-combination-pembrolizumab-first-line" target="_blank" rel="noopener">fda.gov</a>. Datopotamab deruxtecan (TROPION-Lung01): <em>J Clin Oncol</em> 2024. <a href="https://ascopubs.org/doi/10.1200/JCO-24-01544" target="_blank" rel="noopener">ascopubs.org</a>. Trastuzumab deruxtecan + pertuzumab (DESTINY-Breast09): <em>N Engl J Med</em> 2025. <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2508668" target="_blank" rel="noopener">nejm.org</a></li>
+          <li id="r12">Fakih MG, et al. Sotorasib plus panitumumab in refractory KRAS G12C-mutated colorectal cancer (CodeBreaK 300); PFS 5.6 vs 2.0 months. <em>N Engl J Med</em> 2023;389:2125&ndash;2139. <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2308795" target="_blank" rel="noopener">nejm.org</a></li>
+          <li id="r13">FDA. Codevelopment of Two or More New Investigational Drugs for Use in Combination (guidance, June 2013). <a href="https://www.federalregister.gov/documents/2013/06/14/2013-14168/guidance-for-industry-on-codevelopment-of-two-or-more-new-investigational-drugs-for-use-in" target="_blank" rel="noopener">federalregister.gov</a>. Contribution-of-components principle, 21 CFR 300.50. <a href="https://www.ecfr.gov/current/title-21/section-300.50" target="_blank" rel="noopener">ecfr.gov</a></li>
+          <li id="r14">Tosh C, Tec M, et al. A Bayesian active learning platform for scalable combination drug screens (BATCHIE). <em>Nat Commun</em> 2025;16:156. <a href="https://www.nature.com/articles/s41467-024-55287-7" target="_blank" rel="noopener">nature.com</a></li>
+          <li id="r15">Chen EY, et al. Trends in the complexity of single-agent and combination cancer therapies (99 of 292 FDA solid-tumour approvals, 2011&ndash;2023, were combinations). <em>The Oncologist</em> 2024. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11954493/" target="_blank" rel="noopener">ncbi.nlm.nih.gov</a></li>
+          <li id="r16">IQVIA Institute. Global Oncology Trends 2025 (cancer-medicine spend $252B in 2024, projected ~$441B by 2029). <a href="https://www.iqvia.com/insights/the-iqvia-institute/reports-and-publications/reports/global-oncology-trends-2025" target="_blank" rel="noopener">iqvia.com</a></li>
+          <li id="r17">Regeneron. Update on the Phase 3 trial of fianlimab (anti-LAG-3) in first-line metastatic melanoma (May 2026). <a href="https://investor.regeneron.com/news-releases/news-release-details/regeneron-provides-update-phase-3-trial-fianlimab-lag-3" target="_blank" rel="noopener">regeneron.com</a>. Coverage: <a href="https://www.biopharmadive.com/news/regeneron-cancer-immunotherapy-fianlimab-lag3-melanoma-study-results/820443/" target="_blank" rel="noopener">biopharmadive.com</a></li>
+          <li id="r18">Big Picture Bio with the Allen Institute. Early vulnerabilities of Alzheimer&rsquo;s disease from single-cell omics: NMDA-receptor-expression-mediated hyperexcitability as a common early vulnerability. Preprint, bioRxiv, 2026. <a href="https://www.biorxiv.org/content/10.64898/2026.07.01.734821v1" target="_blank" rel="noopener">biorxiv.org</a></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+</article>
+</main>
+
+<div id="site-contact"></div>
+<div id="site-footer"></div>
+<script src="/assets/site.js"></script>
+<script src="/assets/inner-visuals.js"></script>
+<script src="/assets/blog.js"></script>
+</body>
+</html>

@@ -48,7 +48,7 @@
     ctx.fillText(str,x,y);
   }
   function roundRect(ctx,x,y,w,h,r){
-    r=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+r,y);
+    r=Math.max(0,Math.min(r,w/2,h/2));ctx.beginPath();ctx.moveTo(x+r,y);
     ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);
     ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();
   }
@@ -328,12 +328,12 @@
       v.w=Math.max(1,r.width);v.h=Math.max(1,r.height);v.dpr=Math.min(window.devicePixelRatio||1,2);
       canvas.width=Math.round(v.w*v.dpr);canvas.height=Math.round(v.h*v.dpr);
       canvas.style.width=v.w+"px";canvas.style.height=v.h+"px";
-      draw(v,reduced?0:performance.now());
+      try{draw(v,reduced?0:performance.now());}catch(e){}
     }
     if("ResizeObserver" in window)new ResizeObserver(resize).observe(host);
     else window.addEventListener("resize",resize);
     if("IntersectionObserver" in window)new IntersectionObserver(function(entries){v.active=entries[0].isIntersecting;},{rootMargin:"120px"}).observe(host);
-    visuals.push(v);resize();
+    visuals.push(v);try{resize();}catch(e){}
   }
 
   var hero=document.querySelector(".hero");
@@ -352,7 +352,7 @@
   });
 
   function loop(time){
-    visuals.forEach(function(v){if(v.active)draw(v,time);});
+    visuals.forEach(function(v){if(v.active){try{draw(v,time);}catch(e){}}});
     raf=requestAnimationFrame(loop);
   }
   if(!reduced)raf=requestAnimationFrame(loop);

@@ -16,6 +16,7 @@
   ];
   var LATEST = [
     // {tag, date, text, href} — newest first; wire real items here as they land.
+    {tag:"Essay",       date:"Aug 2026", text:"Why the right combinations are the next breakthrough", href:"/blog/why-the-right-combinations/"},
     {tag:"Publication", date:"2026", text:"Cell paper on the reasoning world model — in press", href:"/company.html"},
     {tag:"Result",      date:"2026", text:"87% prospective validation across novel ASCO combinations", href:"/solutions/clinical-development.html"},
     {tag:"Partnership", date:"2026", text:"First pilot partnership signed with a biotech", href:"/pipeline.html"},
@@ -43,6 +44,7 @@
           '</div>'+
           '<a href="/pipeline.html"'+(isCurrent("/pipeline.html")?' class="current"':'')+'>Pipeline</a>'+
           '<a href="/company.html"'+(isCurrent("/company.html")?' class="current"':'')+'>Company</a>'+
+          '<a href="/blog/"'+(path.indexOf("/blog")===0?' class="current"':'')+'>Journal</a>'+
           '<a href="/#contact">Contact</a>'+
         '</div>'+
       '</nav>';
@@ -98,6 +100,7 @@
             '<h4>Company</h4>'+
             '<a href="/pipeline.html">Pipeline</a>'+
             '<a href="/company.html">Company</a>'+
+            '<a href="/blog/">Journal</a>'+
             '<a href="/#contact">Contact</a>'+
           '</div>'+
           '<div class="fcol flatest"><h4>Latest</h4>'+latest+'</div>'+
