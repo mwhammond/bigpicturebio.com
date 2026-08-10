@@ -1385,10 +1385,41 @@ p.body{ font-family:var(--sans); font-size:clamp(15px,1.1vw,17px); line-height:1
   background:radial-gradient(120% 90% at 100% 0%, rgba(165,40,106,.06), transparent 52%), #fff;
 }
 
-/* --- the home hero canvas band stays dark: keep its text light --- */
-:root[data-theme="light"] .model-story{ color:#F2EFEA; }
-:root[data-theme="light"] .model-beat h2{ color:#F2EFEA; }
-:root[data-theme="light"] .model-beat--hero p{ color:rgba(224,220,210,.82); }
+/* --- home model story: full light treatment (canvas repaints light too) --- */
+:root[data-theme="light"] .model-story{ background:var(--bg); color:var(--ink); }
+:root[data-theme="light"] .model-visual{
+  background:radial-gradient(90% 100% at 78% 52%, rgba(240,138,184,.12), transparent 70%), var(--bg);
+}
+:root[data-theme="light"] .model-visual::before{
+  background-image:
+    linear-gradient(rgba(40,32,24,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(40,32,24,.05) 1px, transparent 1px);
+}
+:root[data-theme="light"] .model-wash{
+  background:
+    linear-gradient(90deg, rgba(245,241,232,.98) 0%, rgba(245,241,232,.93) 31%, rgba(245,241,232,.44) 48%, rgba(245,241,232,0) 72%),
+    linear-gradient(0deg, rgba(245,241,232,.76) 0%, rgba(245,241,232,0) 34%);
+}
+:root[data-theme="light"] .model-hud-top{ color:rgba(36,31,27,.56); border-bottom-color:rgba(40,32,24,.16); }
+:root[data-theme="light"] .model-metrics{ border-top-color:rgba(40,32,24,.18); }
+:root[data-theme="light"] .model-metric-label{ color:rgba(36,31,27,.5); }
+:root[data-theme="light"] .model-metrics b{ color:rgba(36,31,27,.9); }
+:root[data-theme="light"] .model-key{ color:rgba(36,31,27,.62); }
+:root[data-theme="light"] .model-beat h2{ color:var(--ink); }
+:root[data-theme="light"] .model-beat p{ color:rgba(60,56,47,.82); }
+:root[data-theme="light"] .model-beat--hero p{ color:rgba(60,56,47,.82); }
+:root[data-theme="light"] .model-scroll-cue{ color:rgba(36,31,27,.55); }
+:root[data-theme="light"] .model-scroll-cue span{ background:rgba(40,32,24,.14); }
+:root[data-theme="light"] .model-note{ border-color:rgba(165,40,106,.32); background:rgba(165,40,106,.07); }
+:root[data-theme="light"] .model-note b{ color:var(--ink); }
+:root[data-theme="light"] .model-note span{ color:rgba(36,31,27,.5); }
+@media (max-width:1024px){
+  :root[data-theme="light"] .model-wash{
+    background:
+      linear-gradient(0deg, rgba(245,241,232,.98) 0%, rgba(245,241,232,.9) 34%, rgba(245,241,232,.18) 70%, rgba(245,241,232,.05) 100%),
+      linear-gradient(90deg, rgba(245,241,232,.42), transparent);
+  }
+}
 
 /* --- inner-page canvas heroes + dark scrim bands keep light text --- */
 :root[data-theme="light"] .hero h1{ color:#F2EFEA; }
@@ -1396,3 +1427,45 @@ p.body{ font-family:var(--sans); font-size:clamp(15px,1.1vw,17px); line-height:1
 :root[data-theme="light"] .inner-page .section-head h2{ color:#F2EFEA; }
 :root[data-theme="light"] .inner-page .section-head p{ color:rgba(224,220,210,.8); }
 :root[data-theme="light"] .inner-page .lead{ color:var(--ink-2); }
+
+/* --- data-instrument cards stay dark on a light page: make them opaque
+   and keep their inner text light so the embedded charts read cleanly --- */
+:root[data-theme="light"] .panel{
+  background:radial-gradient(120% 100% at 100% 0%, rgba(82,34,63,.28), transparent 54%), #141019;
+  border-color:rgba(255,255,255,.10);
+  box-shadow:0 26px 70px rgba(90,60,40,.20);
+}
+:root[data-theme="light"] .panel .panel-title,
+:root[data-theme="light"] .panel .panel-title-lg{ color:#F2EFEA; }
+:root[data-theme="light"] .panel .panel-tag{ color:#B0ACA4; border-color:rgba(255,255,255,.22); }
+:root[data-theme="light"] .panel .panel-intro,
+:root[data-theme="light"] .panel .panel-legend{ color:#B0ACA4; }
+:root[data-theme="light"] .panel .panel-note{ color:#9D98A1; border-top-color:rgba(255,255,255,.08); }
+:root[data-theme="light"] .panel .bar-x{ color:#E0DCD2; }
+:root[data-theme="light"] .panel .bar .cap{ color:#F2EFEA; }
+:root[data-theme="light"] .panel .bar-note,
+:root[data-theme="light"] .panel .gauge-cap{ color:#8A857E; }
+:root[data-theme="light"] .panel .toggle{ border-color:rgba(255,255,255,.18); background:rgba(255,255,255,.04); }
+:root[data-theme="light"] .panel .toggle button{ color:#B0ACA4; }
+:root[data-theme="light"] .inner-page .panel:has(.bio-instrument){
+  background:radial-gradient(120% 100% at 100% 0%, rgba(82,34,63,.24), transparent 52%), #141019;
+}
+
+/* article "paper" excerpt needs a soft edge once the page is light too */
+:root[data-theme="light"] .report,
+:root[data-theme="light"] .inner-page .report{
+  border:1px solid #E3D9CB;
+  box-shadow:0 22px 55px rgba(90,60,40,.16);
+}
+:root[data-theme="light"] .article-meta{ border-top-color:rgba(255,255,255,.12); }
+
+/* --- home page opens on a LIGHT hero in light mode, so its nav is light from
+   the top (inner pages keep the dark-hero nav treatment above) --- */
+:root[data-theme="light"] .home-page .nav{ background:linear-gradient(180deg, rgba(245,241,232,.86) 0%, rgba(245,241,232,0) 100%); }
+:root[data-theme="light"] .home-page .nav .wordmark{ color:var(--ink); }
+:root[data-theme="light"] .home-page .nav .wordmark em{ color:var(--accent); }
+:root[data-theme="light"] .home-page .nav-links a,
+:root[data-theme="light"] .home-page .nav-item > button{ color:var(--ink-2); }
+:root[data-theme="light"] .home-page .nav-toggle span{ background:var(--ink); }
+:root[data-theme="light"] .home-page .theme-toggle{ color:var(--ink-2); border-color:var(--line-2); }
+:root[data-theme="light"] .home-page .theme-toggle:hover{ color:var(--accent); border-color:var(--accent); }

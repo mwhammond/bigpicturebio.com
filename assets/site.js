@@ -18,6 +18,8 @@
     var next = isLight ? "dark" : "light";
     document.documentElement.setAttribute("data-theme", next);
     try{ localStorage.setItem("bpb-theme", next); }catch(e){}
+    // nudge canvases (home model story) to repaint with the new palette
+    window.dispatchEvent(new Event("resize"));
   }
 
   /* ---------------- Site config (single source of truth) ---------------- */
