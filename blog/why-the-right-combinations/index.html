@@ -232,12 +232,13 @@
     <div class="wrap">
       <div class="block-head reveal">
         <div class="eyebrow"><span class="bar"></span>What the field needs</div>
-        <h2 class="head">A model that can <span class="accent">reason</span> about the biology.</h2>
+        <h2 class="head">Modelling the evolution of complex disease where <span class="accent">no training data exists</span>.</h2>
       </div>
       <div class="article-body reveal" style="margin-top:22px">
         <p>What the field needs is a model that can hold several mechanisms in mind at once and tie them to real human outcomes, so you know, before you go near a clinic, which combination will move the needle for which patient.</p>
         <p>Most of the industry building trial-prediction models is chasing the newest architecture, foundation models and virtual cells today, classical machine learning a few years ago. Underneath, they all join the dots between past trials. That gives you a good model of how known drugs behave in familiar situations and very little ability to extrapolate to a novel drug, a new target, or a system pushed into a state it has not seen. Clinical data makes this worse: one sample per patient at one moment, a narrow range of drugs, almost no counterfactuals. An off-the-shelf language model can already predict trial outcomes with close to <strong>80% accuracy</strong>. Restrict it to the cases that actually matter, the surprising success, the true synergy, and that accuracy collapses toward zero. Those cases resist interpolation. They need reasoning about the biology.</p>
         <p>A language model has no framework for that. Faced with a novel case it is pulled straight back into the reasoning that drove the last round of failures, because that is what sits in its training data. The harness we have spent the last year building does the opposite: it weighs every influential factor, from diffusion gradients inside a tumour to the variance in a receptor&rsquo;s density across a population, scaled all the way through to the placebo rate at a particular trial site. That is what lets us predict exact endpoints to within weeks of overall survival.</p>
+        <p>There is a further reason existing outcomes are the wrong thing to learn from. Many of the most useful building blocks for a combination are the ones that failed on their own. The box is full of mechanisms of synergism and selectivity that never cleared pre-clinical because, in isolation, they do little, yet in the right pairing they beat any single target by a wide margin. A model trained on what has already read out in humans cannot see the worth of those pieces, so it quietly locks out the most desirable part of the search space.</p>
         <h3>Reasoning back to the driving node</h3>
         <p>Over the past year we built agents to unpick the earliest vulnerabilities of Alzheimer&rsquo;s disease with the <a href="https://alleninstitute.org/" target="_blank" rel="noopener">Allen Institute</a>. Working from single-cell omics, they integrated across hundreds of smaller hypotheses, most of them far from the largest changes in the data, and converged on NMDA-receptor-expression-mediated hyperexcitability as a common early vulnerability.<a class="ref" href="#r18">18</a> That subtlety is the whole point. Disease is driven by cell state, by network position and by how the system evolves, so the biggest change in a dataset is usually a downstream consequence, several steps from the lever that actually controls it. To intervene you have to reason back to the driving node. It is the lesson a decade of amyloid antibodies, aimed at a late and highly visible change, keeps teaching the hard way.</p>
         <h3>A world model, then a fast search over it</h3>
@@ -264,13 +265,13 @@
     <div class="section-inner">
       <div class="section-head reveal">
         <div class="eyebrow"><span class="bar"></span>Early signal</div>
-        <h2>We put the reasoning to the test before the read-out.</h2>
+        <h2>Prospective testing where the outcome isn&rsquo;t obvious.</h2>
       </div>
       <div class="row align-top">
         <div class="col-text reveal">
           <div class="kpis" style="margin-bottom:26px"><div class="statline"><span class="n">87%</span><span class="l">prospective accuracy on ASCO read-outs, across entirely novel combinations</span></div></div>
           <div class="article-body">
-            <p>Across recent ASCO read-outs the model has predicted endpoints with <strong>87% prospective accuracy</strong>, including on combinations it had never seen. Ahead of this year&rsquo;s meeting it called the readout of Regeneron&rsquo;s fianlimab, an anti-LAG-3 antibody, before its Phase 3 melanoma trial missed its primary endpoint and took roughly <strong>$8 billion</strong> off the company&rsquo;s value in a single day.<a class="ref" href="#r17">17</a> The reasoning behind that call rests on more than a decade of company-building at Deep Science Ventures, where the great majority of theses translated as planned. We are about to take our first repurposing combination into the lab with a partner we will name shortly, and we are in conversation with several of the largest pharmaceutical companies in the world.</p>
+            <p>Across recent ASCO read-outs the model has predicted endpoints with <strong>87% prospective accuracy</strong>, including on combinations it had never seen. Ahead of this year&rsquo;s meeting it called the readout of Regeneron&rsquo;s fianlimab, an anti-LAG-3 antibody, before its Phase 3 melanoma trial missed its primary endpoint and took roughly <strong>$8 billion</strong> off the company&rsquo;s value in a single day.<a class="ref" href="#r17">17</a> The reasoning behind that call rests on more than a decade of company-building at <a href="https://deepscienceventures.com" target="_blank" rel="noopener">Deep Science Ventures</a>, where the great majority of theses translated as planned. We are about to take our first repurposing combination into the lab with a partner we will name shortly, and we are in conversation with several of the largest pharmaceutical companies in the world.</p>
           </div>
           <div class="roles" style="margin-top:26px">
             <span>KRAS backbone design</span>
@@ -295,20 +296,50 @@
     </div>
   </section>
 
-  <!-- CTA: solutions -->
-  <section class="block">
+  <!-- CTA: how we work with partners (mirrors the homepage panel) -->
+  <section class="block tight model-solutions">
     <div class="wrap">
       <div class="block-head reveal">
-        <div class="eyebrow"><span class="bar"></span>Where this goes to work</div>
-        <h2 class="head">Put the model on your <span class="accent">hardest question</span>.</h2>
-        <p class="lead">The same reasoning engine sits underneath every decision our partners bring us, from the trial they are about to commit to, to the asset they are weighing, to the platform they need to point.</p>
+        <div class="eyebrow"><span class="bar"></span>Working together</div>
+        <h2 class="head mt-s">How we work with partners to build better combination therapies.</h2>
       </div>
-      <div class="solutions-grid reveal" style="margin-top:clamp(28px,4vw,48px)">
-        <a class="sol-card" href="/solutions/clinical-development.html"><span class="k">Clinical Development</span><h3>Design the trial that reads out</h3><p>Predict your endpoint, then design the trial that clears it on fewer patients.</p><span class="go">Explore</span></a>
-        <a class="sol-card" href="/solutions/competitive-intelligence.html"><span class="k">Competitive Intelligence</span><h3>Read the field by its mechanism</h3><p>Know what becomes standard of care, and what a rival&rsquo;s combination does to your franchise.</p><span class="go">Explore</span></a>
-        <a class="sol-card" href="/solutions/investment-partnering-dd.html"><span class="k">Investment &amp; partnering DD</span><h3>A mechanistic verdict on the asset</h3><p>Where it wins, what it needs beside it, and whether it still beats standard of care at launch.</p><span class="go">Explore</span></a>
-        <a class="sol-card" href="/solutions/lifecycle-franchise-strategy.html"><span class="k">Lifecycle &amp; Franchise Strategy</span><h3>Keep your asset the standard</h3><p>The combination, sequence and setting that hold your molecule first-line.</p><span class="go">Explore</span></a>
-        <a class="sol-card" href="/solutions/platform-payload-strategy.html"><span class="k">Platform &amp; Payload Strategy</span><h3>Point your platform at the target</h3><p>The payload, target and indication most likely to win in patients.</p><span class="go">Explore</span></a>
+      <div class="solutions-grid" style="margin-top:clamp(44px,6vh,72px);">
+        <a class="sol-card reveal" href="/solutions/clinical-development.html">
+          <span class="k">Clinical Development</span>
+          <h3>Understand how complex, systems-level interactions will play out</h3>
+          <p>Predict the endpoint, then design the trial that clears it, on fewer patients and in less time.</p>
+          <span class="go">Explore</span>
+        </a>
+        <a class="sol-card reveal" href="/solutions/competitive-intelligence.html">
+          <span class="k">Competitive Intelligence</span>
+          <h3>Know which competitor combinations are most likely to threaten your franchise</h3>
+          <p>See what becomes standard of care, and what a rival's combination would do to your franchise.</p>
+          <span class="go">Explore</span>
+        </a>
+        <a class="sol-card reveal" href="/solutions/investment-partnering-dd.html">
+          <span class="k">Investment &amp; partnering DD</span>
+          <h3>Turn clinical uncertainty into a verdict</h3>
+          <p>A mechanistic read on whether an asset works — for a deal or a position.</p>
+          <span class="go">Explore</span>
+        </a>
+        <a class="sol-card reveal" href="/solutions/lifecycle-franchise-strategy.html">
+          <span class="k">Lifecycle &amp; Franchise Strategy</span>
+          <h3>Keep your asset the standard of care</h3>
+          <p>The combination, sequence and setting that keep your molecule first-line.</p>
+          <span class="go">Explore</span>
+        </a>
+        <a class="sol-card reveal" href="/solutions/platform-payload-strategy.html">
+          <span class="k">Platform &amp; Payload Strategy</span>
+          <h3>Point your platform at the right target</h3>
+          <p>The payload, target and indication that turn a delivery technology into a clinical winner.</p>
+          <span class="go">Explore</span>
+        </a>
+        <a class="sol-card reveal" href="/pipeline.html">
+          <span class="k">Pipeline &amp; partnerships</span>
+          <h3>What we're building now</h3>
+          <p>Ten programmes in design or terms, pre-launch — and a growing internal pipeline.</p>
+          <span class="go">See the pipeline</span>
+        </a>
       </div>
     </div>
   </section>
