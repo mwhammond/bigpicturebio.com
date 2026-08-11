@@ -82,16 +82,23 @@
         <div class="panel" style="margin-top:clamp(20px,2.6vw,30px);">
           <div class="panel-head"><span class="panel-title">Predicted population response</span><span class="panel-tag">Model view · stalled</span></div>
           <div class="js-muller" data-muller="stalled" style="position:relative;width:100%;aspect-ratio:16/10;border-radius:8px;overflow:hidden;background:#0c0d10;"></div>
-          <div class="panel-note">The added arm never clears the tumour and the resistant subclone keeps growing — the separation the trial was powered to see never opens.</div>
+          <div class="panel-legend">
+            <span style="color:#F6C982"><i></i>Immune influx</span>
+            <span style="color:#EC7EA6"><i></i>Normalised stroma</span>
+            <span style="color:#CE6BA0"><i></i>Reactive CAF</span>
+            <span style="color:#96509A"><i></i>Resistant clone</span>
+            <span style="color:#52223F"><i></i>Residual tumour</span>
+          </div>
+          <div class="panel-note">Left to right, baseline to month&nbsp;36: the added arm never clears the tumour and the resistant subclone keeps growing — the separation the trial was powered to see never opens.</div>
         </div>
       </div>
       <div class="col-exhibit reveal">
         <div class="report">
-          <div class="report-top"><span>Big Picture Bio · Validation report</span><span>Excerpt · illustrative</span></div>
-          <h4>3.2 · Predicted trial outcome — Regeneron fianlimab (LAG-3) Ph III</h4>
+          <div class="report-top"><span>Big Picture Bio · Prediction memo · 12 May 2026</span><span>Excerpt · illustrative</span></div>
+          <h4>3.2 · Predicted outcome — Regeneron fianlimab (LAG-3) Ph III</h4>
           <p>Adding LAG-3 blockade to the PD-1 backbone in first-line melanoma moves the biology only <span class="hl">marginally beyond the active comparator</span> — recognition-dependent kill is already near-saturated in most responders, so the combination sits close to today's standard of care.</p>
-          <p>The model therefore predicted a <span class="hl">real but small PFS gain — smaller than the trial was powered to detect</span> against pembrolizumab: the resistant fraction persists and the curves stay too close to clear significance.</p>
-          <div class="callout">Predicted: numeric PFS benefit, primary endpoint missed — matched the May 2026 read-out.</div>
+          <p>The model therefore expects a <span class="hl">real but small PFS gain — smaller than the trial is powered to detect</span> against pembrolizumab: the resistant fraction persists and the curves stay too close to clear significance.</p>
+          <div class="callout">Forecast, issued days before the read-out: numeric PFS benefit, primary endpoint likely missed.</div>
         </div>
       </div>
     </div>
@@ -101,9 +108,22 @@
 <!-- LEAD MAGNET -->
 <section class="block leadmag on-light">
   <div class="wrap">
-    <div class="lm-card reveal">
-      <div>
-        <div class="lm-eyebrow">Your hardest question, answered in 24 hours</div>
+    <div class="lm-pair">
+      <div class="lm-card lm-card--stack reveal">
+        <div>
+          <div class="lm-eyebrow">Example report · PDF</div>
+          <h2>See a prediction in full.</h2>
+          <p>The full version of the excerpt above — our mechanistic prediction memo for the Regeneron fianlimab (LAG-3) melanoma read-out, issued before the result.</p>
+        </div>
+        <form class="lm-report" data-report="clinical-development-fianlimab" data-file="/reports/clinical-development-fianlimab.pdf">
+          <div><label>Work email</label><input type="email" name="email" required placeholder="you@company.com"></div>
+          <button class="submit" type="submit">Download the report →</button>
+          <p class="consent">We'll send the PDF and may follow up once. No list, no spam.</p>
+        </form>
+      </div>
+      <div class="lm-card lm-card--stack reveal">
+        <div>
+          <div class="lm-eyebrow">Your hardest question, answered in 24 hours</div>
         <h2>Send us your toughest trial-design question.</h2>
         <p>Describe the decision you're weighing. We'll send back a predicted-endpoint read and the one experiment that moves your odds — one question, one answer, no obligation.</p>
       </div>
@@ -113,6 +133,7 @@
         <button class="submit" type="submit">Send my question →</button>
         <p class="consent">We'll only use this to answer your question. No list, no spam.</p>
       </form>
+      </div>
     </div>
   </div>
 </section>

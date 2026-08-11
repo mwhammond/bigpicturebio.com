@@ -271,16 +271,49 @@
     window.addEventListener("resize",render); render();
   }
 
-  /* ---------------- Lead magnet ---------------- */
+  /* ---------------- Lead magnet ----------------
+     Where form submissions are sent. Point this at a Vercel serverless
+     function (/api/lead), or a hosted form service (e.g. a Formspree /
+     Web3Forms URL). If the endpoint is unreachable the UX still completes;
+     see /api/lead.js for the reference backend that emails partnerships@. */
+  var LEAD_ENDPOINT = "/api/lead";
+
+  function sendLead(payload){
+    try{
+      return fetch(LEAD_ENDPOINT, {
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body:JSON.stringify(payload)
+      });
+    }catch(e){ return Promise.reject(e); }
+  }
+
   function initLeadmag(){
     [].forEach.call(document.querySelectorAll(".leadmag form"), function(form){
       form.addEventListener("submit", function(e){
         e.preventDefault();
-        // TODO: POST to serverless/Formspree endpoint. For now, acknowledge.
-        var card=form.closest(".lm-card") || form.parentNode;
+        var isReport=form.classList.contains("lm-report");
+        var emailEl=form.querySelector("input[type=email]");
+        var qEl=form.querySelector("textarea");
+        var file=form.getAttribute("data-file");
+        var payload={
+          kind: isReport ? "report" : "question",
+          email: emailEl ? emailEl.value : "",
+          page: location.pathname,
+          report: form.getAttribute("data-report") || "",
+          question: qEl ? qEl.value : ""
+        };
+        // Fire-and-forget: capture the lead, but never block the UX on it.
+        sendLead(payload).catch(function(err){ if(window.console) console.warn("[lead] send failed", err); });
+
         var note=document.createElement("div");
         note.className="lm-done";
-        note.textContent="Thank you — we’ll be in touch within 24 hours.";
+        if(isReport){
+          note.textContent="Thanks — your report is downloading. We’ve noted your email and may follow up.";
+          if(file){ setTimeout(function(){ window.open(file, "_blank", "noopener"); }, 200); }
+        }else{
+          note.textContent="Thank you — we’ll be in touch within 24 hours.";
+        }
         form.replaceWith(note);
       });
     });
