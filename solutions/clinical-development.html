@@ -26,30 +26,19 @@
   </div>
 </header>
 
-<!-- THE PROBLEM -->
+<!-- THE PROBLEM + THE DECISION (merged) -->
 <section class="problem">
   <div class="problem-inner reveal">
     <div class="eyebrow"><span class="bar"></span>The problem</div>
-    <h2 class="problem-head">You carry the risk of a decision made <span class="accent">years before the read-out</span>.</h2>
-    <p class="problem-lead">By the time a trial reports, the choices that decided it — line, population, dose, endpoint — were locked at design. Four in five Phase III combinations fail, and the levers that could have changed that closed early.</p>
+    <h2 class="problem-head">Most of the risk is settled <span class="accent">years before the read-out</span> — at design.</h2>
+    <p class="problem-lead">By the time a trial reports, the choices that decided it — line, population, dose, endpoint — were locked in at design, when phase-to-phase success still sits near 20%. Four in five Phase III combinations fail, and the levers that could have changed that closed early.</p>
     <div class="problem-points">
       <div class="ppoint"><span class="pn">01</span><p><b>Thin signal, big commitment.</b> You green-light a Phase on early-phase data that rarely captures how a combination behaves at scale.</p></div>
       <div class="ppoint"><span class="pn">02</span><p><b>Failure modes set at design.</b> Wrong line, population or dose step-up — and no amount of execution recovers it.</p></div>
       <div class="ppoint"><span class="pn">03</span><p><b>The wrong test on a synergy.</b> Standard statistics miss the interactions and sequences that combinations live or die by.</p></div>
     </div>
+    <p class="problem-lead" style="margin-top:clamp(24px,3vh,40px);">Our reasoning model reads those choices the way the biology will, so you commit to the design that wins rather than the one you hope will — and every prediction is <b>explainable</b>, traceable from receptor engagement through to the endpoint. This matters most for novel immunotherapy combinations: foundation models and traditional ML can interpolate from known regimens, but cannot reliably extrapolate to a synergy that has never been observed. We reason from mechanism, cell state and resistance instead.</p>
     <p class="problem-for"><b>Built for</b> &nbsp;Global Project Leaders · Clinical Development · Biometrics</p>
-  </div>
-</section>
-
-<!-- THE DECISION -->
-<section class="block">
-  <div class="wrap">
-    <div class="block-head reveal">
-      <div class="eyebrow"><span class="bar"></span>The decision</div>
-      <h2 class="head mt-s">Most of the risk is settled <span class="accent">before the first patient is dosed</span>.</h2>
-      <p class="lead">Phase-to-phase success sits near 20% — in the line you chose, the population you enrolled, the dose you escalated to. Our reasoning model reads those choices the way the biology will, so you commit to the design that wins rather than the one you hope will.</p>
-      <p class="body">This matters most for novel immunotherapy combinations. Foundation models and traditional ML can interpolate from known regimens; they cannot reliably extrapolate to a synergy that has never been observed. We reason from mechanism, cell state and resistance instead.</p>
-    </div>
   </div>
 </section>
 
@@ -61,7 +50,7 @@
         <div class="eyebrow"><span class="bar"></span>What you get</div>
         <ul class="deliverables">
           <li>The <b>predicted endpoint</b> for your trial exactly as designed — with a confidence level you can take into a committee.</li>
-          <li>The design changes that <b>lift probability of success</b> while cutting patient numbers, time and cost.</li>
+          <li>The <b>design decisions that make or break the trial</b> — line, population, dose, endpoint — tuned to lift probability of success while cutting patient numbers, time and cost.</li>
           <li>The <b>single experiment</b> — in vitro or in vivo — that moves your odds the most, so your budget buys the result that actually matters.</li>
           <li>A mechanistic prediction for <b>novel combinations and sequences</b> that have no training-set precedent.</li>
         </ul>
@@ -90,14 +79,19 @@
         <div class="eyebrow"><span class="bar"></span>Worked example</div>
         <h2 class="head mt-s">The model predicted the miss — and <span class="accent">why</span>.</h2>
         <p class="lead">Every prediction decomposes into the biology and the trial design that drive it. No black box: a committee can interrogate the reasoning behind the number.</p>
+        <div class="panel" style="margin-top:clamp(20px,2.6vw,30px);">
+          <div class="panel-head"><span class="panel-title">Predicted population response</span><span class="panel-tag">Model view · stalled</span></div>
+          <div class="js-muller" data-muller="stalled" style="position:relative;width:100%;aspect-ratio:16/10;border-radius:8px;overflow:hidden;background:#0c0d10;"></div>
+          <div class="panel-note">The added arm never clears the tumour and the resistant subclone keeps growing — the separation the trial was powered to see never opens.</div>
+        </div>
       </div>
       <div class="col-exhibit reveal">
         <div class="report">
           <div class="report-top"><span>Big Picture Bio · Validation report</span><span>Excerpt · illustrative</span></div>
-          <h4>3.2 · Predicted tumour biology — Regeneron Ph III</h4>
-          <p>Baseline receptor mapping placed <span class="hl">68% of tumour mass within an immune-excluded stroma</span>. Reactive CAF sustain TGF-β–driven exclusion; absent stromal normalisation, PD-1 blockade cannot convert into durable CD8⁺ killing.</p>
-          <p>The regimen carried no stroma-directed arm. The model therefore predicted <span class="hl">negligible CD8⁺ ingress and no curve separation beyond month 18</span>, with AR-V7⁺ resistant subclones repopulating thereafter.</p>
-          <div class="callout">Predicted 24-mo OS Δ = +1.2 mo (n.s.) — matched the reported read-out.</div>
+          <h4>3.2 · Predicted trial outcome — Regeneron fianlimab (LAG-3) Ph III</h4>
+          <p>Adding LAG-3 blockade to the PD-1 backbone in first-line melanoma moves the biology only <span class="hl">marginally beyond the active comparator</span> — recognition-dependent kill is already near-saturated in most responders, so the combination sits close to today's standard of care.</p>
+          <p>The model therefore predicted a <span class="hl">real but small PFS gain — smaller than the trial was powered to detect</span> against pembrolizumab: the resistant fraction persists and the curves stay too close to clear significance.</p>
+          <div class="callout">Predicted: numeric PFS benefit, primary endpoint missed — matched the May 2026 read-out.</div>
         </div>
       </div>
     </div>

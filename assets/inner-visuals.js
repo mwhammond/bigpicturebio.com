@@ -163,30 +163,58 @@
   }
 
   function drawAntigen(v,t){
-    var c=v.ctx,b=region(v),cx=b.x+b.w*.69,cy=b.y+b.h*.52,rad=Math.min(b.w,b.h)*.29;
-    glow(c,cx,cy,rad*1.7,PAL.purple,.18);
-    for(var i=0;i<23;i++){
+    var c=v.ctx,b=region(v),cx=b.x+b.w*.66,cy=b.y+b.h*.52,rad=Math.min(b.w,b.h)*.30;
+    glow(c,cx,cy,rad*1.7,PAL.purple,.16);
+
+    // Tumour cells: mostly antigen-POSITIVE (recognised), a clear minority antigen-NULL (escape).
+    var cells=[],i;
+    for(i=0;i<20;i++){
       var a=hash(i*4)*Math.PI*2,r=rad*Math.sqrt(hash(i*7+4));
-      var x=cx+Math.cos(a)*r,y=cy+Math.sin(a)*r*.78;
-      var antigen=(i%7!==0);
-      cell(c,x,y,8+hash(i)*5,antigen?PAL.pink:PAL.plum,antigen?.07:.02,130+i);
-      if(antigen){
-        for(var s=-1;s<=1;s++){
-          var aa=-Math.PI/2+s*.5;
-          line(c,x+Math.cos(aa)*10,y+Math.sin(aa)*10,x+Math.cos(aa)*16,y+Math.sin(aa)*16,rgba(PAL.amber,.82),1);
-        }
+      cells.push({
+        x:cx+Math.cos(a)*r, y:cy+Math.sin(a)*r*.80,
+        r:8+hash(i)*4, isNull:(i%6===2), seed:130+i, killed:false
+      });
+    }
+
+    // Blue CD8 effectors stream in from the left, dock onto antigen-POSITIVE cells and
+    // kill them. Antigen-null cells are never engaged — recognition depends on the antigen.
+    var targets=cells.filter(function(o){return !o.isNull;});
+    var effN=Math.min(6,targets.length);
+    for(i=0;i<effN;i++){
+      var tgt=targets[(i*2)%targets.length];
+      var sx=b.x+b.w*.11, sy=b.y+b.h*(.22+i*.12);
+      var q=clamp(((t*.00020)+i*.17)%1.4,0,1);           // migrate 0..1, then hold docked
+      var ex=lerp(sx,tgt.x-tgt.r-5,q), ey=lerp(sy,tgt.y,q);
+      curve(c,sx+8,sy,(sx+tgt.x)*.5,sy+(tgt.y-sy)*.3,ex,ey,rgba(PAL.blue,.22),1,[4,5]);
+      cell(c,ex,ey,8,PAL.blue,.06,80+i);
+      if(q>=.97){ tgt.killed=true; glow(c,tgt.x,tgt.y,tgt.r*1.6,PAL.pink,.22); }
+    }
+
+    // Tumour cells drawn on top of the effectors.
+    cells.forEach(function(o,idx){
+      if(o.isNull){
+        // antigen-null: clearly visible — muted body, dashed red "no-receptor" ring, escaping outward.
+        cell(c,o.x,o.y,o.r+1,PAL.muted,.16,o.seed);
+        c.strokeStyle=rgba(PAL.risk,.85);c.lineWidth=1.4;c.setLineDash([3,3]);
+        c.beginPath();c.arc(o.x,o.y,o.r+7+Math.sin(t*.004+idx),0,Math.PI*2);c.stroke();c.setLineDash([]);
+        var ang=Math.atan2(o.y-cy,o.x-cx);
+        line(c,o.x+Math.cos(ang)*(o.r+7),o.y+Math.sin(ang)*(o.r+7),o.x+Math.cos(ang)*(o.r+18),o.y+Math.sin(ang)*(o.r+18),rgba(PAL.risk,.72),1.4);
+      }else if(o.killed){
+        // recognised & killed: faded body with an apoptotic cross.
+        cell(c,o.x,o.y,o.r*.9,PAL.pink,.03,o.seed);
+        line(c,o.x-5,o.y-5,o.x+5,o.y+5,rgba(PAL.pink,.92),1.6);
+        line(c,o.x+5,o.y-5,o.x-5,o.y+5,rgba(PAL.pink,.92),1.6);
       }else{
-        c.strokeStyle=rgba(PAL.risk,.8);c.lineWidth=1.2;c.beginPath();c.arc(x,y,17+Math.sin(t*.004+i)*2,0,Math.PI*2);c.stroke();
+        // antigen-positive, awaiting kill: pink body with amber antigen receptors.
+        cell(c,o.x,o.y,o.r,PAL.pink,.07,o.seed);
+        for(var s=-1;s<=1;s++){ var aa=-Math.PI/2+s*.5;
+          line(c,o.x+Math.cos(aa)*10,o.y+Math.sin(aa)*10,o.x+Math.cos(aa)*16,o.y+Math.sin(aa)*16,rgba(PAL.amber,.82),1); }
       }
-    }
-    for(i=0;i<5;i++){
-      var ty=b.y+b.h*(.20+i*.14),tx=b.x+b.w*.13+Math.sin(t*.001+i)*5;
-      cell(c,tx,ty,9,PAL.blue,.05,210+i);
-      curve(c,tx+10,ty,b.x+b.w*.35,ty-15,cx-rad*.65,cy+(i-2)*28,rgba(PAL.blue,.28),1,[4,5]);
-    }
-    label(c,"RECOGNITION-DEPENDENT KILL",b.x+16,b.y+24,8,rgba(PAL.blue,.78));
-    label(c,"ANTIGEN-POSITIVE",cx+rad*.64,b.y+24,8,rgba(PAL.amber,.76),"right");
-    label(c,"ANTIGEN-NULL ESCAPE",cx+rad*.75,cy+rad*.68,7.5,rgba(PAL.risk,.9),"right");
+    });
+
+    label(c,"CD8+ RECOGNITION-DEPENDENT KILL",b.x+16,b.y+24,8,rgba(PAL.blue,.80));
+    label(c,"ANTIGEN-POSITIVE · KILLED",cx+rad*.70,b.y+24,8,rgba(PAL.amber,.78),"right");
+    label(c,"ANTIGEN-NULL · ESCAPES",cx+rad*.92,cy+rad*.86,7.5,rgba(PAL.risk,.9),"right");
   }
 
   function drawBone(v,t){

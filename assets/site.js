@@ -25,10 +25,11 @@
   /* ---------------- Site config (single source of truth) ---------------- */
   var SOLUTIONS = [
     ["/solutions/clinical-development.html",       "Clinical Development",        "Design the trial that reads out"],
-    ["/solutions/competitive-intelligence.html",   "Competitive Intelligence",    "Read the field by its mechanism"],
+    ["/solutions/competitive-intelligence.html",   "Market Intelligence",         "Which mechanisms will win"],
     ["/solutions/investment-partnering-dd.html",   "Investment &amp; partnering DD","A verdict, not a guess"],
     ["/solutions/lifecycle-franchise-strategy.html","Lifecycle &amp; Franchise Strategy","Keep your asset the standard"],
-    ["/solutions/platform-payload-strategy.html",  "Platform &amp; Payload Strategy","Point your platform at the target"]
+    ["/solutions/platform-payload-strategy.html",  "Platform &amp; Payload Strategy","Point your platform at the target"],
+    ["/solutions/optimal-indication-selection.html","Optimal Indication Selection","The indication where your asset wins"]
   ];
   var LATEST = [
     // {tag, date, text, href} — newest first; wire real items here as they land.
@@ -143,6 +144,17 @@
     [0.84,[0.11,0.07,0.46,0.10,0.00,0.26]],
     [1.00,[0.10,0.06,0.55,0.08,0.00,0.21]]
   ];
+  /* "Stalled response" — the kill never clears the tumour and the resistant
+     subclone keeps growing, so no durable separation opens. Used on the
+     Clinical Development worked example (Regeneron-style miss). */
+  var ANCHORS_STALLED = [
+    [0.00,[0.00,0.00,0.02,0.12,0.06,0.80]],
+    [0.15,[0.02,0.01,0.04,0.12,0.07,0.74]],
+    [0.35,[0.05,0.03,0.07,0.12,0.09,0.64]],
+    [0.55,[0.07,0.04,0.09,0.12,0.11,0.57]],
+    [0.75,[0.06,0.03,0.10,0.12,0.14,0.55]],
+    [1.00,[0.05,0.03,0.10,0.12,0.16,0.54]]
+  ];
   function buildLayerPath(tops,bots){
     var d="M"+tops[0][0]+","+tops[0][1]+" ",i,p0,p1,dx;
     for(i=1;i<tops.length;i++){ p0=tops[i-1];p1=tops[i];dx=p1[0]-p0[0];
@@ -152,17 +164,18 @@
       d+="C"+(p0[0]+dx*0.5)+","+p0[1]+" "+(p1[0]-dx*0.5)+","+p1[1]+" "+p1[0]+","+p1[1]+" "; }
     return d+"Z";
   }
-  function mullerPaths(w,h){
+  function mullerPaths(w,h,anchors){
+    anchors=anchors||ANCHORS;
     var N=PALETTE.length, tops=[], bots=[], i;
     for(i=0;i<N;i++){ tops.push([]); bots.push([]); }
-    ANCHORS.forEach(function(a){ var t=a[0],frac=a[1],cum=0,top,bot;
+    anchors.forEach(function(a){ var t=a[0],frac=a[1],cum=0,top,bot;
       for(i=0;i<N;i++){ top=cum; bot=cum+frac[i]; tops[i].push([t*w,top*h]); bots[i].push([t*w,bot*h]); cum=bot; } });
     var p="";
     for(i=0;i<N;i++) p+='<path d="'+buildLayerPath(tops[i],bots[i])+'" fill="'+PALETTE[i]+'"/>';
     return p;
   }
-  function mullerSVG(){
-    return '<svg viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;display:block">'+mullerPaths(1000,1000)+'</svg>';
+  function mullerSVG(anchors){
+    return '<svg viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;display:block">'+mullerPaths(1000,1000,anchors)+'</svg>';
   }
 
   /* ---------------- Charts ---------------- */
@@ -293,8 +306,10 @@
   function boot(){
     buildNav(); buildContact(); buildFooter();
 
-    // muller backgrounds
-    [].forEach.call(document.querySelectorAll(".js-muller"), function(el){ el.innerHTML=mullerSVG(); });
+    // muller backgrounds (default success trajectory; opt into "stalled" per element)
+    [].forEach.call(document.querySelectorAll(".js-muller"), function(el){
+      el.innerHTML=mullerSVG(el.getAttribute("data-muller")==="stalled"?ANCHORS_STALLED:ANCHORS);
+    });
     // charts
     [].forEach.call(document.querySelectorAll("[data-chart]"), function(el){ var f=CHARTS[el.getAttribute("data-chart")]; if(f) f(el); });
 
