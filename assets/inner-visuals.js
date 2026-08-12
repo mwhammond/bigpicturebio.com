@@ -369,11 +369,16 @@
   var heroBg=hero&&hero.querySelector(".hero-bg");
   if(heroBg){
     makeVisual(heroBg,pageType,true);
-    var meta=META[pageType]||META["world-model"];
-    var hud=document.createElement("div");
-    hud.className="inner-hero-hud";
-    hud.innerHTML="<span>"+meta[0]+"</span><span>"+meta[1]+"</span>";
-    hero.appendChild(hud);
+    // Skip the "WORLD MODEL / …" hero label on blog/article pages — that label
+    // set describes the Solutions pages, not editorial content.
+    var onBlog = location.pathname.indexOf("/blog") === 0;
+    if(!onBlog){
+      var meta=META[pageType]||META["world-model"];
+      var hud=document.createElement("div");
+      hud.className="inner-hero-hud";
+      hud.innerHTML="<span>"+meta[0]+"</span><span>"+meta[1]+"</span>";
+      hero.appendChild(hud);
+    }
   }
   [].forEach.call(document.querySelectorAll(".bio-instrument[data-bio-art]"),function(host){
     makeVisual(host,host.getAttribute("data-bio-art"),false);
