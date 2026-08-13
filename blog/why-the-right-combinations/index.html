@@ -2253,7 +2253,7 @@ ol.reflist li em{ font-style:italic; color:var(--ink-2); }
   });
   function onScroll(){ if(nav) nav.classList.toggle("solid", window.scrollY>40); }
   window.addEventListener("scroll",onScroll,{passive:true}); onScroll();
-  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }); },{threshold:0.15});
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }); },{threshold:0,rootMargin:"0px 0px -10% 0px"});
   [].forEach.call(document.querySelectorAll(".reveal"),function(el){ io.observe(el); });
   requestAnimationFrame(function(){ document.body.classList.add("ready"); });
 })();
