@@ -351,7 +351,10 @@
     initTransitions();
 
     // reveal
-    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }); },{threshold:0.15});
+    // threshold:0 + bottom rootMargin so it fires when an element's top enters
+    // view, regardless of height (a tall block can never reach a 0.15 ratio on
+    // a small screen, which left long sections stuck at opacity:0 on mobile).
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }); },{threshold:0,rootMargin:"0px 0px -10% 0px"});
     [].forEach.call(document.querySelectorAll(".reveal"), function(el){ io.observe(el); });
 
     requestAnimationFrame(function(){ document.body.classList.add("ready"); });
