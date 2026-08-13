@@ -1,0 +1,2256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why the right combinations are the next breakthrough — Big Picture Bio</title>
+<meta name="description" content="Most diseases of ageing have no single cause, so no single-target drug can reverse them. Why rationally designed drug combinations — checkpoint doublets, TROP2 and topoisomerase-payload ADCs, KRAS backbones — are where the next breakthroughs live, and how Big Picture Bio's world model finds them across billions of options.">
+<link rel="canonical" href="https://bigpicturebio.com/blog/why-the-right-combinations/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="Big Picture Bio">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Big Picture Bio">
+<meta property="og:title" content="Why the right combinations are the next breakthrough in drug design">
+<meta property="og:description" content="Diseases of ageing rarely have a single cause. The next wave of medicines will be rationally designed combinations, and finding them means searching a space far too large to screen.">
+<meta property="og:url" content="https://bigpicturebio.com/blog/why-the-right-combinations/">
+<meta property="og:image" content="https://bigpicturebio.com/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Why the right combinations are the next breakthrough in drug design">
+<meta name="twitter:description" content="Diseases of ageing rarely have a single cause. The next wave of medicines will be rationally designed combinations, and finding them means searching a space far too large to screen.">
+<meta name="twitter:image" content="https://bigpicturebio.com/img/og-image.png">
+
+<link rel="icon" href="/img/favicon-48.png" sizes="48x48">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
+<style>
+/* ===========================================================================
+   Big Picture Bio — shared site styles
+   Design language reused from the interactive-scroll-imagery build.
+   Tokens + components + multi-page nav/footer + solution-page layout.
+   =========================================================================== */
+
+:root{
+  --bg:#0A0A0A;
+  --bg-2:#0E0C10;
+  --ink:#F2EFEA;
+  --ink-2:#E0DCD2;
+  --muted:#B0ACA4;
+  --faint:#8A857E;
+  --line:#2A2A30;
+  --line-2:#3A3A42;
+  --accent:#F08AB8;
+  --accent-2:#F19A6C;
+
+  /* light band — pale wash drawn from the muller palette (amber → blush → mauve) */
+  --light-band:linear-gradient(135deg,#F6EFE1 0%,#F3E7E2 54%,#EEDFE7 100%);
+  --light-ink:#241F1B;
+  --light-ink-2:#4A443C;
+  --light-muted:#8A8175;
+  --light-accent:#A5286A;
+  --light-line:#E1D7CB;
+
+  --serif:"Source Serif 4","Iowan Old Style",Georgia,serif;
+  --sans:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+
+  --maxw:1200px;
+}
+
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; background:var(--bg); }
+html{ scroll-behavior:smooth; }
+body{
+  min-height:100vh;
+  color:var(--ink);
+  font-family:var(--sans);
+  font-feature-settings:"ss01","cv11";
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{ color:inherit; }
+img{ max-width:100%; }
+
+/* Page fade-in / between-page transition ---------------------------------- */
+body{ opacity:0; transition:opacity .5s ease; }
+body.ready{ opacity:1; }
+body.leaving{ opacity:0; }
+
+/* ---------- Shared eyebrow / type helpers ---------- */
+.eyebrow{
+  font-family:var(--mono);
+  font-size:clamp(11px,.85vw,13px);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--accent);
+  font-weight:500;
+  line-height:1.4;
+  display:flex; align-items:center; gap:14px;
+  text-wrap:balance;
+}
+.eyebrow .bar{ width:36px; height:1px; background:var(--accent); flex:0 0 36px; }
+
+.accent{ color:var(--accent); }
+.serif{ font-family:var(--serif); }
+
+/* ===========================================================================
+   NAV  (injected by site.js into #site-nav)
+   =========================================================================== */
+.nav{
+  position:fixed; top:0; left:0; right:0; z-index:80;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:clamp(14px,1.8vw,22px) clamp(20px,5vw,64px);
+  background:linear-gradient(180deg, rgba(10,10,10,.82) 0%, rgba(10,10,10,0) 100%);
+  -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px);
+  transition:background .3s ease;
+}
+.nav.solid{ background:rgba(10,10,10,.92); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+.nav .wordmark{
+  font-family:var(--serif); font-weight:400;
+  font-size:clamp(17px,1.4vw,21px); letter-spacing:-.005em;
+  white-space:nowrap; color:var(--ink); text-decoration:none;
+}
+.nav .wordmark em{ font-style:italic; color:var(--accent); }
+
+.nav-links{ display:flex; align-items:center; gap:clamp(18px,2vw,34px); }
+.nav-links a, .nav-item > button{
+  font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ink-2); text-decoration:none; background:none; border:0; cursor:pointer;
+  padding:6px 0; transition:color .18s ease; white-space:nowrap;
+}
+.nav-links a:hover, .nav-item > button:hover, .nav-item.open > button{ color:var(--accent); }
+.nav-links a.current{ color:var(--ink); border-bottom:1px solid var(--accent); }
+.nav-item.current > button{ color:var(--ink); }
+.nav-item.current > button .chev{ border-color:var(--accent); }
+
+.nav-item{ position:relative; }
+.nav-item > button{ display:inline-flex; align-items:center; gap:7px; }
+.nav-item > button .chev{ width:8px; height:8px; border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform:rotate(45deg) translateY(-1px); transition:transform .2s ease; }
+.nav-item.open > button .chev{ transform:rotate(225deg) translateY(-1px); }
+.nav-menu{
+  position:absolute; top:calc(100% + 12px); right:0; min-width:290px;
+  background:rgba(14,12,16,.97); -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px);
+  border:1px solid var(--line-2); border-radius:14px; padding:8px;
+  box-shadow:0 30px 80px rgba(0,0,0,.55);
+  opacity:0; visibility:hidden; transform:translateY(-6px); transition:opacity .2s ease, transform .2s ease, visibility .2s;
+}
+.nav-item.open .nav-menu{ opacity:1; visibility:visible; transform:translateY(0); }
+.nav-menu a{
+  display:block; padding:11px 14px; border-radius:9px;
+  font-family:var(--sans); font-size:14px; letter-spacing:0; text-transform:none;
+  color:var(--ink-2); text-decoration:none;
+}
+.nav-menu a small{ display:block; font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); margin-top:3px; }
+.nav-menu a:hover{ background:rgba(240,138,184,.10); color:var(--ink); }
+.nav-menu a:hover small{ color:var(--accent); }
+
+.nav-toggle{ display:none; }
+
+@media (max-width:860px){
+  .nav-links{
+    position:fixed; inset:0 0 auto 0; top:0; flex-direction:column; align-items:flex-start; gap:6px;
+    padding:88px clamp(20px,6vw,40px) 32px; background:rgba(10,10,10,.98);
+    transform:translateY(-100%); transition:transform .35s ease; height:auto;
+  }
+  .nav.menu-open .nav-links{ transform:translateY(0); }
+  .nav-links a, .nav-item > button{ font-size:15px; padding:10px 0; }
+  .nav-item{ width:100%; }
+  .nav-menu{ position:static; opacity:1; visibility:visible; transform:none; box-shadow:none; border:0; background:none; padding:0 0 0 12px; min-width:0; }
+  .nav-item .nav-menu{ display:none; } .nav-item.open .nav-menu{ display:block; }
+  .nav-toggle{
+    display:inline-flex; flex-direction:column; gap:5px; background:none; border:0; cursor:pointer; z-index:90; padding:6px;
+  }
+  .nav-toggle span{ width:24px; height:2px; background:var(--ink); transition:transform .25s ease, opacity .2s ease; }
+  .nav.menu-open .nav-toggle span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .nav.menu-open .nav-toggle span:nth-child(2){ opacity:0; }
+  .nav.menu-open .nav-toggle span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+}
+
+/* ===========================================================================
+   HERO  (solution / inner-page cinematic hero — short, ~88vh)
+   =========================================================================== */
+.hero{ position:relative; min-height:min(88vh,760px); display:flex; overflow:hidden; background:#160f1c; }
+.hero-bg{ position:absolute; inset:0; z-index:0; }
+.hero-bg img{ width:100%; height:100%; object-fit:cover; display:block; }
+.hero-muller{ position:absolute; inset:0; }
+.hero-muller svg{ width:100%; height:100%; }
+.hero-scrim{
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    linear-gradient(90deg, rgba(10,10,10,.86) 0%, rgba(10,10,10,.5) 34%, rgba(10,10,10,.05) 66%),
+    linear-gradient(0deg, rgba(10,10,10,.72) 0%, rgba(10,10,10,0) 44%);
+}
+.hero-inner{
+  position:relative; z-index:2; align-self:flex-end;
+  padding:clamp(96px,14vh,150px) clamp(24px,7vw,120px) clamp(48px,8vh,88px);
+  width:min(720px,92vw);
+}
+.hero h1{
+  font-family:var(--serif); font-weight:300;
+  font-size:clamp(30px,4.2vw,56px); line-height:1.04; letter-spacing:-.022em;
+  margin:clamp(16px,2vw,24px) 0 0; color:var(--ink); text-wrap:balance;
+}
+.hero h1 .italic{ font-style:italic; color:var(--accent); }
+.hero .sub{
+  font-family:var(--serif); font-weight:300; font-style:italic;
+  font-size:clamp(17px,1.6vw,23px); line-height:1.38; color:var(--ink-2);
+  margin:clamp(18px,2.2vw,26px) 0 0; max-width:52ch; text-wrap:pretty;
+}
+.hero .statline{ margin-top:clamp(22px,3vw,34px); }
+
+/* ===========================================================================
+   PAGE BODY LAYOUT
+   =========================================================================== */
+.wrap{ max-width:var(--maxw); margin:0 auto 0 0; padding:0 clamp(24px,7vw,120px); }
+.block{ padding:clamp(56px,9vh,120px) 0; position:relative; }
+.block.tight{ padding:clamp(36px,6vh,72px) 0; }
+.block-head{ max-width:60ch; }
+.block-head .eyebrow{ margin-bottom:16px; }
+h2.head{
+  font-family:var(--serif); font-weight:300;
+  font-size:clamp(23px,2.6vw,36px); line-height:1.1; letter-spacing:-.015em;
+  margin:0; color:var(--ink); text-wrap:balance;
+}
+h2.head .accent{ font-style:italic; }
+.lead{
+  font-family:var(--serif); font-weight:300;
+  font-size:clamp(17px,1.5vw,22px); line-height:1.5; color:var(--ink-2);
+  margin:clamp(14px,1.6vw,22px) 0 0; max-width:56ch; text-wrap:pretty;
+}
+.lead .hl{ color:var(--ink); font-style:italic; }
+p.body{ font-family:var(--sans); font-size:clamp(15px,1.1vw,17px); line-height:1.6; color:var(--ink-2); max-width:56ch; margin:16px 0 0; }
+.footnote{ font-family:var(--sans); font-size:12.5px; line-height:1.5; color:var(--faint); margin-top:18px; max-width:60ch; }
+
+/* two-column content row: text + exhibit */
+.row{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,5vw,80px); align-items:center; }
+.row.align-top{ align-items:start; }
+.row.narrow-text{ grid-template-columns:1.3fr .7fr; }
+.row > .col-text{ min-width:0; }
+.row > .col-exhibit{ min-width:0; }
+@media (max-width:900px){ .row{ grid-template-columns:1fr; gap:36px; } .row.reverse .col-exhibit{ order:-1; } }
+
+/* deliverables list */
+.deliverables{ list-style:none; margin:clamp(20px,2.4vw,30px) 0 0; padding:0; display:grid; gap:14px; }
+.deliverables li{
+  position:relative; padding-left:30px;
+  font-family:var(--sans); font-size:clamp(15px,1.1vw,17px); line-height:1.5; color:var(--ink-2);
+}
+.deliverables li::before{
+  content:""; position:absolute; left:0; top:.5em; width:12px; height:7px;
+  border-left:2px solid var(--accent); border-bottom:2px solid var(--accent);
+  transform:rotate(-45deg); transform-origin:center;
+}
+.deliverables li b{ color:var(--ink); font-weight:600; }
+
+/* audience lanes (two-block split, e.g. Investment & partnering DD) */
+.lanes{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,2.4vw,32px); margin-top:clamp(24px,3vw,40px); }
+@media (max-width:820px){ .lanes{ grid-template-columns:1fr; } }
+.lane{
+  border:1px solid var(--line-2); border-radius:16px; padding:clamp(20px,2vw,28px);
+  background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+}
+.lane h3{ font-family:var(--serif); font-weight:400; font-size:clamp(19px,1.6vw,24px); margin:0 0 4px; color:var(--ink); }
+.lane .who{ font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin:0 0 12px; }
+.lane p{ font-family:var(--sans); font-size:14.5px; line-height:1.55; color:var(--ink-2); margin:0; }
+
+/* KPI band */
+.kpis{ display:flex; flex-wrap:wrap; gap:clamp(24px,4vw,64px); }
+.statline{ display:flex; align-items:baseline; gap:16px; }
+.statline .n{ font-family:var(--serif); font-weight:300; font-size:clamp(44px,6vw,86px); line-height:.82; color:var(--accent); letter-spacing:-.03em; }
+.statline .l{ font-family:var(--sans); font-size:clamp(13px,1vw,15px); line-height:1.35; color:var(--ink-2); max-width:22ch; }
+.kpi{ display:flex; flex-direction:column; gap:8px; }
+.kpi .k{ font-family:var(--serif); font-weight:300; font-size:clamp(30px,3.4vw,46px); line-height:1; color:var(--ink); letter-spacing:-.02em; }
+.kpi .k .accent{ color:var(--accent); }
+.kpi .d{ font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+
+/* role chips */
+.roles{ display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+.roles span{
+  font-family:var(--mono); font-size:11px; letter-spacing:.06em;
+  color:var(--ink-2); border:1px solid var(--line-2); border-radius:999px; padding:8px 14px;
+}
+
+/* ===========================================================================
+   PANELS / EXHIBITS  (glass card + chart)
+   =========================================================================== */
+.panel{
+  background:rgba(14,12,16,.62); -webkit-backdrop-filter:blur(16px) saturate(1.1); backdrop-filter:blur(16px) saturate(1.1);
+  border:1px solid rgba(255,255,255,.12); border-radius:18px; padding:clamp(16px,1.6vw,24px);
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+}
+.panel-head{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:14px; }
+.panel-title{ font-family:var(--mono); font-size:clamp(11px,.9vw,12.5px); letter-spacing:.13em; text-transform:uppercase; color:var(--ink); }
+.panel-tag{ font-family:var(--mono); font-size:9.5px; letter-spacing:.11em; text-transform:uppercase; color:var(--muted); border:1px solid var(--line-2); border-radius:999px; padding:3px 8px; white-space:nowrap; }
+.panel svg{ width:100%; height:auto; display:block; }
+.panel-legend{ display:flex; gap:16px; flex-wrap:wrap; margin-top:12px; font-family:var(--mono); font-size:10.5px; letter-spacing:.05em; color:var(--muted); }
+.panel-legend span{ display:inline-flex; align-items:center; gap:7px; }
+.panel-legend i{ width:15px; height:0; border-top-width:2px; border-top-style:solid; display:inline-block; }
+.panel-legend i.dot{ width:8px; height:8px; border:0; border-radius:50%; }
+.panel-note{ margin-top:10px; font-family:var(--sans); font-size:11.5px; line-height:1.4; color:var(--muted); }
+
+/* Report "paper" excerpt (the worked-example centrepiece) */
+.report{ position:relative; overflow:hidden; background:#F3EFE6; color:#241F1B; border-radius:12px; padding:22px 26px 30px; box-shadow:0 34px 90px rgba(0,0,0,.6); }
+.report-top{ display:flex; justify-content:space-between; gap:10px; font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:#8A8175; border-bottom:1px solid #DAD3C6; padding-bottom:10px; }
+.report h4{ font-family:var(--serif); font-weight:600; font-size:clamp(14px,1.15vw,16px); margin:15px 0 10px; color:#1D1915; letter-spacing:-.01em; }
+.report p{ font-family:var(--serif); font-weight:400; font-size:clamp(12px,1vw,13.5px); line-height:1.62; color:#3A342C; margin:0 0 10px; }
+.report .hl{ background:rgba(200,92,142,.22); box-shadow:0 0 0 1px rgba(200,92,142,.18); padding:0 2px; }
+.report .callout{ margin-top:12px; border-left:3px solid #C85C8E; background:#ECE5D8; padding:10px 13px; font-family:var(--mono); font-size:11px; line-height:1.45; color:#4A2036; }
+
+/* pipeline mini-diagram (bars) */
+.pipe{ display:flex; flex-direction:column; gap:14px; }
+.pipe-row{ display:grid; grid-template-columns:120px 1fr; align-items:center; gap:12px; }
+.pipe-label{ font-family:var(--sans); font-size:13px; color:var(--ink); }
+.pipe-label small{ display:block; font-family:var(--mono); font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-top:2px; }
+.pipe-track{ position:relative; height:8px; border-radius:999px; background:rgba(255,255,255,.08); overflow:hidden; }
+.pipe-fill{ position:absolute; left:0; top:0; bottom:0; border-radius:999px; background:linear-gradient(90deg,var(--accent-2),var(--accent)); }
+
+/* ===========================================================================
+   HOME — journey + solution overview cards
+   =========================================================================== */
+.solutions-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,1.8vw,24px); margin-top:clamp(36px,5vh,60px); }
+@media (max-width:940px){ .solutions-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:620px){ .solutions-grid{ grid-template-columns:1fr; } }
+.sol-card{
+  display:flex; flex-direction:column; gap:12px; text-decoration:none;
+  border:1px solid var(--line-2); border-radius:16px; padding:clamp(20px,1.8vw,26px);
+  background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,0));
+  transition:border-color .2s ease, transform .2s ease, background .2s ease;
+}
+.sol-card:hover{ border-color:var(--accent); transform:translateY(-3px); background:rgba(240,138,184,.05); }
+.sol-card .k{ font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); }
+.sol-card h3{ font-family:var(--serif); font-weight:400; font-size:clamp(19px,1.7vw,24px); line-height:1.12; margin:0; color:var(--ink); }
+.sol-card p{ font-family:var(--sans); font-size:14px; line-height:1.5; color:var(--muted); margin:0; }
+.sol-card .go{ margin-top:auto; font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2); display:inline-flex; align-items:center; gap:8px; }
+.sol-card:hover .go{ color:var(--accent); }
+.sol-card .go::after{ content:"→"; }
+
+/* ===========================================================================
+   FULL-BLEED SCRIM SECTION (texture between blocks + team/company)
+   =========================================================================== */
+.section{ position:relative; padding:clamp(72px,12vh,150px) clamp(24px,7vw,120px); overflow:hidden; }
+.section-bg{ position:absolute; inset:0; z-index:0; }
+.section-bg img{ width:100%; height:100%; object-fit:cover; display:block; filter:brightness(.42) saturate(1.05); }
+.section-bg::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,10,10,.78) 0%, rgba(10,10,10,.66) 45%, rgba(10,10,10,.82) 100%); }
+.section > *:not(.section-bg){ position:relative; z-index:1; }
+.section-inner{ max-width:var(--maxw); margin:0 auto 0 0; }
+.section-head{ max-width:760px; margin:0 0 clamp(40px,6vh,64px); text-align:left; }
+.section-head .eyebrow{ justify-content:flex-start; margin-bottom:18px; }
+.section-head h2{ font-family:var(--serif); font-weight:300; font-size:clamp(23px,2.6vw,36px); line-height:1.1; letter-spacing:-.015em; margin:0; color:var(--ink); text-wrap:balance; }
+.section-head p{ font-family:var(--serif); font-weight:300; font-size:clamp(16px,1.4vw,20px); line-height:1.5; color:var(--ink-2); margin:16px 0 0; max-width:60ch; }
+
+/* ===========================================================================
+   PROBLEM  (light section — customer problem, above "the decision")
+   =========================================================================== */
+.problem{ background:var(--light-band); color:var(--light-ink); padding:clamp(52px,9vh,104px) clamp(24px,7vw,120px); }
+.problem-inner{ max-width:var(--maxw); margin:0 auto 0 0; }
+.problem .eyebrow{ color:var(--light-accent); }
+.problem .eyebrow .bar{ background:var(--light-accent); }
+.problem-head{ font-family:var(--serif); font-weight:300; font-size:clamp(22px,2.6vw,34px); line-height:1.14; letter-spacing:-.015em; color:#1D1915; margin:16px 0 0; max-width:26ch; text-wrap:balance; }
+.problem-head .accent{ font-style:italic; color:#A5286A; }
+.problem-lead{ font-family:var(--serif); font-weight:400; font-size:clamp(16px,1.4vw,20px); line-height:1.5; color:#3A342C; margin:16px 0 0; max-width:60ch; text-wrap:pretty; }
+.problem-points{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(20px,3vw,44px); margin-top:clamp(30px,4.5vh,52px); }
+@media (max-width:760px){ .problem-points{ grid-template-columns:1fr; gap:22px; } }
+.ppoint .pn{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:#A5286A; }
+.ppoint p{ font-family:var(--sans); font-size:14.5px; line-height:1.55; color:#3A342C; margin:10px 0 0; border-top:1px solid #D8D0C2; padding-top:14px; }
+.ppoint p b{ color:#1D1915; font-weight:600; }
+.problem-for{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--light-muted); margin:clamp(30px,4.5vh,48px) 0 0; }
+.problem-for b{ color:#5A5248; font-weight:500; }
+
+/* ---------------------------------------------------------------------------
+   .lightband — generic light section for alternating rhythm (reuses standard
+   components; overrides their colours for dark-on-light). Same wash as .problem.
+   --------------------------------------------------------------------------- */
+.lightband{ background:var(--light-band); color:var(--light-ink); }
+.lightband .eyebrow{ color:var(--light-accent); }
+.lightband .eyebrow .bar{ background:var(--light-accent); }
+.lightband h2.head, .lightband .section-head h2{ color:var(--light-ink); }
+.lightband h2.head .accent, .lightband .section-head h2 .accent{ color:var(--light-accent); }
+.lightband .lead{ color:var(--light-ink-2); }
+.lightband p.body{ color:var(--light-ink-2); }
+/* solution cards on a light band */
+.lightband .sol-card{ background:rgba(255,255,255,.5); border-color:rgba(70,50,30,.14); }
+.lightband .sol-card:hover{ background:rgba(255,255,255,.8); border-color:var(--light-accent); transform:translateY(-3px); }
+.lightband .sol-card .k{ color:var(--light-accent); }
+.lightband .sol-card h3{ color:var(--light-ink); }
+.lightband .sol-card p{ color:#6A6258; }
+.lightband .sol-card .go{ color:var(--light-ink-2); }
+.lightband .sol-card:hover .go{ color:var(--light-accent); }
+.problem .statline .n, .lightband .statline .n{ color:var(--light-accent); }
+.problem .statline .l, .lightband .statline .l{ color:var(--light-ink-2); }
+.problem .deliverables li, .lightband .deliverables li{ color:var(--light-ink-2); }
+.problem .deliverables li b, .lightband .deliverables li b{ color:var(--light-ink); }
+.problem .deliverables li::before, .lightband .deliverables li::before{ border-color:var(--light-accent); }
+.problem .body, .lightband p.body{ color:var(--light-ink-2); }
+.problem .footnote, .lightband .footnote{ font-family:var(--sans); font-size:12.5px; line-height:1.5; color:var(--light-muted); margin-top:18px; max-width:60ch; }
+
+/* ===========================================================================
+   LEAD MAGNET  (email capture)
+   =========================================================================== */
+.leadmag{ position:relative; }
+.leadmag .lm-card{
+  background:rgba(14,12,16,.6); -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px);
+  border:1px solid var(--line-2); border-radius:20px; padding:clamp(26px,3.2vw,44px);
+  display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(28px,4vw,56px); align-items:center;
+}
+@media (max-width:820px){ .leadmag .lm-card{ grid-template-columns:1fr; gap:28px; } }
+/* Two-up: an example-report download card beside the question card */
+.leadmag .lm-pair{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,2.4vw,32px); align-items:stretch; }
+@media (max-width:900px){ .leadmag .lm-pair{ grid-template-columns:1fr; } }
+.leadmag .lm-pair .lm-card{ grid-template-columns:1fr; gap:clamp(16px,2vw,24px); align-content:start; }
+.leadmag .lm-report{ align-content:start; }
+.leadmag .lm-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
+.leadmag h2{ font-family:var(--serif); font-weight:300; font-size:clamp(21px,2.2vw,30px); line-height:1.14; letter-spacing:-.015em; margin:12px 0 0; color:var(--ink); text-wrap:balance; }
+.leadmag p{ font-family:var(--sans); font-size:14.5px; line-height:1.55; color:var(--ink-2); margin:14px 0 0; max-width:44ch; }
+.leadmag form{ display:grid; gap:12px; }
+.leadmag label{ font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+.leadmag input, .leadmag textarea{
+  width:100%; font-family:var(--sans); font-size:15px; color:var(--ink);
+  background:rgba(255,255,255,.04); border:1px solid var(--line-2); border-radius:11px; padding:13px 15px;
+  transition:border-color .2s ease;
+}
+.leadmag input::placeholder, .leadmag textarea::placeholder{ color:var(--faint); }
+.leadmag input:focus, .leadmag textarea:focus{ outline:none; border-color:var(--accent); }
+.leadmag textarea{ min-height:92px; resize:vertical; }
+.leadmag .submit{
+  display:inline-flex; align-items:center; justify-content:center; gap:9px; cursor:pointer;
+  font-family:var(--mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#2A1020;
+  background:linear-gradient(120deg,var(--accent-2),var(--accent)); border:0; border-radius:999px; padding:14px 22px;
+  transition:filter .2s ease, transform .15s ease;
+}
+.leadmag .submit:hover{ filter:brightness(1.06); transform:translateY(-1px); }
+.leadmag .consent{ font-family:var(--sans); font-size:11.5px; line-height:1.4; color:var(--faint); margin-top:2px; }
+.leadmag .consent a{ color:var(--muted); }
+.leadmag .lm-done{ font-family:var(--serif); font-style:italic; font-size:18px; color:var(--ink-2); }
+
+/* Light variant — lead magnet as an alternating light band */
+.leadmag.on-light{ background:var(--light-band); }
+.leadmag.on-light .lm-card{ background:rgba(255,255,255,.6); border-color:rgba(70,50,30,.14); box-shadow:0 30px 80px rgba(90,60,40,.14); -webkit-backdrop-filter:none; backdrop-filter:none; }
+.leadmag.on-light .lm-eyebrow{ color:var(--light-accent); }
+.leadmag.on-light h2{ color:var(--light-ink); }
+.leadmag.on-light p{ color:var(--light-ink-2); }
+.leadmag.on-light label{ color:var(--light-muted); }
+.leadmag.on-light input, .leadmag.on-light textarea{ background:#fff; border-color:var(--light-line); color:var(--light-ink); }
+.leadmag.on-light input::placeholder, .leadmag.on-light textarea::placeholder{ color:#B4ADA1; }
+.leadmag.on-light input:focus, .leadmag.on-light textarea:focus{ border-color:var(--light-accent); }
+.leadmag.on-light .consent{ color:var(--light-muted); }
+.leadmag.on-light .consent a{ color:#6A6258; }
+.leadmag.on-light .lm-done{ color:var(--light-ink-2); }
+
+/* ===========================================================================
+   TEAM / ADVISORS  (Company page)
+   =========================================================================== */
+.team-grid{ max-width:900px; margin:0 auto; display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(24px,4vw,56px); }
+@media (max-width:620px){ .team-grid{ grid-template-columns:1fr; } }
+.member{ text-align:center; }
+.member-avatar{ width:clamp(120px,14vw,168px); height:clamp(120px,14vw,168px); margin:0 auto 20px; border-radius:50%; overflow:hidden; border:1px solid var(--line-2); }
+.member-avatar img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.15); }
+.member-name{ font-family:var(--serif); font-weight:400; font-size:clamp(19px,1.7vw,24px); color:var(--ink); margin:0; }
+.member-role{ font-family:var(--mono); font-size:clamp(10px,.85vw,12px); letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin:7px 0 12px; }
+.member-bio{ font-family:var(--sans); font-size:clamp(13px,1.05vw,15px); line-height:1.55; color:var(--ink-2); max-width:34ch; margin:0 auto; }
+
+.advisors{ max-width:860px; margin:clamp(48px,7vh,80px) auto 0; }
+.advisors-label{ text-align:center; font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:28px; }
+.advisor-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(20px,3vw,40px); }
+@media (max-width:620px){ .advisor-grid{ grid-template-columns:1fr; } }
+.advisor{ display:flex; align-items:center; gap:16px; }
+.advisor-avatar{ flex:0 0 auto; width:64px; height:64px; border-radius:50%; overflow:hidden; border:1px solid var(--line-2); }
+.advisor-avatar img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.2); }
+.advisor-name{ font-family:var(--serif); font-weight:400; font-size:17px; color:var(--ink); margin:0; }
+.advisor-bio{ font-family:var(--sans); font-size:12.5px; line-height:1.5; color:var(--ink-2); margin:5px 0 0; }
+
+/* ===========================================================================
+   PIPELINE TABLE
+   =========================================================================== */
+.ptable{ width:100%; border-collapse:collapse; margin-top:clamp(28px,4vh,44px); }
+.ptable th{ text-align:left; font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:400; padding:0 16px 12px 0; border-bottom:1px solid var(--line-2); }
+.ptable td{ padding:15px 16px 15px 0; border-bottom:1px solid var(--line); vertical-align:middle; }
+.ptable .partner{ font-family:var(--mono); font-size:13px; color:var(--ink); white-space:nowrap; }
+.ptable .partner.internal{ color:var(--accent); }
+.ptable .ind{ font-family:var(--serif); font-size:clamp(15px,1.2vw,18px); color:var(--ink); }
+.ptable .ind.tbd{ font-style:italic; color:var(--muted); }
+.ptable .appr{ font-family:var(--sans); font-size:13.5px; color:var(--ink-2); }
+.ptable .appr.tbd{ font-style:italic; color:var(--muted); }
+.ptable td.stage{ text-align:right; white-space:nowrap; }
+.stage-tag{ font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; border:1px solid var(--line-2); border-radius:999px; padding:4px 10px; color:var(--muted); }
+.stage-tag.design{ color:#F2B5D2; border-color:rgba(240,138,184,.5); background:rgba(240,138,184,.10); }
+.stage-tag.scoping{ color:var(--accent); border-color:var(--accent); }
+@media (max-width:720px){
+  .ptable, .ptable tbody, .ptable tr, .ptable td{ display:block; width:100%; }
+  .ptable thead{ display:none; }
+  .ptable tr{ border-bottom:1px solid var(--line-2); padding:14px 0; }
+  .ptable td{ border:0; padding:2px 0; }
+  .ptable td.stage{ text-align:left; margin-top:6px; }
+}
+
+/* ===========================================================================
+   CONTACT (warm gradient) + FOOTER
+   =========================================================================== */
+.contact{ position:relative; text-align:left; padding:clamp(72px,12vh,150px) clamp(24px,7vw,120px); overflow:hidden;
+  background:linear-gradient(120deg,#F8DBA6 0%,#F2AC85 46%,#EC92B3 100%); }
+.contact::after{ content:""; position:absolute; inset:0; z-index:0; background:radial-gradient(120% 120% at 20% 30%, rgba(255,246,231,.34) 0%, rgba(255,246,231,0) 56%); pointer-events:none; }
+.contact > *{ position:relative; z-index:1; }
+.contact-inner{ max-width:var(--maxw); margin:0 auto 0 0; }
+.contact .eyebrow{ justify-content:flex-start; margin-bottom:22px; color:#A5286A; }
+.contact .eyebrow .bar{ background:#A5286A; }
+.contact h2{ font-family:var(--serif); font-weight:300; font-size:clamp(26px,3.2vw,44px); line-height:1.08; letter-spacing:-.02em; color:#3A1330; margin:0; max-width:18ch; text-wrap:balance; }
+.contact h2 .accent{ font-style:italic; color:#A5286A; }
+.contact-emails{ display:flex; flex-wrap:wrap; gap:14px 40px; justify-content:flex-start; margin-top:clamp(30px,4.5vh,48px); }
+.contact-emails a{ font-family:var(--mono); font-size:clamp(12px,1vw,15px); letter-spacing:.03em; color:#3A1330; text-decoration:none; border-bottom:1px solid rgba(58,19,48,.35); padding-bottom:3px; transition:color .2s, border-color .2s; }
+.contact-emails a:hover{ color:#A5286A; border-color:#A5286A; }
+
+.footer{ background:var(--bg); border-top:1px solid var(--line); padding:clamp(48px,7vh,80px) clamp(24px,7vw,120px) 40px; }
+.footer-inner{ max-width:var(--maxw); margin:0 auto 0 0; display:grid; grid-template-columns:1.15fr .7fr .7fr 1.05fr; gap:clamp(28px,4vw,56px); }
+@media (max-width:980px){ .footer-inner{ grid-template-columns:1fr 1fr; } }
+@media (max-width:480px){ .footer-inner{ grid-template-columns:1fr; } }
+.footer .fm{ font-family:var(--serif); font-size:20px; color:var(--ink); }
+.footer .fm em{ font-style:italic; color:var(--accent); }
+.footer .ftag{ font-family:var(--sans); font-size:13px; line-height:1.5; color:var(--muted); margin:12px 0 0; max-width:34ch; }
+.footer .fcol h4{ font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin:0 0 14px; font-weight:400; }
+.footer .fcol a{ display:block; font-family:var(--sans); font-size:14px; color:var(--ink-2); text-decoration:none; margin-bottom:10px; }
+.footer .fcol a:hover{ color:var(--accent); }
+.footer .flatest a{ display:block; margin-bottom:16px; padding-bottom:2px; }
+.footer .flatest .tag{ font-family:var(--mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); }
+.footer .flatest .date{ font-family:var(--mono); font-size:9px; letter-spacing:.06em; color:var(--faint); margin-left:8px; }
+.footer .flatest .t{ display:block; font-family:var(--sans); font-size:13px; line-height:1.4; color:var(--ink-2); margin-top:5px; }
+.footer .flatest a:hover .t{ color:var(--accent); }
+.footer-base{ max-width:var(--maxw); margin:clamp(36px,5vh,56px) auto 0 0; padding-top:22px; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; color:var(--faint); }
+
+/* ---------- reveal on scroll ---------- */
+.reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease; }
+.reveal.in{ opacity:1; transform:none; }
+@media (prefers-reduced-motion:reduce){ .reveal{ opacity:1; transform:none; transition:none; } html{ scroll-behavior:auto; } }
+
+/* small helpers */
+.center{ text-align:center; }
+.mt-s{ margin-top:16px; } .mt-m{ margin-top:28px; } .mt-l{ margin-top:44px; }
+.divider{ height:1px; background:var(--line); border:0; margin:0; }
+
+/* ===========================================================================
+   HOME — THE LIVING MODEL
+   One persistent scientific state, transformed through the whole narrative.
+   =========================================================================== */
+.home-page{ background:#08090c; }
+.model-story{
+  position:relative;
+  background:#08090c;
+  color:var(--ink);
+  isolation:isolate;
+}
+.model-stage{ position:relative; }
+.model-visual{
+  position:sticky;
+  top:0;
+  height:100svh;
+  min-height:640px;
+  margin-bottom:-100svh;
+  overflow:hidden;
+  background:
+    radial-gradient(90% 100% at 78% 52%, rgba(56,27,51,.34), transparent 70%),
+    #08090c;
+  z-index:0;
+}
+.model-visual::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  opacity:.42;
+  background-image:
+    linear-gradient(rgba(255,255,255,.032) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.032) 1px, transparent 1px);
+  background-size:72px 72px;
+  mask-image:linear-gradient(90deg, transparent 0%, #000 43%, #000 100%);
+}
+.model-canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  z-index:0;
+}
+.model-wash{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg, rgba(8,9,12,.98) 0%, rgba(8,9,12,.93) 31%, rgba(8,9,12,.44) 48%, rgba(8,9,12,0) 72%),
+    linear-gradient(0deg, rgba(8,9,12,.76) 0%, rgba(8,9,12,0) 34%);
+}
+.model-hud{
+  position:absolute;
+  inset:0;
+  z-index:3;
+  pointer-events:none;
+  font-family:var(--mono);
+  text-transform:uppercase;
+}
+.model-hud-top{
+  position:absolute;
+  top:clamp(76px,10vh,104px);
+  left:clamp(24px,5vw,64px);
+  right:clamp(24px,5vw,64px);
+  display:flex;
+  justify-content:space-between;
+  gap:24px;
+  padding-bottom:12px;
+  border-bottom:1px solid rgba(255,255,255,.11);
+  color:rgba(242,239,234,.52);
+  font-size:10px;
+  letter-spacing:.15em;
+}
+.model-hud-top span:last-child{ color:var(--accent); }
+.model-metrics{
+  position:absolute;
+  right:clamp(24px,5vw,64px);
+  bottom:clamp(56px,8vh,86px);
+  display:grid;
+  grid-template-columns:repeat(3,minmax(112px,1fr));
+  min-width:min(500px,42vw);
+  border-top:1px solid rgba(255,255,255,.13);
+}
+.model-metrics > div{ padding:12px 14px 0 0; }
+.model-metric-label{
+  display:block;
+  color:rgba(242,239,234,.38);
+  font-size:8px;
+  letter-spacing:.13em;
+}
+.model-metrics b{
+  display:block;
+  margin-top:7px;
+  color:rgba(242,239,234,.88);
+  font-weight:500;
+  font-size:12px;
+  letter-spacing:.08em;
+}
+.model-key{
+  position:absolute;
+  right:clamp(24px,5vw,64px);
+  top:clamp(110px,15vh,150px);
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:8px 14px;
+  max-width:430px;
+  color:rgba(242,239,234,.5);
+  font-size:8px;
+  letter-spacing:.1em;
+  transition:opacity .22s ease, visibility .22s ease;
+}
+.model-key span{ display:inline-flex; align-items:center; gap:6px; }
+.model-key i{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--key);
+  box-shadow:0 0 12px color-mix(in srgb,var(--key) 65%,transparent);
+}
+.model-copy{ position:relative; z-index:4; }
+.model-beat{
+  min-height:100svh;
+  min-height:max(640px,100svh);
+  padding:clamp(94px,13vh,132px) clamp(24px,7vw,120px) clamp(64px,9vh,96px);
+  display:flex;
+  align-items:center;
+  pointer-events:none;
+}
+.model-beat-inner{
+  width:min(520px,36vw);
+  opacity:.2;
+  transform:translateY(26px);
+  transition:opacity .5s ease, transform .5s ease;
+  text-shadow:0 1px 24px rgba(0,0,0,.4);
+}
+.model-beat.is-active .model-beat-inner{
+  opacity:1;
+  transform:none;
+}
+.model-beat--hero .model-beat-inner{ width:min(560px,38vw); }
+.model-beat--wide .model-beat-inner{ width:min(560px,38vw); }
+.model-beat .scale-run{ max-width:100%; margin-top:clamp(20px,2.6vw,32px); }
+.model-beat .scale-run strong{ font-size:clamp(26px,2.4vw,40px); }
+.model-beat--hero h1{
+  margin:clamp(18px,2.4vw,30px) 0 0;
+  max-width:11ch;
+  font-family:var(--sans);
+  font-size:clamp(38px,4.4vw,64px);
+  font-weight:400;
+  line-height:.98;
+  letter-spacing:-.05em;
+  text-wrap:balance;
+}
+.model-beat--hero h1 span{
+  color:var(--accent);
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:300;
+  letter-spacing:-.045em;
+}
+.model-beat--hero p{
+  max-width:55ch;
+  margin:clamp(20px,2.6vw,32px) 0 0;
+  color:var(--ink-2);
+  font-family:var(--sans);
+  font-size:clamp(15px,1.3vw,19px);
+  line-height:1.55;
+}
+.model-scroll-cue{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-top:clamp(30px,4vw,52px);
+  color:rgba(242,239,234,.5);
+  font-family:var(--mono);
+  font-size:9px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.model-scroll-cue span{
+  position:relative;
+  width:52px;
+  height:1px;
+  overflow:hidden;
+  background:rgba(255,255,255,.16);
+}
+.model-scroll-cue span::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:var(--accent);
+  transform:translateX(-100%);
+  animation:modelCue 2.2s ease-in-out infinite;
+}
+@keyframes modelCue{
+  0%,18%{ transform:translateX(-100%); }
+  60%,100%{ transform:translateX(100%); }
+}
+.model-step{
+  display:block;
+  margin-bottom:18px;
+  color:var(--accent);
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.model-beat h2{
+  max-width:14ch;
+  margin:0;
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:clamp(32px,3.6vw,56px);
+  font-weight:400;
+  line-height:1.02;
+  letter-spacing:-.045em;
+  text-wrap:balance;
+}
+.model-beat h2 em{
+  color:var(--accent);
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:300;
+}
+.model-beat p{
+  max-width:48ch;
+  margin:22px 0 0;
+  color:rgba(224,220,210,.74);
+  font-family:var(--sans);
+  font-size:clamp(14px,1.18vw,17px);
+  line-height:1.58;
+}
+.model-note{
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+  width:max-content;
+  max-width:100%;
+  margin-top:28px;
+  padding:11px 14px 10px;
+  border:1px solid rgba(240,138,184,.3);
+  border-radius:999px;
+  background:rgba(240,138,184,.06);
+  font-family:var(--mono);
+  text-transform:uppercase;
+}
+.model-note b{
+  color:var(--ink);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.1em;
+}
+.model-note span{
+  color:rgba(242,239,234,.45);
+  font-size:8px;
+  letter-spacing:.09em;
+}
+.model-note--risk{
+  border-color:rgba(255,95,97,.42);
+  background:rgba(255,95,97,.07);
+}
+.model-note--risk b{ color:#FF8789; }
+
+/* Proof arrives as a clean analytical surface after the dark sequence. */
+.model-proof{
+  position:relative;
+  z-index:6;
+  padding:clamp(72px,11vh,136px) clamp(24px,7vw,120px);
+  background:#F3EFE7;
+  color:#1D1915;
+}
+.model-proof-inner{
+  max-width:var(--maxw);
+  margin:0 auto 0 0;
+  display:grid;
+  grid-template-columns:1.05fr .48fr .92fr;
+  gap:clamp(34px,5vw,76px);
+  align-items:end;
+}
+.model-proof .eyebrow{ color:#A5286A; }
+.model-proof .eyebrow .bar{ background:#A5286A; }
+.model-proof-copy h2{
+  max-width:18ch;
+  margin:18px 0 0;
+  font-family:var(--sans);
+  font-size:clamp(30px,3.2vw,48px);
+  font-weight:400;
+  line-height:1.02;
+  letter-spacing:-.045em;
+}
+.model-proof-copy p{
+  max-width:48ch;
+  margin:20px 0 0;
+  color:#5C554C;
+  font-size:15px;
+  line-height:1.6;
+}
+.model-proof-stat{
+  padding-left:clamp(0px,2vw,28px);
+  border-left:1px solid #D7CFC4;
+}
+.model-proof-stat strong{
+  display:block;
+  color:#A5286A;
+  font-family:var(--sans);
+  font-size:clamp(70px,8vw,116px);
+  font-weight:300;
+  line-height:.78;
+  letter-spacing:-.07em;
+}
+.model-proof-stat strong span{
+  margin-left:3px;
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:.42em;
+}
+.model-proof-stat p{
+  max-width:19ch;
+  margin:24px 0 0;
+  color:#6D655B;
+  font-size:13px;
+  line-height:1.45;
+}
+.model-proof-chart{
+  padding:20px;
+  border:1px solid #DED6CB;
+  border-radius:18px;
+  background:rgba(255,255,255,.46);
+}
+.model-proof-chart .panel-title{ color:#2B2520; }
+.model-proof-chart .panel-tag{ color:#8A8175; border-color:#D6CEC3; }
+.model-proof-chart .panel-legend{ color:#756D64; }
+.model-proof-chart svg line{ stroke:#4A443C; }
+
+.model-opportunity{
+  position:relative;
+  z-index:6;
+}
+
+.model-solutions{
+  position:relative;
+  z-index:6;
+  background:#0A0A0A;
+  padding-top:clamp(72px,10vh,120px);
+  padding-bottom:clamp(72px,10vh,120px);
+}
+.model-solutions .block-head{ max-width:720px; }
+.model-solutions .solutions-grid{ grid-template-columns:repeat(3,1fr); }
+.model-solutions .sol-card{
+  position:relative;
+  overflow:hidden;
+  min-height:250px;
+  padding-top:clamp(24px,2.3vw,34px);
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgba(240,138,184,.13), transparent 52%),
+    #101014;
+}
+.model-solutions .sol-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:3px;
+  background:linear-gradient(90deg,#F6C982,#F19A6C,#EC7EA6,#96509A);
+  opacity:.7;
+}
+.model-solutions .sol-card:nth-child(2n)::before{
+  background:linear-gradient(90deg,#83B9FF,#96509A,#EC7EA6);
+}
+.model-solutions .sol-card h3{
+  max-width:14ch;
+  font-family:var(--sans);
+  font-size:clamp(22px,2vw,29px);
+  font-weight:400;
+  letter-spacing:-.035em;
+}
+
+@media (max-width:1080px){
+  .model-metrics{ min-width:400px; }
+}
+@media (max-width:1024px){
+  .model-visual{ min-height:600px; }
+  .model-visual::before{ opacity:.24; mask-image:none; }
+  .model-wash{
+    background:
+      linear-gradient(0deg, rgba(8,9,12,.98) 0%, rgba(8,9,12,.9) 34%, rgba(8,9,12,.18) 70%, rgba(8,9,12,.05) 100%),
+      linear-gradient(90deg, rgba(8,9,12,.42), transparent);
+  }
+  .model-hud-top{ top:76px; }
+  .model-key{ display:none; }
+  .model-metrics{
+    right:20px;
+    bottom:22px;
+    min-width:0;
+    width:calc(100% - 40px);
+    grid-template-columns:repeat(3,1fr);
+  }
+  .model-beat{
+    align-items:flex-end;
+    padding:100px 24px 122px;
+  }
+  .model-beat-inner,
+  .model-beat--hero .model-beat-inner{
+    width:100%;
+    max-width:650px;
+  }
+  .model-beat--hero h1{ max-width:12ch; font-size:clamp(42px,10vw,70px); }
+  .model-beat h2{ max-width:17ch; font-size:clamp(34px,8vw,54px); }
+  .model-proof-inner{ grid-template-columns:1fr; align-items:start; }
+  .model-proof-stat{ padding:26px 0 0; border-left:0; border-top:1px solid #D7CFC4; }
+  .model-proof-stat p{ max-width:32ch; }
+  .model-proof-chart{ grid-column:auto; }
+  .model-solutions .solutions-grid{ grid-template-columns:1fr 1fr; }
+}
+@media (max-width:580px){
+  .model-metrics > div:nth-child(1){ display:none; }
+  .model-metrics{ grid-template-columns:1fr 1fr; }
+  .model-note{ align-items:flex-start; flex-direction:column; gap:4px; border-radius:14px; }
+  .model-solutions .solutions-grid{ grid-template-columns:1fr; }
+  .model-solutions .sol-card{ min-height:220px; }
+}
+@media (prefers-reduced-motion:reduce){
+  .model-scroll-cue span::after{ animation:none; transform:none; }
+  .model-beat-inner{ transition:none; }
+}
+
+/* ===========================================================================
+   INNER PAGES — LIVING BIOLOGY
+   Shared line-art heroes and model instruments for Solutions, Pipeline,
+   and Company. The biology leads; the model is the lens.
+   =========================================================================== */
+.inner-page{ background:#08090c; }
+.inner-page .hero{
+  min-height:min(92svh,900px);
+  height:auto;
+  isolation:isolate;
+  background:#08090c;
+  border-bottom:1px solid rgba(255,255,255,.09);
+}
+.inner-page .hero-bg{
+  inset:0;
+  overflow:hidden;
+  background:#08090c;
+}
+.inner-page .hero-bg > img{ display:none; }
+.inner-page .hero-bg::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:
+    linear-gradient(90deg, rgba(8,9,12,.98) 0%, rgba(8,9,12,.9) 35%, rgba(8,9,12,.30) 57%, rgba(8,9,12,.04) 100%),
+    linear-gradient(0deg, rgba(8,9,12,.74), transparent 42%);
+  pointer-events:none;
+}
+.inner-page .hero-scrim{
+  z-index:2;
+  background:
+    radial-gradient(80% 100% at 22% 54%, rgba(82,34,63,.18), transparent 62%),
+    linear-gradient(0deg, rgba(8,9,12,.58), transparent 34%);
+}
+.bio-art-host{ position:relative; overflow:hidden; background:#08090c; }
+.bio-art-canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+}
+.inner-page .hero-inner{
+  position:relative;
+  z-index:4;
+  align-self:center;
+  width:min(780px,58vw);
+  padding:clamp(118px,15vh,164px) 0 clamp(82px,10vh,110px) clamp(24px,7vw,120px);
+}
+.inner-page .hero h1{
+  max-width:12ch;
+  margin-top:clamp(20px,2.5vw,30px);
+  font-family:var(--sans);
+  font-size:clamp(48px,6vw,88px);
+  font-weight:400;
+  line-height:.96;
+  letter-spacing:-.058em;
+}
+.inner-page .hero h1 .italic{
+  font-family:var(--serif);
+  font-weight:300;
+  letter-spacing:-.045em;
+}
+.inner-page .hero .sub{
+  max-width:50ch;
+  margin-top:clamp(22px,2.8vw,34px);
+  font-family:var(--sans);
+  font-size:clamp(15px,1.3vw,19px);
+  font-style:normal;
+  line-height:1.56;
+  color:rgba(224,220,210,.76);
+}
+.inner-page .hero .statline{
+  max-width:590px;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.12);
+}
+.inner-page .hero .statline .n{
+  font-family:var(--sans);
+  font-size:clamp(46px,5.5vw,78px);
+  font-weight:300;
+}
+.inner-hero-hud{
+  position:absolute;
+  z-index:4;
+  top:clamp(84px,11vh,110px);
+  left:clamp(24px,7vw,120px);
+  right:clamp(24px,5vw,64px);
+  display:flex;
+  justify-content:flex-end;
+  gap:18px;
+  padding-bottom:12px;
+  border-bottom:1px solid rgba(255,255,255,.11);
+  color:rgba(242,239,234,.44);
+  font-family:var(--mono);
+  font-size:9px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  pointer-events:none;
+}
+.inner-hero-hud span:first-child{ color:var(--accent); }
+
+.inner-page .problem{
+  padding-top:clamp(78px,11vh,132px);
+  padding-bottom:clamp(72px,10vh,120px);
+  background:#F3EFE7;
+}
+.inner-page .problem-head{
+  max-width:20ch;
+  font-family:var(--sans);
+  font-size:clamp(34px,4.3vw,62px);
+  line-height:1;
+  letter-spacing:-.05em;
+}
+.inner-page .problem-head .accent{
+  font-family:var(--serif);
+  font-weight:300;
+}
+.inner-page .problem-lead{
+  max-width:54ch;
+  font-family:var(--sans);
+  font-size:clamp(16px,1.35vw,19px);
+  line-height:1.6;
+  color:#5E564C;
+}
+.inner-page .problem-points{
+  gap:1px;
+  background:#D8D0C5;
+  border:1px solid #D8D0C5;
+  border-radius:16px;
+  overflow:hidden;
+}
+.inner-page .ppoint{
+  min-height:188px;
+  padding:22px 24px 24px;
+  background:rgba(255,255,255,.62);
+}
+.inner-page .ppoint .pn{
+  display:block;
+  font-size:10px;
+}
+.inner-page .ppoint p{
+  margin-top:32px;
+  padding-top:0;
+  border:0;
+}
+.inner-page .problem-for{
+  padding-top:20px;
+  border-top:1px solid #D8D0C5;
+}
+.inner-page .block{
+  border-top:1px solid rgba(255,255,255,.07);
+}
+.inner-page h2.head,
+.inner-page .section-head h2{
+  font-family:var(--sans);
+  font-size:clamp(32px,4vw,58px);
+  font-weight:400;
+  line-height:1.02;
+  letter-spacing:-.048em;
+}
+.inner-page h2.head .accent,
+.inner-page .section-head h2 .accent{
+  font-family:var(--serif);
+  font-weight:300;
+}
+.inner-page .lead{
+  font-family:var(--sans);
+  font-size:clamp(16px,1.35vw,19px);
+  line-height:1.6;
+  color:rgba(224,220,210,.72);
+}
+.inner-page .deliverables{
+  counter-reset:deliverable;
+  gap:0;
+}
+.inner-page .deliverables li{
+  counter-increment:deliverable;
+  padding:17px 0 17px 54px;
+  border-bottom:1px solid rgba(255,255,255,.09);
+}
+.inner-page .deliverables li::before{
+  content:"0" counter(deliverable);
+  top:20px;
+  width:auto;
+  height:auto;
+  border:0;
+  transform:none;
+  color:var(--accent);
+  font-family:var(--mono);
+  font-size:9px;
+  letter-spacing:.14em;
+}
+
+.inner-page .panel:has(.bio-instrument){
+  padding:14px;
+  background:
+    radial-gradient(120% 100% at 100% 0%, rgba(82,34,63,.24), transparent 52%),
+    rgba(10,10,14,.86);
+}
+.bio-instrument{
+  position:relative;
+  min-height:clamp(300px,34vw,430px);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:12px;
+  overflow:hidden;
+  background:#08090c;
+}
+.bio-instrument::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  border-radius:inherit;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.025);
+  pointer-events:none;
+}
+.inner-page .panel-legend i{
+  width:7px;
+  height:7px;
+  border:0;
+  border-radius:50%;
+  background:currentColor;
+}
+.inner-page .panel-note{
+  padding-top:12px;
+  border-top:1px solid rgba(255,255,255,.08);
+  font-family:var(--mono);
+  font-size:9.5px;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+}
+
+.inner-page .section{
+  border-top:1px solid rgba(255,255,255,.08);
+  background:
+    radial-gradient(70% 120% at 100% 50%, rgba(82,34,63,.22), transparent 64%),
+    #0D0D11;
+}
+.inner-page .section-bg img{ display:none; }
+.inner-page .section-bg{
+  opacity:.65;
+  background:
+    repeating-radial-gradient(ellipse at 80% 50%, transparent 0 64px, rgba(240,138,184,.06) 65px 66px, transparent 67px 88px);
+}
+.inner-page .section-bg::after{
+  background:linear-gradient(90deg, rgba(13,13,17,.98), rgba(13,13,17,.54) 68%, rgba(13,13,17,.7));
+}
+.inner-page .report{
+  border-radius:18px;
+  box-shadow:0 34px 90px rgba(0,0,0,.38);
+}
+.inner-page .lane{
+  min-height:220px;
+  padding:clamp(24px,3vw,38px);
+  border-radius:18px;
+  background:radial-gradient(110% 90% at 100% 0%, rgba(240,138,184,.11), transparent 58%);
+}
+.inner-page .lane h3{
+  font-family:var(--sans);
+  font-size:clamp(24px,2.2vw,32px);
+  letter-spacing:-.035em;
+}
+
+.scale-run{
+  display:grid;
+  grid-template-columns:1fr auto 1fr auto 1fr;
+  gap:clamp(12px,2vw,28px);
+  align-items:center;
+  max-width:760px;
+  margin-top:clamp(28px,4vw,48px);
+}
+.scale-run > div{ min-width:0; }
+.scale-run strong{
+  display:block;
+  color:var(--accent);
+  font-family:var(--sans);
+  font-size:clamp(36px,4.4vw,66px);
+  font-weight:300;
+  line-height:.9;
+  letter-spacing:-.055em;
+}
+.scale-run span{
+  display:block;
+  max-width:17ch;
+  margin-top:9px;
+  color:rgba(242,239,234,.53);
+  font-family:var(--mono);
+  font-size:8.5px;
+  line-height:1.4;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.scale-run > i{
+  color:rgba(242,239,234,.28);
+  font-family:var(--mono);
+  font-size:18px;
+  font-style:normal;
+}
+.pipeline-page .hero-inner{ width:min(940px,70vw); }
+.pipeline-page .hero h1{ max-width:13ch; }
+.pipeline-page .ptable{ border-top:1px solid var(--line-2); }
+.pipeline-page .ptable tr{ transition:background .2s ease; }
+.pipeline-page .ptable tbody tr:hover{ background:rgba(240,138,184,.045); }
+
+.company-page .team-grid{
+  max-width:none;
+  margin:0;
+  gap:18px;
+}
+.company-page .member{
+  display:grid;
+  grid-template-columns:clamp(116px,13vw,176px) 1fr;
+  grid-template-rows:auto auto 1fr;
+  column-gap:24px;
+  align-items:start;
+  min-height:240px;
+  padding:22px;
+  text-align:left;
+  border:1px solid var(--line-2);
+  border-radius:18px;
+  background:radial-gradient(120% 100% at 100% 0%, rgba(240,138,184,.09), transparent 58%);
+}
+.company-page .member-avatar{
+  grid-row:1 / 4;
+  width:100%;
+  height:auto;
+  aspect-ratio:1;
+  margin:0;
+  border-radius:12px;
+}
+.company-page .member-name{ margin-top:4px; font-family:var(--sans); }
+.company-page .member-role{ margin-top:8px; }
+.company-page .member-bio{ max-width:38ch; margin:4px 0 0; }
+.company-page .advisors{
+  max-width:none;
+  margin-left:0;
+  margin-right:0;
+}
+.company-page .advisors-label{ text-align:left; }
+.company-page .advisor{
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:14px;
+}
+
+@media (max-width:900px){
+  .inner-page .hero{ min-height:820px; }
+  .inner-page .hero-inner,
+  .pipeline-page .hero-inner{
+    align-self:flex-end;
+    width:100%;
+    padding:128px 24px 92px;
+  }
+  .inner-page .hero-bg::before{
+    background:
+      linear-gradient(0deg, rgba(8,9,12,.98) 0%, rgba(8,9,12,.9) 42%, rgba(8,9,12,.18) 76%, rgba(8,9,12,.03) 100%);
+  }
+  .inner-page .hero h1{ max-width:13ch; font-size:clamp(44px,9vw,72px); }
+  .inner-hero-hud{ left:24px; right:24px; justify-content:space-between; }
+  .inner-hero-hud span:last-child{ display:none; }
+  .bio-instrument{ min-height:360px; }
+}
+@media (max-width:620px){
+  .inner-page .hero{ min-height:760px; }
+  .inner-page .hero h1{ font-size:clamp(40px,12vw,58px); }
+  .inner-page .hero .statline{ display:none; }
+  .inner-page .ppoint{ min-height:0; }
+  .scale-run{ grid-template-columns:1fr 1fr; }
+  .scale-run > i{ display:none; }
+  .scale-run > div:last-child{ grid-column:1 / -1; }
+  .company-page .member{ grid-template-columns:92px 1fr; min-height:0; }
+  .company-page .member-avatar{ grid-row:1 / 3; }
+  .company-page .member-bio{ grid-column:1 / -1; margin-top:18px; }
+}
+@media (prefers-reduced-motion:reduce){
+  .bio-art-canvas{ transition:none; }
+}
+
+/* ===========================================================================
+   THEME TOGGLE  (nav button)
+   Cinematic canvas heroes stay dark in both themes; the editorial content
+   flips to a warm paper light theme.
+   =========================================================================== */
+.theme-toggle{
+  font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--ink-2); background:none; border:1px solid var(--line-2); border-radius:999px;
+  padding:6px 12px; cursor:pointer; white-space:nowrap;
+  transition:color .18s ease, border-color .18s ease;
+}
+.theme-toggle:hover{ color:var(--accent); border-color:var(--accent); }
+.theme-toggle::before{ content:"Light"; }
+@media (max-width:860px){
+  .theme-toggle{ margin-top:8px; font-size:13px; padding:8px 14px; }
+}
+
+/* ===========================================================================
+   LIGHT THEME
+   =========================================================================== */
+:root[data-theme="light"]{
+  --bg:#F5F1E8;
+  --bg-2:#EFE7DA;
+  --ink:#211C18;
+  --ink-2:#3E382F;
+  --muted:#6E665B;
+  --faint:#8A8175;
+  --line:#E4DBCE;
+  --line-2:#D4C9B9;
+  --accent:#A5286A;
+  --accent-2:#B7622F;
+}
+:root[data-theme="light"] body,
+:root[data-theme="light"] .home-page,
+:root[data-theme="light"] .inner-page{ background:var(--bg); }
+
+/* --- nav: dark scrim + light text at the top (every page opens on a dark
+   canvas hero); flips to light chrome + dark text once scrolled (solid) --- */
+:root[data-theme="light"] .nav .wordmark{ color:#F2EFEA; }
+:root[data-theme="light"] .nav .wordmark em{ color:var(--accent); }
+:root[data-theme="light"] .nav-links a,
+:root[data-theme="light"] .nav-item > button{ color:#E0DCD2; }
+:root[data-theme="light"] .nav-toggle span{ background:#F2EFEA; }
+:root[data-theme="light"] .nav.solid{ background:rgba(245,241,232,.93); border-bottom-color:var(--line); }
+:root[data-theme="light"] .nav.solid .wordmark{ color:var(--ink); }
+:root[data-theme="light"] .nav.solid .nav-links a,
+:root[data-theme="light"] .nav.solid .nav-item > button{ color:var(--ink-2); }
+:root[data-theme="light"] .nav.solid .nav-toggle span{ background:var(--ink); }
+:root[data-theme="light"] .nav.solid .nav-links a.current{ color:var(--ink); }
+:root[data-theme="light"] .nav.solid .nav-links a:hover,
+:root[data-theme="light"] .nav.solid .nav-item > button:hover{ color:var(--accent); }
+:root[data-theme="light"] .nav-menu{ background:rgba(255,255,255,.98); border-color:var(--line-2); box-shadow:0 30px 80px rgba(90,60,40,.18); }
+:root[data-theme="light"] .nav-menu a{ color:var(--ink-2); }
+:root[data-theme="light"] .nav-menu a small{ color:var(--faint); }
+:root[data-theme="light"] .nav-menu a:hover{ background:rgba(165,40,106,.08); color:var(--ink); }
+:root[data-theme="light"] .nav-menu a:hover small{ color:var(--accent); }
+@media (max-width:860px){
+  :root[data-theme="light"] .nav.menu-open .nav-links{ background:rgba(245,241,232,.98); }
+  :root[data-theme="light"] .nav.menu-open .nav-links a,
+  :root[data-theme="light"] .nav.menu-open .nav-item > button{ color:var(--ink-2); }
+}
+
+/* --- theme toggle button in each nav state --- */
+:root[data-theme="light"] .theme-toggle::before{ content:"Dark"; }
+:root[data-theme="light"] .theme-toggle{ color:#E0DCD2; border-color:rgba(255,255,255,.28); }
+:root[data-theme="light"] .theme-toggle:hover{ color:var(--accent); border-color:var(--accent); }
+:root[data-theme="light"] .nav.solid .theme-toggle{ color:var(--ink-2); border-color:var(--line-2); }
+:root[data-theme="light"] .nav.solid .theme-toggle:hover{ color:var(--accent); border-color:var(--accent); }
+
+/* --- footer + solution cards flip to light --- */
+:root[data-theme="light"] .footer{ background:var(--bg-2); border-top-color:var(--line); }
+:root[data-theme="light"] .sol-card{ background:rgba(255,255,255,.55); border-color:var(--line-2); }
+:root[data-theme="light"] .sol-card:hover{ background:rgba(255,255,255,.85); border-color:var(--accent); }
+:root[data-theme="light"] .sol-card p{ color:#6A6258; }
+:root[data-theme="light"] .model-solutions{ background:var(--bg-2); }
+:root[data-theme="light"] .model-solutions .sol-card{
+  background:radial-gradient(120% 90% at 100% 0%, rgba(165,40,106,.06), transparent 52%), #fff;
+}
+
+/* --- home model story: full light treatment (canvas repaints light too) --- */
+:root[data-theme="light"] .model-story{ background:var(--bg); color:var(--ink); }
+:root[data-theme="light"] .model-visual{
+  background:radial-gradient(90% 100% at 78% 52%, rgba(240,138,184,.12), transparent 70%), var(--bg);
+}
+:root[data-theme="light"] .model-visual::before{
+  background-image:
+    linear-gradient(rgba(40,32,24,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(40,32,24,.05) 1px, transparent 1px);
+}
+:root[data-theme="light"] .model-wash{
+  background:
+    linear-gradient(90deg, rgba(245,241,232,.98) 0%, rgba(245,241,232,.93) 31%, rgba(245,241,232,.44) 48%, rgba(245,241,232,0) 72%),
+    linear-gradient(0deg, rgba(245,241,232,.76) 0%, rgba(245,241,232,0) 34%);
+}
+:root[data-theme="light"] .model-hud-top{ color:rgba(36,31,27,.56); border-bottom-color:rgba(40,32,24,.16); }
+:root[data-theme="light"] .model-metrics{ border-top-color:rgba(40,32,24,.18); }
+:root[data-theme="light"] .model-metric-label{ color:rgba(36,31,27,.5); }
+:root[data-theme="light"] .model-metrics b{ color:rgba(36,31,27,.9); }
+:root[data-theme="light"] .model-key{ color:rgba(36,31,27,.62); }
+:root[data-theme="light"] .model-beat h2{ color:var(--ink); }
+:root[data-theme="light"] .model-beat p{ color:rgba(60,56,47,.82); }
+:root[data-theme="light"] .model-beat--hero p{ color:rgba(60,56,47,.82); }
+:root[data-theme="light"] .model-scroll-cue{ color:rgba(36,31,27,.55); }
+:root[data-theme="light"] .model-scroll-cue span{ background:rgba(40,32,24,.14); }
+:root[data-theme="light"] .model-note{ border-color:rgba(165,40,106,.32); background:rgba(165,40,106,.07); }
+:root[data-theme="light"] .model-note b{ color:var(--ink); }
+:root[data-theme="light"] .model-note span{ color:rgba(36,31,27,.5); }
+@media (max-width:1024px){
+  :root[data-theme="light"] .model-wash{
+    background:
+      linear-gradient(0deg, rgba(245,241,232,.98) 0%, rgba(245,241,232,.9) 34%, rgba(245,241,232,.18) 70%, rgba(245,241,232,.05) 100%),
+      linear-gradient(90deg, rgba(245,241,232,.42), transparent);
+  }
+}
+
+/* --- inner-page canvas heroes + dark scrim bands keep light text --- */
+:root[data-theme="light"] .hero h1{ color:#F2EFEA; }
+:root[data-theme="light"] .hero .sub{ color:rgba(224,220,210,.84); }
+:root[data-theme="light"] .inner-page .section-head h2{ color:#F2EFEA; }
+:root[data-theme="light"] .inner-page .section-head p{ color:rgba(224,220,210,.8); }
+:root[data-theme="light"] .inner-page .lead{ color:var(--ink-2); }
+
+/* --- data-instrument cards stay dark on a light page: make them opaque
+   and keep their inner text light so the embedded charts read cleanly --- */
+:root[data-theme="light"] .panel{
+  background:radial-gradient(120% 100% at 100% 0%, rgba(82,34,63,.28), transparent 54%), #141019;
+  border-color:rgba(255,255,255,.10);
+  box-shadow:0 26px 70px rgba(90,60,40,.20);
+}
+:root[data-theme="light"] .panel .panel-title,
+:root[data-theme="light"] .panel .panel-title-lg{ color:#F2EFEA; }
+:root[data-theme="light"] .panel .panel-tag{ color:#B0ACA4; border-color:rgba(255,255,255,.22); }
+:root[data-theme="light"] .panel .panel-intro,
+:root[data-theme="light"] .panel .panel-legend{ color:#B0ACA4; }
+:root[data-theme="light"] .panel .panel-note{ color:#9D98A1; border-top-color:rgba(255,255,255,.08); }
+:root[data-theme="light"] .panel .bar-x{ color:#E0DCD2; }
+:root[data-theme="light"] .panel .bar .cap{ color:#F2EFEA; }
+:root[data-theme="light"] .panel .bar-note,
+:root[data-theme="light"] .panel .gauge-cap{ color:#8A857E; }
+:root[data-theme="light"] .panel .toggle{ border-color:rgba(255,255,255,.18); background:rgba(255,255,255,.04); }
+:root[data-theme="light"] .panel .toggle button{ color:#B0ACA4; }
+:root[data-theme="light"] .inner-page .panel:has(.bio-instrument){
+  background:radial-gradient(120% 100% at 100% 0%, rgba(82,34,63,.24), transparent 52%), #141019;
+}
+
+/* article "paper" excerpt needs a soft edge once the page is light too */
+:root[data-theme="light"] .report,
+:root[data-theme="light"] .inner-page .report{
+  border:1px solid #E3D9CB;
+  box-shadow:0 22px 55px rgba(90,60,40,.16);
+}
+:root[data-theme="light"] .article-meta{ border-top-color:rgba(255,255,255,.12); }
+
+/* --- home page opens on a LIGHT hero in light mode, so its nav is light from
+   the top (inner pages keep the dark-hero nav treatment above) --- */
+:root[data-theme="light"] .home-page .nav{ background:linear-gradient(180deg, rgba(245,241,232,.86) 0%, rgba(245,241,232,0) 100%); }
+:root[data-theme="light"] .home-page .nav .wordmark{ color:var(--ink); }
+:root[data-theme="light"] .home-page .nav .wordmark em{ color:var(--accent); }
+:root[data-theme="light"] .home-page .nav-links a,
+:root[data-theme="light"] .home-page .nav-item > button{ color:var(--ink-2); }
+:root[data-theme="light"] .home-page .nav-toggle span{ background:var(--ink); }
+:root[data-theme="light"] .home-page .theme-toggle{ color:var(--ink-2); border-color:var(--line-2); }
+:root[data-theme="light"] .home-page .theme-toggle:hover{ color:var(--accent); border-color:var(--accent); }
+
+</style>
+<style>
+/* ===========================================================================
+   Big Picture Bio — Journal / article styles
+   Layers on top of site.css tokens + components. Long-form editorial reading
+   plus the interactive article exhibits (bars, gauge, muller, pareto).
+   =========================================================================== */
+
+/* ---------- Article hero meta ---------- */
+.article-page .hero-inner{ width:min(820px,64vw); }
+.article-meta{
+  display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px;
+  margin-top:clamp(22px,3vw,32px); padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.12);
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.06em; color:var(--muted);
+}
+.article-meta .sep{ color:var(--line-2); }
+.article-page .hero .sub{ font-family:var(--serif); font-style:italic; color:var(--ink-2); }
+
+/* ---------- Reading column ---------- */
+.measure{ max-width:66ch; }
+.article-body p{
+  font-family:var(--sans); font-size:clamp(16px,1.15vw,18px); line-height:1.72;
+  color:var(--ink-2); margin:0 0 22px; max-width:66ch; text-wrap:pretty;
+}
+.article-body p a{ color:var(--ink); text-decoration:none; border-bottom:1px solid var(--line-2); }
+.article-body p a:hover{ border-bottom-color:var(--accent); color:#fff; }
+.article-body strong{ color:var(--ink); font-weight:600; }
+.article-body em{ font-style:italic; }
+.article-body .lead-para{ font-size:clamp(18px,1.35vw,21px); line-height:1.62; color:var(--ink); }
+.article-body h3{
+  font-family:var(--sans); font-weight:600; letter-spacing:-.02em;
+  font-size:clamp(18px,1.5vw,22px); color:var(--ink); margin:clamp(30px,4vw,44px) 0 10px;
+}
+.dropcap::first-letter{
+  float:left; font-family:var(--serif); font-weight:300; color:var(--accent);
+  font-size:4.4em; line-height:.7; padding:6px 12px 0 0;
+}
+
+/* superscript citation links */
+a.ref{
+  font-family:var(--mono); font-size:.66em; font-weight:500; vertical-align:super; line-height:0;
+  color:var(--accent); text-decoration:none; margin-left:2px; padding:0 1px;
+  border-bottom:1px solid rgba(240,138,184,.4);
+}
+a.ref:hover{ color:#fff; border-bottom-color:var(--accent); }
+
+/* pull quote */
+.pull{
+  max-width:38ch; margin:clamp(34px,5vw,52px) 0; padding-left:clamp(18px,2vw,26px);
+  border-left:2px solid var(--accent);
+  font-family:var(--serif); font-weight:300; font-size:clamp(22px,2.6vw,30px);
+  line-height:1.24; letter-spacing:-.015em; color:var(--ink); text-wrap:balance;
+}
+.pull em{ font-style:italic; color:var(--accent); }
+
+/* ---------- Figures ---------- */
+.fig{ margin:clamp(34px,5vw,60px) 0; }
+.fig .panel-intro{
+  font-family:var(--sans); font-size:14.5px; line-height:1.55; color:var(--muted);
+  margin:6px 0 20px; max-width:66ch;
+}
+.fig .panel-title-lg{
+  font-family:var(--sans); font-weight:400; letter-spacing:-.03em; color:var(--ink);
+  font-size:clamp(20px,2vw,27px); line-height:1.14; margin:2px 0 2px;
+}
+.fig figcaption{
+  font-family:var(--sans); font-size:13px; line-height:1.6; color:var(--faint);
+  margin-top:16px; max-width:72ch;
+}
+.fig figcaption b{ color:var(--muted); font-weight:600; }
+
+/* toggle control */
+.toggle{ display:inline-flex; gap:3px; padding:3px; border:1px solid var(--line-2); border-radius:999px; background:rgba(255,255,255,.03); }
+.toggle button{
+  font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--muted); background:transparent; border:0; cursor:pointer;
+  padding:8px 15px; border-radius:999px; transition:all .2s ease; white-space:nowrap;
+}
+.toggle button[aria-pressed="true"]{ color:#2A1020; background:var(--accent); font-weight:500; }
+
+/* tooltip */
+.tt{
+  position:absolute; pointer-events:none; z-index:20; opacity:0; transform:translate(-50%,-114%);
+  transition:opacity .12s ease; background:#16131a; border:1px solid var(--line-2);
+  border-radius:10px; padding:10px 13px; min-width:150px; max-width:250px;
+  box-shadow:0 16px 40px rgba(0,0,0,.55);
+}
+.tt .tt-h{ font-family:var(--sans); font-weight:600; color:var(--ink); font-size:13.5px; margin-bottom:3px; }
+.tt .tt-d{ font-family:var(--mono); font-size:10.5px; letter-spacing:.03em; color:var(--accent); margin-bottom:5px; }
+.tt .tt-b{ font-family:var(--sans); font-size:12.5px; color:var(--muted); line-height:1.45; }
+
+/* bar chart */
+.bars{ display:flex; align-items:flex-end; justify-content:center; gap:clamp(26px,6vw,72px); height:290px; padding:14px 0 0; }
+.bar-col{ display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; }
+.bar-stack{ display:flex; flex-direction:column; justify-content:flex-end; height:100%; width:clamp(54px,9vw,92px); }
+.bar{ width:100%; border-radius:4px 4px 0 0; position:relative; height:0; transition:height 1.05s cubic-bezier(.2,.7,.2,1); }
+.bar .cap{ position:absolute; left:0; right:0; top:-28px; text-align:center; font-family:var(--serif); color:var(--ink); font-size:17px; opacity:0; transition:opacity .5s ease .7s; }
+.bar-x{ margin-top:14px; font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; color:var(--ink-2); text-transform:uppercase; text-align:center; }
+.bar-note{ font-family:var(--sans); font-size:12px; color:var(--faint); margin-top:4px; max-width:15ch; text-align:center; }
+
+/* gauge + market layout */
+.gauge-wrap{ display:flex; flex-direction:column; align-items:center; }
+.gauge-cap{ font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-top:10px; text-align:center; max-width:32ch; line-height:1.5; }
+
+/* references */
+.refs{ max-width:66ch; margin-top:clamp(48px,7vw,80px); padding-top:26px; border-top:1px solid var(--line); }
+.refs h2{ font-family:var(--mono); font-weight:500; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin:0 0 18px; }
+ol.reflist{ margin:0; padding:0 0 0 1.5em; }
+ol.reflist li{ font-family:var(--sans); font-size:13.5px; line-height:1.62; color:var(--muted); margin:0 0 12px; }
+ol.reflist li a{ color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(240,138,184,.3); word-break:break-word; }
+ol.reflist li a:hover{ border-bottom-color:var(--accent); }
+ol.reflist li em{ font-style:italic; color:var(--ink-2); }
+
+/* ---------- Journal index ---------- */
+.post-list{ display:grid; gap:clamp(18px,2vw,24px); margin-top:clamp(30px,4vw,48px); }
+.post-card{
+  display:grid; grid-template-columns:1fr; gap:14px; text-decoration:none;
+  border:1px solid var(--line-2); border-radius:18px; padding:clamp(24px,2.6vw,36px);
+  background:radial-gradient(120% 90% at 100% 0%, rgba(240,138,184,.08), transparent 56%), #101014;
+  transition:border-color .2s ease, transform .2s ease, background .2s ease;
+}
+.post-card:hover{ border-color:var(--accent); transform:translateY(-3px); }
+.post-card .pc-meta{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); display:flex; gap:12px; flex-wrap:wrap; }
+.post-card .pc-meta .d{ color:var(--faint); }
+.post-card h3{ font-family:var(--sans); font-weight:400; letter-spacing:-.035em; font-size:clamp(24px,2.6vw,36px); line-height:1.06; color:var(--ink); margin:0; max-width:24ch; }
+.post-card h3 .italic{ font-family:var(--serif); font-weight:300; font-style:italic; color:var(--accent); }
+.post-card p{ font-family:var(--sans); font-size:15px; line-height:1.55; color:var(--muted); margin:0; max-width:64ch; }
+.post-card .go{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2); }
+.post-card:hover .go{ color:var(--accent); }
+.post-card .go::after{ content:" →"; }
+
+@media (max-width:620px){
+  .bars{ height:220px; gap:16px; }
+  .pull{ font-size:clamp(20px,6vw,26px); }
+}
+
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Why the right combinations are the next breakthrough in drug design",
+  "description": "Most diseases of ageing have no single cause, so no single-target drug can reverse them. Why rationally designed drug combinations are where the next breakthroughs live, and how Big Picture Bio's world model finds them.",
+  "image": "https://bigpicturebio.com/img/og-image.png",
+  "author": { "@type": "Organization", "name": "Big Picture Bio", "url": "https://bigpicturebio.com" },
+  "publisher": { "@type": "Organization", "name": "Big Picture Bio", "logo": { "@type": "ImageObject", "url": "https://bigpicturebio.com/img/favicon-192.png" } },
+  "datePublished": "2026-08-11",
+  "dateModified": "2026-08-11",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://bigpicturebio.com/blog/why-the-right-combinations/" },
+  "keywords": "combination therapy, drug combinations, combination therapy design, synergy, oncology, checkpoint inhibitors, antibody-drug conjugates, TROP2 ADC, topoisomerase inhibitor, KRAS combination, LAG-3, AI drug discovery, clinical trial prediction"
+}
+</script>
+</head>
+<body class="inner-page article-page">
+<nav class="nav" id="nav">
+  <a class="wordmark" href="https://bigpicturebio.com/">Big Picture <em>Bio</em></a>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light or dark theme" title="Toggle light or dark theme"></button>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-scrim"></div>
+  <div class="hero-inner">
+    <div class="eyebrow"><span class="bar"></span>Perspective · Combination therapy</div>
+    <h1>Why the right combinations are the <span class="italic">next breakthrough</span></h1>
+    <p class="sub">Diseases of ageing rarely have a single cause. The next generation of medicines will be combinations, and finding them means searching a space far too large to screen your way through.</p>
+    <div class="article-meta">
+      <span>Big Picture Bio</span><span class="sep">/</span>
+      <span>11 August 2026</span><span class="sep">/</span>
+      <span>9 min read</span>
+    </div>
+  </div>
+</header>
+
+<main>
+<article>
+
+  <!-- INTRO -->
+  <section class="block">
+    <div class="wrap">
+      <div class="article-body reveal">
+        <p class="lead-para dropcap">Ask a pharma company what it is looking for and the answer is almost always the same: a novel target, ideally one with single-agent efficacy. That preference has ruled drug discovery since the beginning of rational drug design, and it still shapes how the industry allocates its money today.</p>
+        <p>It is easy to see why. A single target is tractable. One mechanism, one biomarker, one clean causal story to tell a regulator. And every so often it works spectacularly. Imatinib blocks the single BCR-ABL fusion protein that drives chronic myeloid leukaemia, and in the IRIS trial that defined the modern targeted era it produced a complete haematologic response in <strong>95.3%</strong> of patients,<a class="ref" href="#r1">1</a> turning a fatal leukaemia into a condition most people now survive for well over a decade.</p>
+        <p>The question is whether that model still serves us against the disease burden we actually carry now. An ageing population is accumulating conditions that are, almost by definition, not caused by any one thing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: wish list -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <div class="eyebrow"><span class="bar"></span>The premise</div>
+        <h2 class="head">The &ldquo;ideal target&rdquo; is a wish list, <span class="accent">not a biological fact</span>.</h2>
+      </div>
+      <div class="article-body reveal" style="margin-top:22px">
+        <p>The textbook criteria for a good target read like a checklist. It should sit in a pathway causally linked to the disease and to nothing else, ideally with human genetic evidence tying it to the condition. It should be expressed in diseased tissue and nowhere else. It should have a druggable surface, and it should be different enough from its relatives that you can hit it without hitting them. AstraZeneca formalised a version of this as its <strong>5R framework</strong> after auditing its own pipeline (right target, right tissue, right safety, right patient, right commercial potential), and credited disciplined decisions across all five for reversing its clinical success rate.<a class="ref" href="#r2">2</a></p>
+        <p>Biology does not organise itself to make that checklist easy to satisfy. Living systems are built on redundancy, feedback and failsafes, the same properties that make them robust to damage. Engineer a mouse to lack a gene and it often shows no defect at all, because a paralog quietly takes over the job. Delete <em>Rpl22</em> and its paralog <em>Rpl22l1</em> steps in;<a class="ref" href="#r3">3</a> knock out one or even two of the three cyclin D genes and the remaining one covers for them.<a class="ref" href="#r4">4</a> Tumours use the same trick against us: block one signalling route and the cell reroutes through another. There is no strong reason to expect a perfectly isolated, disease-only, non-redundant node to exist for most diseases, because that is not how the system was built.</p>
+        <blockquote class="pull">The nodes that matter most are the ones evolution was most careful to back up.</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: even a clean target -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <div class="eyebrow"><span class="bar"></span>And even if you find one</div>
+        <h2 class="head">A clean target may still not be <span class="accent">enough</span>.</h2>
+      </div>
+      <div class="article-body reveal" style="margin-top:22px">
+        <p>Suppose you find one anyway. Diseases of ageing are rarely the output of a single broken part. Alzheimer&rsquo;s is the clearest case: amyloid plaques, tau tangles, chronic neuroinflammation and vascular dysfunction interact and reinforce one another, and few researchers now believe any one of them fully explains progression.<a class="ref" href="#r5">5</a> That is the backdrop to decades of amyloid-only programmes returning, at best, modest effects; even the anti-amyloid antibodies that finally cleared plaque slow decline by roughly a quarter rather than stopping it.<a class="ref" href="#r6">6</a> The same shape, several interacting pathologies rather than one root cause, shows up across most of the diseases that accumulate with age.</p>
+        <p>So the more honest question may not be &ldquo;where is the next great target?&rdquo; We are largely standing on the shoulders of giants; much of the important target biology in a given disease has arguably already been found. What has not been solved is the expectation that any one of those targets, hit in isolation, should reverse a disease that never had a single cause. The work left to do lies in managing the relationships between the nodes we already have.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Eroom -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <div class="eyebrow"><span class="bar"></span>The cost</div>
+        <h2 class="head">This is part of why drug development keeps getting <span class="accent">more expensive</span>.</h2>
+      </div>
+      <div class="article-body reveal" style="margin-top:22px">
+        <p>The industry has a name for its declining returns on research: Eroom&rsquo;s Law, Moore&rsquo;s Law spelled backwards. The number of new drugs approved per billion inflation-adjusted dollars of R&amp;D has fallen by half roughly every nine years since 1950, even as the underlying science and computing power improved beyond recognition.<a class="ref" href="#r7">7</a> A field that keeps insisting on single, clean, isolated mechanisms, in diseases that do not have them, is a plausible part of that gap between scientific progress and drug-approval productivity.</p>
+      </div>
+      <div class="kpis reveal" style="margin-top:clamp(30px,4vw,48px)">
+        <div class="statline"><span class="n">½</span><span class="l">New drugs per $1B of R&amp;D halve about every 9 years — Eroom&rsquo;s Law, holding since 1950</span></div>
+        <div class="statline"><span class="n">~80&times;</span><span class="l">Fall in R&amp;D efficiency since 1950, inflation-adjusted (Scannell et al.)</span></div>
+        <div class="statline"><span class="n">$2.6<span style="font-size:.5em;font-family:var(--serif);font-style:italic">B</span></span><span class="l">Capitalised cost per new drug, and still climbing (DiMasi, 2016)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: field is moving -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <div class="eyebrow"><span class="bar"></span>The shift</div>
+        <h2 class="head">The field is already moving toward combinations. It just cannot <span class="accent">navigate</span> them yet.</h2>
+      </div>
+      <div class="article-body reveal" style="margin-top:22px">
+        <p>Pharma has not ignored any of this. It is visibly shifting toward dual- and multi-mechanism medicine. Bispecific antibodies went from a niche format to standard equipment, with fourteen approved by the end of 2023, and a first-in-class PD-1&times;VEGF bispecific, ivonescimab, has now beaten single-agent pembrolizumab head to head in lung cancer.<a class="ref" href="#r8">8</a> The older proof points are already approved and have aged well. Combining two checkpoint inhibitors, nivolumab against PD-1 and ipilimumab against CTLA-4, extended median progression-free survival in advanced melanoma from <strong>2.9 months</strong> on ipilimumab alone to <strong>11.5 months</strong> together. Years on, that gap had widened into survival: a median of <strong>72.1 months</strong> on the combination against 19.9 on ipilimumab, with roughly half the combination patients still alive at six and a half years.<a class="ref" href="#r9">9</a> Anti-LAG-3 became the third checkpoint class to reach the clinic in combination, as relatlimab plus nivolumab, the first LAG-3 regimen approved and one that more than doubled progression-free survival over nivolumab alone.<a class="ref" href="#r10">10</a></p>
+        <p>The same logic runs through the parts of oncology moving fastest right now. Antibody-drug conjugates carrying topoisomerase-1 payloads, the TROP2 conjugates datopotamab deruxtecan and sacituzumab govitecan and the HER2 conjugate trastuzumab deruxtecan, are being developed less as solo agents than as backbones. Sacituzumab govitecan with pembrolizumab lifted first-line progression-free survival in triple-negative breast cancer to <strong>11.2 months</strong> against 7.8 for chemotherapy with pembrolizumab; datopotamab deruxtecan is in late-stage trials alongside the EGFR inhibitor osimertinib; trastuzumab deruxtecan is being paired with pertuzumab and with checkpoint blockade.<a class="ref" href="#r11">11</a> KRAS G12C inhibitors needed partners too. Blocking the mutant protein alone triggers a feedback reactivation of EGFR, so sotorasib only worked in colorectal cancer once it was combined with the EGFR antibody panitumumab, roughly tripling progression-free survival over standard care.<a class="ref" href="#r12">12</a> The direction of travel is clear. The hard part is no longer whether to combine, but which combination, in which order, for which patient. Regulators ask a version of the same question: each component of a fixed-dose combination has to earn its place under the contribution-of-components principle, and since 2013 the FDA has kept a narrow codevelopment pathway open for two novel agents that only work together.<a class="ref" href="#r13">13</a></p>
+      </div>
+
+      <!-- EXHIBIT: unlock bars -->
+      <figure class="fig reveal">
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">The unlock · synergy vs single-agent screens</span><span class="panel-tag">Illustrative</span></div>
+          <p class="panel-title-lg">A component with no solo activity can transform a combination</p>
+          <p class="panel-intro">Screen agents one at a time and the most valuable partners look like failures. Synergy lives in the interaction, which is exactly what single-agent testing throws away.</p>
+          <div class="bars" id="unlockBars" aria-hidden="true"></div>
+          <div class="panel-legend">
+            <span style="color:#96509A"><i class="dot"></i><span style="color:var(--muted)">Sensitiser alone</span></span>
+            <span style="color:#CE6BA0"><i class="dot"></i><span style="color:var(--muted)">Active agent alone</span></span>
+            <span style="color:#EC7EA6"><i class="dot"></i><span style="color:var(--muted)">Combination</span></span>
+          </div>
+          <div class="panel-note">Sensitisers, immune primers and resistance-breakers carry weak monotherapy signals, so a pipeline tuned for single-agent efficacy discards them.</div>
+        </div>
+      </figure>
+
+      <!-- EXHIBIT: share gauge + market -->
+      <figure class="fig reveal">
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Market · combinations as the default</span><span class="panel-tag">Sources: The Oncologist 2024 · IQVIA 2025</span></div>
+          <p class="panel-title-lg">Combinations are now roughly one in three new oncology approvals</p>
+          <div style="display:grid;grid-template-columns:minmax(0,220px) 1fr;gap:clamp(20px,3vw,44px);align-items:center;margin-top:18px">
+            <div class="gauge-wrap">
+              <div id="shareGauge"></div>
+              <div class="gauge-cap">of FDA solid-tumour approvals, 2011&ndash;2023, were combination regimens<a class="ref" href="#r15">15</a></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:clamp(20px,2.6vw,30px)">
+              <div class="kpi"><span class="k">$252<span class="accent">B</span></span><span class="d">Global spend on cancer medicines, 2024 — projected to reach $441B by 2029 (IQVIA)<a class="ref" href="#r16">16</a></span></div>
+              <div class="kpi"><span class="k">99&thinsp;/&thinsp;292</span><span class="d">FDA solid-tumour approvals that were combinations, rising in absolute number year on year</span></div>
+            </div>
+          </div>
+          <div class="panel-note">Combination regimens have moved from the exception toward the default across immuno-oncology, targeted therapy and ADC development.</div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- SECTION: brute force -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <div class="eyebrow"><span class="bar"></span>The search problem</div>
+        <h2 class="head">You cannot brute-force your way to the <span class="accent">right combination</span>.</h2>
+      </div>
+      <div class="article-body reveal" style="margin-top:22px">
+        <p>Combinations are harder to navigate than single agents precisely because of the complexity they are meant to address. The search space is enormous: a full pairwise screen of just 100 drugs at 100 doses each is on the order of <strong>50 million experiments</strong>, and every extra drug, or every move to triplets and quadruplets, multiplies that again. Even the best physical screens have a deeper limit. BATCHIE, a Bayesian platform, recovered most of the synergies in a 206-drug panel while running only about 4% of its roughly 1.4 million wells,<a class="ref" href="#r14">14</a> which is a genuine advance and still cells in a dish. A dish cannot see the immune compartment clearing or sparing a clone, the stroma that walls a drug out, how much of a dose actually reaches each metastatic site, or the order and timing in which agents are given. It will not tell you that a combination which clears the primary tumour reseeds from the marrow, or that an oncolytic fails in a liver metastasis because prior chemotherapy remodelled its vasculature. Those are the factors that decide a human outcome, and a physical screen leaves out almost all of them.</p>
+      </div>
+      <div class="scale-run reveal">
+        <div><strong>16B</strong><span>Plausible drug &amp; sequence combinations for one cancer · illustrative</span></div>
+        <i>&rarr;</i>
+        <div><strong>50M</strong><span>Experiments for a 100&times;100 pairwise dose screen</span></div>
+        <i>&rarr;</i>
+        <div><strong>304,205</strong><span>Years to brute-force one cancer at 10 min per prediction</span></div>
+      </div>
+      <div class="article-body reveal" style="margin-top:clamp(28px,4vw,44px)">
+        <p>Add sequence, schedule and patient stratification on top, and the plausible regimens for a single cancer run into the billions. So physical screening was never going to be how we find these answers, and the enthusiasm for fully autonomous closed-loop labs makes us wary rather than hopeful: biology is not cheaply verifiable the way maths or software is, and automating a misleading assay mostly produces wrong answers faster.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: what good looks like (MULLER) -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <div class="eyebrow"><span class="bar"></span>What good looks like</div>
+        <h2 class="head">What a good combination actually does <span class="accent">over time</span>.</h2>
+      </div>
+      <div class="article-body reveal" style="margin-top:22px">
+        <p>The reason combinations matter is easiest to see by watching a tumour and its surroundings evolve. A single agent can shrink a cancer for a while, but it also selects: a resistant subclone that was a rounding error at baseline expands into the space the drug clears, and the disease returns. A well-chosen combination closes those exits, holding the resistant population down while the stroma normalises and the immune compartment does the durable work. Toggle between the two.</p>
+      </div>
+
+      <figure class="fig reveal" id="mullerFig" style="position:relative">
+        <div class="panel">
+          <div class="panel-head">
+            <span class="panel-title">Interactive · tumour evolution over 36 months</span>
+            <div class="toggle" role="group" aria-label="Choose regimen">
+              <button data-mode="mono" aria-pressed="false">Single agent</button>
+              <button data-mode="combo" aria-pressed="true">Rational combination</button>
+            </div>
+          </div>
+          <p class="panel-title-lg">Monotherapy relapse vs a designed combination</p>
+          <p class="panel-intro muller-intro"></p>
+          <div class="muller-chart"></div>
+          <div class="panel-legend muller-legend"></div>
+          <div class="panel-note">Illustrative Muller plot — band thickness is the share of tissue held by each population. Hover a band to name it.</div>
+        </div>
+        <div class="tt"></div>
+        <figcaption><b>Read it left to right.</b> The single-agent course clears sensitive disease early, then a resistant subclone escapes and repopulates. The combination suppresses that escape and lets a normalised stroma and immune response take hold, holding the tumour to a small residual at 36 months.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- SECTION: what the field needs / approach (PARETO) -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <div class="eyebrow"><span class="bar"></span>What the field needs</div>
+        <h2 class="head">Modelling the evolution of complex disease where <span class="accent">no training data exists</span>.</h2>
+      </div>
+      <div class="article-body reveal" style="margin-top:22px">
+        <p>What the field needs is a model that can hold several mechanisms in mind at once and tie them to real human outcomes, so you know, before you go near a clinic, which combination will move the needle for which patient.</p>
+        <p>Most of the industry building trial-prediction models is chasing the newest architecture, foundation models and virtual cells today, classical machine learning a few years ago. Underneath, they all join the dots between past trials. That gives you a good model of how known drugs behave in familiar situations and very little ability to extrapolate to a novel drug, a new target, or a system pushed into a state it has not seen. Clinical data makes this worse: one sample per patient at one moment, a narrow range of drugs, almost no counterfactuals. An off-the-shelf language model can already predict trial outcomes with close to <strong>80% accuracy</strong>. Restrict it to the cases that actually matter, the surprising success, the true synergy, and that accuracy collapses toward zero. Those cases resist interpolation. They need reasoning about the biology.</p>
+        <p>A language model has no framework for that. Faced with a novel case it is pulled straight back into the reasoning that drove the last round of failures, because that is what sits in its training data. The harness we have spent the last year building does the opposite: it weighs every influential factor, from diffusion gradients inside a tumour to the variance in a receptor&rsquo;s density across a population, scaled all the way through to the placebo rate at a particular trial site. That is what lets us predict exact endpoints to within weeks of overall survival.</p>
+        <p>There is a further reason existing outcomes are the wrong thing to learn from. Many of the most useful building blocks for a combination are the ones that failed on their own. The box is full of mechanisms of synergism and selectivity that never cleared pre-clinical because, in isolation, they do little, yet in the right pairing they beat any single target by a wide margin. A model trained on what has already read out in humans cannot see the worth of those pieces, so it quietly locks out the most desirable part of the search space.</p>
+        <h3>Reasoning back to the driving node</h3>
+        <p>Over the past year we built agents to unpick the earliest vulnerabilities of Alzheimer&rsquo;s disease with the <a href="https://alleninstitute.org/" target="_blank" rel="noopener">Allen Institute</a>. Working from single-cell omics, they integrated across hundreds of smaller hypotheses, most of them far from the largest changes in the data, and converged on NMDA-receptor-expression-mediated hyperexcitability as a common early vulnerability.<a class="ref" href="#r18">18</a> That subtlety is the whole point. Disease is driven by cell state, by network position and by how the system evolves, so the biggest change in a dataset is usually a downstream consequence, several steps from the lever that actually controls it. To intervene you have to reason back to the driving node. It is the lesson a decade of amyloid antibodies, aimed at a late and highly visible change, keeps teaching the hard way.</p>
+        <h3>A world model, then a fast search over it</h3>
+        <p>So we built the model differently. It plays the disease forward in time, step by step, across each metastatic site and the organs that matter, and across each group of patients in a trial, reasoning by analogy about how every pairwise interaction unfolds and bringing it all back together to ask whether a given trial design would actually hit its endpoint. This works because biology is largely conserved: a cell exposed to a given signal, absent competing factors, tends to respond in a knowable way, and the rules for scaling a dose from a dish to a human, or for why an oncolytic may fail after prior chemotherapy has remodelled the vasculature, can be reasoned about from first principles. It is the same reasoning that produced immunotherapy and the GLP-1 drugs, with some luck along the way; we taught a model to do it deliberately.</p>
+        <p>Prediction alone is not enough. The deep model is slow, about ten minutes a cycle, and there are billions of combinations to consider. So we distilled it into a fast approximation that runs in about 100 ms and paired that with a genetic optimiser that recombines the building blocks of a regimen, tests them against the fast model, learns, and tries again. Within minutes it returns the optimum combination for a given cancer, with or without stratification, the wider trade-off curve of survival against regimen complexity, and, most usefully, the two or three wet-lab experiments that would most reduce the remaining uncertainty. Those experiments sharpen the model&rsquo;s grasp of this cancer, and of the systems biology underneath it.</p>
+      </div>
+
+      <figure class="fig reveal" id="paretoFig" style="position:relative">
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">Interactive · the trade-off curve</span><span class="panel-tag">Illustrative &amp; schematic</span></div>
+          <p class="panel-title-lg">Every regimen is a bet on benefit against complexity</p>
+          <p class="panel-intro">More drugs can buy more benefit, but also more toxicity, cost and failure risk. The useful regimens sit on the efficient frontier; the goal is to design toward the top-left. Hover any point for the regimen.</p>
+          <div class="pareto-chart"></div>
+          <div class="panel-note">Positions convey the qualitative trade-off rather than exact trial values. A model that can price this curve picks the combination worth its complexity and leaves the rest.</div>
+        </div>
+        <div class="tt"></div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- SECTION: early signal + worked example -->
+  <section class="section">
+    <div class="section-bg"></div>
+    <div class="section-inner">
+      <div class="section-head reveal">
+        <div class="eyebrow"><span class="bar"></span>Early signal</div>
+        <h2>Prospective testing where the outcome isn&rsquo;t obvious.</h2>
+      </div>
+      <div class="row align-top">
+        <div class="col-text reveal">
+          <div class="kpis" style="margin-bottom:26px"><div class="statline"><span class="n">87%</span><span class="l">prospective accuracy on ASCO read-outs, across entirely novel combinations</span></div></div>
+          <div class="article-body">
+            <p>Across recent ASCO read-outs the model has predicted endpoints with <strong>87% prospective accuracy</strong>, including on combinations it had never seen. Ahead of this year&rsquo;s meeting it called the readout of Regeneron&rsquo;s fianlimab, an anti-LAG-3 antibody, before its Phase 3 melanoma trial missed its primary endpoint and took roughly <strong>$8 billion</strong> off the company&rsquo;s value in a single day.<a class="ref" href="#r17">17</a> The reasoning behind that call rests on more than a decade of company-building at <a href="https://deepscienceventures.com" target="_blank" rel="noopener">Deep Science Ventures</a>, where the great majority of theses translated as planned. We are about to take our first repurposing combination into the lab with a partner we will name shortly, and we are in conversation with several of the largest pharmaceutical companies in the world.</p>
+          </div>
+          <div class="roles" style="margin-top:26px">
+            <span>KRAS backbone design</span>
+            <span>TOPO ADCs in PDAC</span>
+            <span>CD47 rebound in breast</span>
+            <span>post-GLP-1 oncology</span>
+            <span>oral SERD sequencing</span>
+            <span>ivonescimab translation</span>
+          </div>
+          <p class="footnote">A live sample of the questions we are modelling now.</p>
+        </div>
+        <div class="col-exhibit reveal">
+          <div class="report">
+            <div class="report-top"><span>Big Picture Bio · Prospective call</span><span>Excerpt · illustrative</span></div>
+            <h4>Fianlimab (anti-LAG-3) + cemiplimab — 1L metastatic melanoma</h4>
+            <p>LAG-3 contributes little independent exhaustion signal in a PD-1&ndash;naive, checkpoint-responsive setting; against a pembrolizumab comparator the model placed <span class="hl">the added blockade largely on cells already licensed to kill</span>.</p>
+            <p>It therefore predicted <span class="hl">no meaningful separation on progression-free survival</span> versus single-agent PD-1, with the combination&rsquo;s cost falling on toxicity rather than benefit.</p>
+            <div class="callout">Predicted: primary PFS endpoint not met. Reported May 2026 — the trial missed, and the market cut roughly $8B from Regeneron in a day.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA: how we work with partners (mirrors the homepage panel) -->
+  <section class="block tight model-solutions">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <div class="eyebrow"><span class="bar"></span>Working together</div>
+        <h2 class="head mt-s">How we work with partners to build better combination therapies.</h2>
+      </div>
+      <div class="solutions-grid" style="margin-top:clamp(44px,6vh,72px);">
+        <a class="sol-card reveal" href="mailto:partnerships@bigpicturebio.com">
+          <span class="k">Clinical Development</span>
+          <h3>Understand how complex, systems-level interactions will play out</h3>
+          <p>Predict the endpoint, then design the trial that clears it, on fewer patients and in less time.</p>
+          <span class="go">Explore</span>
+        </a>
+        <a class="sol-card reveal" href="mailto:partnerships@bigpicturebio.com">
+          <span class="k">Market Intelligence</span>
+          <h3>Know which novel mechanisms will redefine the standard of care</h3>
+          <p>See what becomes standard of care, and what a rival's combination would do to your franchise.</p>
+          <span class="go">Explore</span>
+        </a>
+        <a class="sol-card reveal" href="mailto:partnerships@bigpicturebio.com">
+          <span class="k">Investment &amp; partnering DD</span>
+          <h3>Turn clinical uncertainty into a verdict</h3>
+          <p>A mechanistic read on whether an asset works — for a deal or a position.</p>
+          <span class="go">Explore</span>
+        </a>
+        <a class="sol-card reveal" href="mailto:partnerships@bigpicturebio.com">
+          <span class="k">Lifecycle &amp; Franchise Strategy</span>
+          <h3>Keep your asset the standard of care</h3>
+          <p>The combination, sequence and setting that keep your molecule first-line.</p>
+          <span class="go">Explore</span>
+        </a>
+        <a class="sol-card reveal" href="mailto:partnerships@bigpicturebio.com">
+          <span class="k">Platform &amp; Payload Strategy</span>
+          <h3>Point your platform at the right target</h3>
+          <p>The payload, target and indication that turn a delivery technology into a clinical winner.</p>
+          <span class="go">Explore</span>
+        </a>
+        <a class="sol-card reveal" href="mailto:partnerships@bigpicturebio.com">
+          <span class="k">Optimal Indication Selection</span>
+          <h3>Find the indication where your technology wins</h3>
+          <p>The disease, patient context and combination partners that turn your asset into a clinical winner.</p>
+          <span class="go">Explore</span>
+        </a>
+        <a class="sol-card reveal" href="mailto:partnerships@bigpicturebio.com">
+          <span class="k">Pipeline &amp; partnerships</span>
+          <h3>What we're building now</h3>
+          <p>Ten programmes in design or terms, pre-launch — and a growing internal pipeline.</p>
+          <span class="go">See the pipeline</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERENCES -->
+  <section class="block">
+    <div class="wrap">
+      <div class="refs" id="references">
+        <h2>References</h2>
+        <ol class="reflist">
+          <li id="r1">O&rsquo;Brien SG, et al. Imatinib compared with interferon and low-dose cytarabine for newly diagnosed chronic-phase CML (IRIS). <em>N Engl J Med</em> 2003;348:994&ndash;1004 (complete haematologic response 95.3%). <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa022457" target="_blank" rel="noopener">nejm.org</a>. Ten-year follow-up: Hochhaus A, et al. <em>N Engl J Med</em> 2017;376:917&ndash;927. <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa1609324" target="_blank" rel="noopener">nejm.org</a></li>
+          <li id="r2">Cook D, et al. Lessons learned from the fate of AstraZeneca&rsquo;s drug pipeline: a five-dimensional framework. <em>Nat Rev Drug Discov</em> 2014;13:419&ndash;431. <a href="https://www.nature.com/articles/nrd4309" target="_blank" rel="noopener">nature.com</a></li>
+          <li id="r3">O&rsquo;Leary MN, et al. The ribosomal protein Rpl22 controls ribosome composition by directly repressing expression of its own paralog, Rpl22l1. <em>PLoS Genet</em> 2013;9:e1003708. <a href="https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1003708" target="_blank" rel="noopener">plos.org</a></li>
+          <li id="r4">Kozar K, et al. Mouse development and cell proliferation in the absence of D-cyclins (only the triple knockout is lethal). <em>Cell</em> 2004;118:477&ndash;491. <a href="https://pubmed.ncbi.nlm.nih.gov/15315760/" target="_blank" rel="noopener">pubmed</a></li>
+          <li id="r5">Multiple interacting pathologies in Alzheimer&rsquo;s disease and the rationale for combination therapy (amyloid, tau, neuroinflammation, vascular dysfunction). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12434272/" target="_blank" rel="noopener">ncbi.nlm.nih.gov</a></li>
+          <li id="r6">van Dyck CH, et al. Lecanemab in early Alzheimer&rsquo;s disease (CLARITY-AD); decline slowed by ~27% on CDR-SB. <em>N Engl J Med</em> 2023;388:9&ndash;21. <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2212948" target="_blank" rel="noopener">nejm.org</a></li>
+          <li id="r7">Scannell JW, et al. Diagnosing the decline in pharmaceutical R&amp;D efficiency (Eroom&rsquo;s Law). <em>Nat Rev Drug Discov</em> 2012;11:191&ndash;200. <a href="https://www.nature.com/articles/nrd3681" target="_blank" rel="noopener">nature.com</a></li>
+          <li id="r8">Klein C, et al. The present and future of bispecific antibodies for cancer therapy (14 approved by end-2023). <em>Nat Rev Drug Discov</em> 2024;23:301&ndash;319. <a href="https://www.nature.com/articles/s41573-024-00896-6" target="_blank" rel="noopener">nature.com</a>. Ivonescimab vs pembrolizumab (HARMONi-2): Fang W, et al. <em>Lancet</em> 2024. <a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(24)02722-3/abstract" target="_blank" rel="noopener">thelancet.com</a></li>
+          <li id="r9">Larkin J, et al. Combined nivolumab and ipilimumab or monotherapy in untreated melanoma (CheckMate 067). <em>N Engl J Med</em> 2015;373:23&ndash;34. <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa1504030" target="_blank" rel="noopener">nejm.org</a>. Long-term overall survival (72.1 vs 19.9 months): Wolchok JD, et al. <em>J Clin Oncol</em> 2022;40:127&ndash;137. <a href="https://ascopubs.org/doi/10.1200/JCO.21.02229" target="_blank" rel="noopener">ascopubs.org</a></li>
+          <li id="r10">Tawbi HA, et al. Relatlimab and nivolumab versus nivolumab in untreated melanoma (RELATIVITY-047); PFS 10.1 vs 4.6 months; first LAG-3 combination approved (2022). <em>N Engl J Med</em> 2022;386:24&ndash;34. <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2109970" target="_blank" rel="noopener">nejm.org</a></li>
+          <li id="r11">Antibody-drug conjugate combinations. Sacituzumab govitecan + pembrolizumab in first-line TNBC (ASCENT-04/KEYNOTE-D19), FDA approval. <a href="https://www.fda.gov/drugs/resources-information-approved-drugs/fda-approves-sacituzumab-govitecan-hziy-monotherapy-and-combination-pembrolizumab-first-line" target="_blank" rel="noopener">fda.gov</a>. Datopotamab deruxtecan (TROPION-Lung01): <em>J Clin Oncol</em> 2024. <a href="https://ascopubs.org/doi/10.1200/JCO-24-01544" target="_blank" rel="noopener">ascopubs.org</a>. Trastuzumab deruxtecan + pertuzumab (DESTINY-Breast09): <em>N Engl J Med</em> 2025. <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2508668" target="_blank" rel="noopener">nejm.org</a></li>
+          <li id="r12">Fakih MG, et al. Sotorasib plus panitumumab in refractory KRAS G12C-mutated colorectal cancer (CodeBreaK 300); PFS 5.6 vs 2.0 months. <em>N Engl J Med</em> 2023;389:2125&ndash;2139. <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2308795" target="_blank" rel="noopener">nejm.org</a></li>
+          <li id="r13">FDA. Codevelopment of Two or More New Investigational Drugs for Use in Combination (guidance, June 2013). <a href="https://www.federalregister.gov/documents/2013/06/14/2013-14168/guidance-for-industry-on-codevelopment-of-two-or-more-new-investigational-drugs-for-use-in" target="_blank" rel="noopener">federalregister.gov</a>. Contribution-of-components principle, 21 CFR 300.50. <a href="https://www.ecfr.gov/current/title-21/section-300.50" target="_blank" rel="noopener">ecfr.gov</a></li>
+          <li id="r14">Tosh C, Tec M, et al. A Bayesian active learning platform for scalable combination drug screens (BATCHIE). <em>Nat Commun</em> 2025;16:156. <a href="https://www.nature.com/articles/s41467-024-55287-7" target="_blank" rel="noopener">nature.com</a></li>
+          <li id="r15">Chen EY, et al. Trends in the complexity of single-agent and combination cancer therapies (99 of 292 FDA solid-tumour approvals, 2011&ndash;2023, were combinations). <em>The Oncologist</em> 2024. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11954493/" target="_blank" rel="noopener">ncbi.nlm.nih.gov</a></li>
+          <li id="r16">IQVIA Institute. Global Oncology Trends 2025 (cancer-medicine spend $252B in 2024, projected ~$441B by 2029). <a href="https://www.iqvia.com/insights/the-iqvia-institute/reports-and-publications/reports/global-oncology-trends-2025" target="_blank" rel="noopener">iqvia.com</a></li>
+          <li id="r17">Regeneron. Update on the Phase 3 trial of fianlimab (anti-LAG-3) in first-line metastatic melanoma (May 2026). <a href="https://investor.regeneron.com/news-releases/news-release-details/regeneron-provides-update-phase-3-trial-fianlimab-lag-3" target="_blank" rel="noopener">regeneron.com</a>. Coverage: <a href="https://www.biopharmadive.com/news/regeneron-cancer-immunotherapy-fianlimab-lag3-melanoma-study-results/820443/" target="_blank" rel="noopener">biopharmadive.com</a></li>
+          <li id="r18">Big Picture Bio with the Allen Institute. Early vulnerabilities of Alzheimer&rsquo;s disease from single-cell omics: NMDA-receptor-expression-mediated hyperexcitability as a common early vulnerability. Preprint, bioRxiv, 2026. <a href="https://www.biorxiv.org/content/10.64898/2026.07.01.734821v1" target="_blank" rel="noopener">biorxiv.org</a></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+</article>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="fm">Big Picture <em>Bio</em></div>
+      <p class="ftag">Mechanistic prediction for novel synergistic combinations beyond the reach of conventional machine learning.</p>
+    </div>
+    <div class="fcol">
+      <h4>Get in touch</h4>
+      <a href="mailto:partnerships@bigpicturebio.com">partnerships@bigpicturebio.com</a>
+    </div>
+  </div>
+  <div class="footer-base">
+    <span>&copy; 2026 Big Picture Bio</span>
+    <span>partnerships@bigpicturebio.com</span>
+  </div>
+</footer>
+<script>
+/* ===========================================================================
+   Big Picture Bio — Journal article exhibits
+   Biology palette shared with assets/site.js. Four exhibits:
+   unlock bars · combination-share gauge · interactive Muller · interactive Pareto
+   =========================================================================== */
+(function(){
+  "use strict";
+  var PAL=['#F6C982','#F19A6C','#EC7EA6','#CE6BA0','#96509A','#52223F'];
+  var ACCENT='#F08AB8', BLUE='#83B9FF';
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function onView(el,cb,th){
+    if(reduce || !('IntersectionObserver' in window)){ cb(); return; }
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ cb(); io.disconnect(); }});},{threshold:th||0.35});
+    io.observe(el);
+  }
+
+  /* ---------------- 1. Unlock bars ---------------- */
+  function unlockBars(host){
+    var H=290;
+    var cols=[
+      {x:'A alone', note:'sensitiser', segs:[{h:0.06,c:PAL[4]}], cap:'–'},
+      {x:'B alone', note:'active agent', segs:[{h:0.30,c:PAL[3]}], cap:'+'},
+      {x:'A + B', note:'synergy', segs:[{h:0.60,c:PAL[1]},{h:0.30,c:PAL[2]}], cap:'××'}
+    ];
+    host.innerHTML=cols.map(function(col){
+      var stack=col.segs.map(function(s,si){
+        var top=(si===col.segs.length-1);
+        var cap=top?'<span class="cap">'+col.cap+'</span>':'';
+        return '<div class="bar seg" data-h="'+s.h+'" style="background:'+s.c+';border-radius:'+(top?'4px 4px 0 0':'0')+'">'+cap+'</div>';
+      }).join('');
+      return '<div class="bar-col"><div class="bar-stack">'+stack+'</div>'+
+             '<div class="bar-x">'+col.x+'</div><div class="bar-note">'+col.note+'</div></div>';
+    }).join('');
+    onView(host,function(){
+      setTimeout(function(){
+        host.querySelectorAll('.bar.seg').forEach(function(b){
+          b.style.height=(parseFloat(b.getAttribute('data-h'))*H)+'px';
+          var c=b.querySelector('.cap'); if(c) c.style.opacity='1';
+        });
+      }, reduce?0:120);
+    });
+  }
+
+  /* ---------------- 2. Combination-share gauge ---------------- */
+  function shareGauge(host){
+    var size=224, sw=17, r=(size-sw)/2, cx=size/2, cy=size/2, C=2*Math.PI*r, pct=0.339;
+    host.innerHTML=
+      '<svg width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'" style="max-width:224px;height:auto" role="img" aria-label="About 34 percent of FDA solid-tumour approvals from 2011 to 2023 were combination regimens">'+
+      '<defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1">'+
+      '<stop offset="0" stop-color="#F6C982"/><stop offset="0.5" stop-color="#EC7EA6"/><stop offset="1" stop-color="#96509A"/></linearGradient></defs>'+
+      '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="#2A2A30" stroke-width="'+sw+'"/>'+
+      '<circle class="gauge-arc" cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="url(#gg)" stroke-width="'+sw+'" stroke-linecap="round" transform="rotate(-90 '+cx+' '+cy+')" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'"/>'+
+      '<text x="'+cx+'" y="'+(cy-1)+'" text-anchor="middle" font-family="Source Serif 4,serif" font-weight="300" font-size="52" letter-spacing="-2" fill="#F2EFEA">34%</text>'+
+      '<text x="'+cx+'" y="'+(cy+26)+'" text-anchor="middle" font-family="Geist Mono,monospace" font-size="11.5" letter-spacing="3" fill="#B0ACA4">1 IN 3</text>'+
+      '</svg>';
+    var arc=host.querySelector('.gauge-arc'), target=C*(1-pct);
+    if(reduce){ arc.style.strokeDashoffset=target; return; }
+    onView(host,function(){ arc.style.transition='stroke-dashoffset 1.5s cubic-bezier(.2,.7,.2,1)'; arc.style.strokeDashoffset=target; },0.4);
+  }
+
+  /* ---------------- 3. Interactive Muller ---------------- */
+  function muller(fig){
+    var host=fig.querySelector('.muller-chart'); if(!host) return;
+    var W=1000,H=520;
+    var COMBO=[
+      [0.00,[0.00,0.00,0.02,0.12,0.06,0.80]],[0.12,[0.02,0.01,0.06,0.13,0.05,0.73]],
+      [0.28,[0.08,0.05,0.12,0.14,0.03,0.58]],[0.48,[0.18,0.12,0.20,0.14,0.01,0.35]],
+      [0.68,[0.14,0.09,0.34,0.12,0.00,0.31]],[0.84,[0.11,0.07,0.46,0.10,0.00,0.26]],
+      [1.00,[0.10,0.06,0.55,0.08,0.00,0.21]]
+    ];
+    var MONO=[
+      [0.00,[0.00,0.00,0.02,0.10,0.08,0.80]],[0.12,[0.03,0.02,0.03,0.10,0.12,0.70]],
+      [0.28,[0.09,0.05,0.04,0.09,0.24,0.49]],[0.48,[0.06,0.04,0.04,0.08,0.41,0.37]],
+      [0.68,[0.04,0.02,0.03,0.07,0.55,0.29]],[0.84,[0.02,0.01,0.02,0.06,0.66,0.23]],
+      [1.00,[0.01,0.01,0.02,0.05,0.74,0.17]]
+    ];
+    var LABELS=[
+      {n:'CD8⁺ cytotoxic T',g:'Immune effectors'},{n:'CD4⁺ helper / NK',g:'Immune support'},
+      {n:'Normalised stroma',g:'Healthy tissue'},{n:'Reactive CAF',g:'Fibrotic stroma'},
+      {n:'Resistant subclone',g:'Escape population'},{n:'Bulk tumour',g:'Sensitive cancer'}
+    ];
+    function lerp(a,b,m){ return a+(b-a)*m; }
+    function anchorsAt(m){ return COMBO.map(function(ca,i){ return [ca[0], ca[1].map(function(v,j){ return lerp(MONO[i][1][j],v,m); })]; }); }
+    function layerPath(tops,bots){
+      var d='M'+tops[0][0]+','+tops[0][1]+' ',i,p0,p1,dx;
+      for(i=1;i<tops.length;i++){ p0=tops[i-1];p1=tops[i];dx=p1[0]-p0[0];
+        d+='C'+(p0[0]+dx*0.5)+','+p0[1]+' '+(p1[0]-dx*0.5)+','+p1[1]+' '+p1[0]+','+p1[1]+' '; }
+      d+='L'+bots[bots.length-1][0]+','+bots[bots.length-1][1]+' ';
+      for(i=bots.length-2;i>=0;i--){ p0=bots[i+1];p1=bots[i];dx=p1[0]-p0[0];
+        d+='C'+(p0[0]+dx*0.5)+','+p0[1]+' '+(p1[0]-dx*0.5)+','+p1[1]+' '+p1[0]+','+p1[1]+' '; }
+      return d+'Z';
+    }
+    function paths(m){
+      var A=anchorsAt(m),N=6,tops=[],bots=[],i;
+      for(i=0;i<N;i++){ tops.push([]); bots.push([]); }
+      A.forEach(function(a){ var t=a[0],f=a[1],cum=0; for(i=0;i<N;i++){ tops[i].push([t*W,cum*H]); bots[i].push([t*W,(cum+f[i])*H]); cum+=f[i]; } });
+      return tops.map(function(_,i){ return layerPath(tops[i],bots[i]); });
+    }
+    var marks='';
+    [0,12,24,36].forEach(function(mo,i){ var x=i/3*W;
+      marks+='<line x1="'+x+'" y1="0" x2="'+x+'" y2="'+H+'" stroke="#F2EFEA" stroke-opacity="0.12"/>'+
+             '<text x="'+(i===3?x-8:x+8)+'" y="'+(H-8)+'" text-anchor="'+(i===3?'end':'start')+'" font-family="Geist Mono,monospace" font-size="12" fill="#F2EFEA" fill-opacity="0.5" letter-spacing="1">'+mo+' mo</text>';
+    });
+    var init=paths(1), ps='';
+    init.forEach(function(d,i){ ps+='<path class="mband" data-i="'+i+'" d="'+d+'" fill="'+PAL[i]+'"/>'; });
+    host.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" style="width:100%;height:clamp(280px,42vw,460px);display:block" role="img" aria-label="Interactive Muller plot of tumour evolution over 36 months">'+ps+marks+'</svg>';
+
+    var leg=fig.querySelector('.muller-legend');
+    if(leg) leg.innerHTML=LABELS.map(function(l,i){ return '<span style="color:'+PAL[i]+'"><i class="dot"></i><span style="color:var(--muted)">'+l.n+'</span></span>'; }).join('');
+
+    var tt=fig.querySelector('.tt'), bands=host.querySelectorAll('.mband');
+    bands.forEach(function(p){
+      var i=+p.getAttribute('data-i'); p.style.cursor='crosshair';
+      p.addEventListener('mousemove',function(ev){ var r=fig.getBoundingClientRect();
+        tt.innerHTML='<div class="tt-h">'+LABELS[i].n+'</div><div class="tt-d">'+LABELS[i].g+'</div>';
+        tt.style.left=(ev.clientX-r.left)+'px'; tt.style.top=(ev.clientY-r.top)+'px'; tt.style.opacity='1'; });
+      p.addEventListener('mouseleave',function(){ tt.style.opacity='0'; });
+    });
+
+    var state=1, raf=null;
+    var bMono=fig.querySelector('[data-mode="mono"]'), bCombo=fig.querySelector('[data-mode="combo"]');
+    var intro=fig.querySelector('.muller-intro');
+    var COPY={
+      1:'A rationally combined regimen: the resistant subclone (violet) never gets its opening, the bulk tumour falls to a small residual, and normalised stroma and immune effectors take over. Durable control at 36 months.',
+      0:'A single active agent: sensitive tumour shrinks early, but the resistant subclone (violet) expands into the cleared space and drives relapse well before 36 months.'
+    };
+    function render(m){ var ds=paths(m); bands.forEach(function(b,i){ b.setAttribute('d',ds[i]); }); }
+    function animateTo(t){
+      if(reduce || document.hidden){ state=t; render(t); return; }
+      var start=state,t0=null,dur=760; if(raf) cancelAnimationFrame(raf);
+      function step(ts){ if(!t0)t0=ts; var k=Math.min(1,(ts-t0)/dur); var e=k<0.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+        render(start+(t-start)*e); if(k<1){ raf=requestAnimationFrame(step); } else { state=t; } }
+      raf=requestAnimationFrame(step);
+    }
+    function set(t){ if(bCombo) bCombo.setAttribute('aria-pressed',t===1?'true':'false'); if(bMono) bMono.setAttribute('aria-pressed',t===0?'true':'false'); if(intro) intro.textContent=COPY[t]; animateTo(t); }
+    if(bMono) bMono.addEventListener('click',function(){ set(0); });
+    if(bCombo) bCombo.addEventListener('click',function(){ set(1); });
+    if(intro) intro.textContent=COPY[1];
+    render(1);
+    if(!reduce){
+      var seen=false;
+      var mo=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting && !seen){ seen=true; state=0; render(0); setTimeout(function(){ animateTo(1); },450); mo.disconnect(); }});},{threshold:0.4});
+      mo.observe(host);
+    }
+  }
+
+  /* ---------------- 4. Interactive Pareto ---------------- */
+  function pareto(fig){
+    var host=fig.querySelector('.pareto-chart'); if(!host) return;
+    var W=760,H=470,pad={l:56,r:26,t:28,b:58}, iw=W-pad.l-pad.r, ih=H-pad.t-pad.b;
+    var P=[
+      {x:1.3,y:2.1,label:'Single targeted agent',drugs:'solo kinase inhibitor',note:'Low toxicity, limited durability once resistance emerges.',front:false},
+      {x:2.2,y:3.6,label:'Checkpoint monotherapy',drugs:'anti-PD-1 · pembrolizumab / nivolumab',note:'Transformative in a minority; most tumours do not respond alone.',front:true},
+      {x:3.1,y:3.0,label:'Chemotherapy doublet',drugs:'platinum backbone',note:'Broad activity, real toxicity, short-lived benefit.',front:false},
+      {x:4.3,y:5.5,label:'Checkpoint + chemotherapy',drugs:'anti-PD-1 + platinum · KEYNOTE-189/407',note:'First-line standard across several solid tumours.',front:true},
+      {x:3.6,y:4.5,label:'TROP2 ADC',drugs:'datopotamab deruxtecan · TOPO-1 payload',note:'ADC backbone, now paired with checkpoint blockade.',front:false},
+      {x:6.5,y:6.9,label:'Dual checkpoint',drugs:'nivolumab + ipilimumab · PD-1 + CTLA-4',note:'Durable in melanoma; substantial immune toxicity.',front:true},
+      {x:5.0,y:6.2,label:'ADC + checkpoint',drugs:'sacituzumab govitecan + pembrolizumab',note:'Leading current combination hypothesis (ASCENT-04).',front:true},
+      {x:4.4,y:5.0,label:'KRAS G12C + EGFR',drugs:'sotorasib + panitumumab · CodeBreaK 300',note:'Feedback EGFR reactivation makes the partner essential.',front:false},
+      {x:8.3,y:7.0,label:'Empirical triplet',drugs:'three-agent, maximum tolerated',note:'More is not free: toxicity and dropout climb fast.',front:false},
+      {x:4.6,y:8.5,label:'Designed combination',drugs:'Big Picture Bio · model-selected',note:'Chosen to sit above the frontier: maximum benefit for its complexity.',front:true,star:true}
+    ];
+    function X(v){ return pad.l+v/10*iw; }
+    function Y(v){ return pad.t+(1-v/10)*ih; }
+    var fr=P.filter(function(p){return p.front;}).slice().sort(function(a,b){return a.x-b.x;});
+    var frLine=fr.map(function(p,i){ return (i?'L':'M')+X(p.x)+','+Y(p.y); }).join(' ');
+    var grid='';
+    for(var g=0;g<=10;g+=2){
+      grid+='<line x1="'+X(g)+'" y1="'+pad.t+'" x2="'+X(g)+'" y2="'+(H-pad.b)+'" stroke="#2A2A30"/>';
+      grid+='<line x1="'+pad.l+'" y1="'+Y(g)+'" x2="'+(W-pad.r)+'" y2="'+Y(g)+'" stroke="#2A2A30"/>';
+    }
+    function star(cx,cy,r){ var pts=[]; for(var i=0;i<10;i++){ var a=Math.PI/5*i-Math.PI/2, rr=i%2?r*0.44:r; pts.push((cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1)); } return '<polygon points="'+pts.join(' ')+'" fill="'+ACCENT+'"/>'; }
+    var dots='';
+    P.forEach(function(p,i){ var cx=X(p.x),cy=Y(p.y);
+      if(p.star){
+        dots+='<g class="pt" data-i="'+i+'" style="cursor:pointer">'+
+          '<circle cx="'+cx+'" cy="'+cy+'" r="17" fill="'+ACCENT+'" fill-opacity="0.12"/>'+
+          '<circle cx="'+cx+'" cy="'+cy+'" r="11" fill="none" stroke="'+BLUE+'" stroke-width="1.4" stroke-opacity="0.7"/>'+
+          star(cx,cy,9)+
+          '<text x="'+(cx+17)+'" y="'+(cy+4)+'" font-family="Geist,sans-serif" font-weight="600" font-size="13" fill="#fff">Designed combination</text></g>';
+      } else {
+        var col=p.front?'#F19A6C':'#96509A';
+        dots+='<g class="pt" data-i="'+i+'" style="cursor:pointer"><circle cx="'+cx+'" cy="'+cy+'" r="6.5" fill="'+col+'" stroke="#08090c" stroke-width="1.5"/></g>';
+      }
+    });
+    var axis=
+      '<text x="'+pad.l+'" y="'+(H-16)+'" font-family="Geist Mono,monospace" font-size="11" fill="#B0ACA4" letter-spacing="1.5">REGIMEN COMPLEXITY · TOXICITY →</text>'+
+      '<text transform="translate(16 '+(pad.t+ih)+') rotate(-90)" font-family="Geist Mono,monospace" font-size="11" fill="#B0ACA4" letter-spacing="1.5">CLINICAL BENEFIT →</text>'+
+      '<text x="'+(W-pad.r)+'" y="'+(pad.t+4)+'" text-anchor="end" font-family="Geist,sans-serif" font-size="12" fill="#8A857E">better ↖ design target</text>';
+    host.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto;display:block;overflow:visible" role="img" aria-label="Pareto trade-off of clinical benefit against regimen complexity, with a model-designed combination above the efficient frontier">'+
+      grid+'<path d="'+frLine+'" fill="none" stroke="'+ACCENT+'" stroke-width="1.6" stroke-dasharray="5 5" stroke-opacity="0.7"/>'+dots+axis+'</svg>';
+
+    var tt=fig.querySelector('.tt');
+    function show(i,cx,cy){ var p=P[i],r=fig.getBoundingClientRect();
+      tt.innerHTML='<div class="tt-h">'+p.label+'</div><div class="tt-d">'+p.drugs+'</div><div class="tt-b">'+p.note+'</div>';
+      tt.style.left=(cx-r.left)+'px'; tt.style.top=(cy-r.top)+'px'; tt.style.opacity='1'; }
+    host.querySelectorAll('.pt').forEach(function(g){ var i=+g.getAttribute('data-i');
+      g.addEventListener('mousemove',function(ev){ show(i,ev.clientX,ev.clientY); });
+      g.addEventListener('mouseenter',function(ev){ show(i,ev.clientX,ev.clientY); });
+      g.addEventListener('click',function(ev){ show(i,ev.clientX,ev.clientY); });
+      g.addEventListener('mouseleave',function(){ tt.style.opacity='0'; });
+    });
+    host.addEventListener('mouseleave',function(){ tt.style.opacity='0'; });
+  }
+
+  /* ---------------- boot ---------------- */
+  function boot(){
+    var b=document.getElementById('unlockBars'); if(b) unlockBars(b);
+    var g=document.getElementById('shareGauge'); if(g) shareGauge(g);
+    var m=document.getElementById('mullerFig'); if(m) muller(m);
+    var p=document.getElementById('paretoFig'); if(p) pareto(p);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
+  else boot();
+})();
+
+</script>
+<script>
+(function(){
+  "use strict";
+  try{ var t=localStorage.getItem("bpb-theme"); if(t==="light"||t==="dark") document.documentElement.setAttribute("data-theme",t); }catch(e){}
+  var nav=document.getElementById("nav");
+  var tt=document.getElementById("themeToggle");
+  if(tt) tt.addEventListener("click",function(){
+    var isLight=document.documentElement.getAttribute("data-theme")==="light";
+    var next=isLight?"dark":"light";
+    document.documentElement.setAttribute("data-theme",next);
+    try{ localStorage.setItem("bpb-theme",next); }catch(e){}
+  });
+  function onScroll(){ if(nav) nav.classList.toggle("solid", window.scrollY>40); }
+  window.addEventListener("scroll",onScroll,{passive:true}); onScroll();
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }); },{threshold:0.15});
+  [].forEach.call(document.querySelectorAll(".reveal"),function(el){ io.observe(el); });
+  requestAnimationFrame(function(){ document.body.classList.add("ready"); });
+})();
+</script>
+</body>
+</html>
