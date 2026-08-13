@@ -36,7 +36,7 @@ details.pr-row.Pass{--edge:var(--pass)}details.pr-row.Miss{--edge:var(--miss)}
 @media(max-width:640px){.pr-row>summary{grid-template-columns:auto 1fr auto;row-gap:6px}.pr-act{display:none}}
 .pr-tk{display:flex;align-items:center;gap:7px}
 .pr-caret{color:var(--faint);transition:transform .15s;font-size:15px}details[open]>summary .pr-caret{transform:rotate(90deg)}
-.pr-tick{font-family:var(--mono);font-weight:600;font-size:13px;color:var(--ink)}
+.pr-tick{display:inline-block;font-family:var(--mono);font-weight:600;font-size:11px;color:var(--muted);background:rgba(255,255,255,.05);border:1px solid var(--line-2);padding:1px 6px;border-radius:5px;margin-right:5px;vertical-align:1px;white-space:nowrap}
 .pr-name{font-weight:500;font-size:13.5px;line-height:1.32;color:var(--ink)}
 .pr-dom{font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 6px;border-radius:5px;white-space:nowrap}
 .pr-dom-onc{color:#c9a7f5;background:rgba(150,110,220,.16)}.pr-dom-imm{color:#6fd8cf;background:rgba(20,150,140,.16)}
@@ -45,7 +45,8 @@ details.pr-row.Pass{--edge:var(--pass)}details.pr-row.Miss{--edge:var(--miss)}
 .pr-chip{font-size:11.5px;font-weight:700;padding:1px 8px;border-radius:999px;font-family:var(--mono)}
 .pr-c-Pass{background:rgba(89,199,149,.16);color:var(--pass)}.pr-c-Miss{background:rgba(224,138,106,.16);color:var(--miss)}
 .pr-conf{font-size:11.5px;color:var(--muted);font-family:var(--mono)}
-.pr-act{font-size:12px;color:var(--ink-2);line-height:1.35}
+.pr-act{grid-column:3/-1;margin-top:3px;font-size:12px;color:var(--ink-2);line-height:1.4}
+@media(max-width:640px){.pr-act{grid-column:1/-1}}
 .pr-badge{font-family:var(--mono);font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:5px;white-space:nowrap;justify-self:start}
 .pr-TP,.pr-TN{color:var(--pass);background:rgba(89,199,149,.16)}.pr-FN{color:var(--amber);background:rgba(208,162,78,.18)}.pr-FP{color:var(--miss);background:rgba(224,138,106,.18)}.pr-pending{color:var(--faint);background:rgba(255,255,255,.05)}
 .pr-body{padding:6px 18px 18px;border-top:1px solid var(--line)}
@@ -65,7 +66,7 @@ details.pr-row.Pass{--edge:var(--pass)}details.pr-row.Miss{--edge:var(--miss)}
   <div class="hero-scrim"></div>
   <div class="hero-inner">
     <div class="eyebrow"><span class="bar"></span>Prospective predictions</div>
-    <h1>We call clinical trials <span class="italic">before the data</span></h1>
+    <h1>Predicting some of the most consequential outcomes <span class="italic">ahead of readout</span></h1>
     <p class="sub">Every call is made ahead of the read-out and scored against what actually happens. A running, public record of where our mechanistic model is right - and where it is wrong.</p>
     <div class="article-meta">
       <span>Big Picture Bio</span><span class="sep">/</span>
