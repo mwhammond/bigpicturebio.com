@@ -84,7 +84,9 @@ body.leaving{ opacity:0; }
   font-size:clamp(17px,1.4vw,21px); letter-spacing:-.005em;
   white-space:nowrap; color:var(--ink); text-decoration:none;
 }
-.nav .wordmark em{ font-style:italic; color:var(--accent); }
+.nav .wordmark{ display:flex; align-items:center; flex-shrink:0; }
+.nav .wordmark img,.footer .fm img{ display:block; width:230px; height:auto; }
+@media(max-width:480px){ .nav .wordmark img{ width:190px; } }
 
 .nav-links{ display:flex; align-items:center; gap:clamp(18px,2vw,34px); }
 .nav-links a, .nav-item > button{

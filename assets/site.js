@@ -34,7 +34,7 @@
     var onSolutions = path.indexOf("/solutions/")===0;
     host.innerHTML =
       '<nav class="nav" id="nav">'+
-        '<a class="wordmark" href="/">Big Picture <em>Bio</em></a>'+
+        '<a class="wordmark" href="/" aria-label="Big Picture Bio home"><img src="/assets/brand/logos/logo-ivory.svg" alt="Big Picture Bio" width="230" height="36"></a>'+
         '<button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>'+
         '<div class="nav-links">'+
           '<div class="nav-item'+(onSolutions?" current":"")+'" id="solItem">'+
@@ -90,7 +90,7 @@
       '<footer class="footer">'+
         '<div class="footer-inner">'+
           '<div>'+
-            '<div class="fm">Big Picture <em>Bio</em></div>'+
+            '<div class="fm"><img src="/assets/brand/logos/logo-ivory.svg" alt="Big Picture Bio" width="230" height="36"></div>'+
             '<p class="ftag">Mechanistic prediction for novel synergistic combinations beyond the reach of conventional machine learning.</p>'+
           '</div>'+
           '<div class="fcol"><h4>Solutions</h4>'+solLinks+'</div>'+
